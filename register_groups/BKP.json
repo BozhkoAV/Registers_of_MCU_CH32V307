@@ -1,0 +1,619 @@
+{
+  "name": "Backup registers",
+  "registers": {
+    "DATAR1": {
+      "name": "Backup Data Register 1",
+      "bits": {
+        "D1": {
+          "name": "Backup data, which can be written with user data",
+          "position": "15:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "They are only reset by backup domain reset (BDRST) or by a TAMPER pin event (if the TAMPER pin function is activated)."
+        }
+      }
+    },
+    "DATAR2": {
+      "name": "Backup Data Register 2",
+      "bits": {
+        "D2": {
+          "name": "Backup data, which can be written with user data",
+          "position": "15:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "They are only reset by backup domain reset (BDRST) or by a TAMPER pin event (if the TAMPER pin function is activated)."
+        }
+      }
+    },
+    "DATAR3": {
+      "name": "Backup Data Register 3",
+      "bits": {
+        "D3": {
+          "name": "Backup data, which can be written with user data",
+          "position": "15:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "They are only reset by backup domain reset (BDRST) or by a TAMPER pin event (if the TAMPER pin function is activated)."
+        }
+      }
+    },
+    "DATAR4": {
+      "name": "Backup Data Register 4",
+      "bits": {
+        "D4": {
+          "name": "Backup data, which can be written with user data",
+          "position": "15:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "They are only reset by backup domain reset (BDRST) or by a TAMPER pin event (if the TAMPER pin function is activated)."
+        }
+      }
+    },
+    "DATAR5": {
+      "name": "Backup Data Register 5",
+      "bits": {
+        "D5": {
+          "name": "Backup data, which can be written with user data",
+          "position": "15:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "They are only reset by backup domain reset (BDRST) or by a TAMPER pin event (if the TAMPER pin function is activated)."
+        }
+      }
+    },
+    "DATAR6": {
+      "name": "Backup Data Register 6",
+      "bits": {
+        "D6": {
+          "name": "Backup data, which can be written with user data",
+          "position": "15:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "They are only reset by backup domain reset (BDRST) or by a TAMPER pin event (if the TAMPER pin function is activated)."
+        }
+      }
+    },
+    "DATAR7": {
+      "name": "Backup Data Register 7",
+      "bits": {
+        "D7": {
+          "name": "Backup data, which can be written with user data",
+          "position": "15:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "They are only reset by backup domain reset (BDRST) or by a TAMPER pin event (if the TAMPER pin function is activated)."
+        }
+      }
+    },
+    "DATAR8": {
+      "name": "Backup Data Register 8",
+      "bits": {
+        "D8": {
+          "name": "Backup data, which can be written with user data",
+          "position": "15:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "They are only reset by backup domain reset (BDRST) or by a TAMPER pin event (if the TAMPER pin function is activated)."
+        }
+      }
+    },
+    "DATAR9": {
+      "name": "Backup Data Register 9",
+      "bits": {
+        "D9": {
+          "name": "Backup data, which can be written with user data",
+          "position": "15:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "They are only reset by backup domain reset (BDRST) or by a TAMPER pin event (if the TAMPER pin function is activated)."
+        }
+      }
+    },
+    "DATAR10": {
+      "name": "Backup Data Register 10",
+      "bits": {
+        "D10": {
+          "name": "Backup data, which can be written with user data",
+          "position": "15:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "They are only reset by backup domain reset (BDRST) or by a TAMPER pin event (if the TAMPER pin function is activated)."
+        }
+      }
+    },
+    "DATAR11": {
+      "name": "Backup Data Register 11",
+      "bits": {
+        "D11": {
+          "name": "Backup data, which can be written with user data",
+          "position": "15:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "They are only reset by backup domain reset (BDRST) or by a TAMPER pin event (if the TAMPER pin function is activated)."
+        }
+      }
+    },
+    "DATAR12": {
+      "name": "Backup Data Register 12",
+      "bits": {
+        "D12": {
+          "name": "Backup data, which can be written with user data",
+          "position": "15:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "They are only reset by backup domain reset (BDRST) or by a TAMPER pin event (if the TAMPER pin function is activated)."
+        }
+      }
+    },
+    "DATAR13": {
+      "name": "Backup Data Register 13",
+      "bits": {
+        "D13": {
+          "name": "Backup data, which can be written with user data",
+          "position": "15:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "They are only reset by backup domain reset (BDRST) or by a TAMPER pin event (if the TAMPER pin function is activated)."
+        }
+      }
+    },
+    "DATAR14": {
+      "name": "Backup Data Register 14",
+      "bits": {
+        "D14": {
+          "name": "Backup data, which can be written with user data",
+          "position": "15:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "They are only reset by backup domain reset (BDRST) or by a TAMPER pin event (if the TAMPER pin function is activated)."
+        }
+      }
+    },
+    "DATAR15": {
+      "name": "Backup Data Register 15",
+      "bits": {
+        "D15": {
+          "name": "Backup data, which can be written with user data",
+          "position": "15:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "They are only reset by backup domain reset (BDRST) or by a TAMPER pin event (if the TAMPER pin function is activated)."
+        }
+      }
+    },
+    "DATAR16": {
+      "name": "Backup Data Register 16",
+      "bits": {
+        "D16": {
+          "name": "Backup data, which can be written with user data",
+          "position": "15:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "They are only reset by backup domain reset (BDRST) or by a TAMPER pin event (if the TAMPER pin function is activated)."
+        }
+      }
+    },
+    "DATAR17": {
+      "name": "Backup Data Register 17",
+      "bits": {
+        "D17": {
+          "name": "Backup data, which can be written with user data",
+          "position": "15:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "They are only reset by backup domain reset (BDRST) or by a TAMPER pin event (if the TAMPER pin function is activated)."
+        }
+      }
+    },
+    "DATAR18": {
+      "name": "Backup Data Register 18",
+      "bits": {
+        "D18": {
+          "name": "Backup data, which can be written with user data",
+          "position": "15:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "They are only reset by backup domain reset (BDRST) or by a TAMPER pin event (if the TAMPER pin function is activated)."
+        }
+      }
+    },
+    "DATAR19": {
+      "name": "Backup Data Register 19",
+      "bits": {
+        "D19": {
+          "name": "Backup data, which can be written with user data",
+          "position": "15:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "They are only reset by backup domain reset (BDRST) or by a TAMPER pin event (if the TAMPER pin function is activated)."
+        }
+      }
+    },
+    "DATAR20": {
+      "name": "Backup Data Register 20",
+      "bits": {
+        "D20": {
+          "name": "Backup data, which can be written with user data",
+          "position": "15:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "They are only reset by backup domain reset (BDRST) or by a TAMPER pin event (if the TAMPER pin function is activated)."
+        }
+      }
+    },
+    "DATAR21": {
+      "name": "Backup Data Register 21",
+      "bits": {
+        "D21": {
+          "name": "Backup data, which can be written with user data",
+          "position": "15:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "They are only reset by backup domain reset (BDRST) or by a TAMPER pin event (if the TAMPER pin function is activated)."
+        }
+      }
+    },
+    "DATAR22": {
+      "name": "Backup Data Register 22",
+      "bits": {
+        "D22": {
+          "name": "Backup data, which can be written with user data",
+          "position": "15:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "They are only reset by backup domain reset (BDRST) or by a TAMPER pin event (if the TAMPER pin function is activated)."
+        }
+      }
+    },
+    "DATAR23": {
+      "name": "Backup Data Register 23",
+      "bits": {
+        "D23": {
+          "name": "Backup data, which can be written with user data",
+          "position": "15:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "They are only reset by backup domain reset (BDRST) or by a TAMPER pin event (if the TAMPER pin function is activated)."
+        }
+      }
+    },
+    "DATAR24": {
+      "name": "Backup Data Register 24",
+      "bits": {
+        "D24": {
+          "name": "Backup data, which can be written with user data",
+          "position": "15:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "They are only reset by backup domain reset (BDRST) or by a TAMPER pin event (if the TAMPER pin function is activated)."
+        }
+      }
+    },
+    "DATAR25": {
+      "name": "Backup Data Register 25",
+      "bits": {
+        "D25": {
+          "name": "Backup data, which can be written with user data",
+          "position": "15:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "They are only reset by backup domain reset (BDRST) or by a TAMPER pin event (if the TAMPER pin function is activated)."
+        }
+      }
+    },
+    "DATAR26": {
+      "name": "Backup Data Register 26",
+      "bits": {
+        "D26": {
+          "name": "Backup data, which can be written with user data",
+          "position": "15:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "They are only reset by backup domain reset (BDRST) or by a TAMPER pin event (if the TAMPER pin function is activated)."
+        }
+      }
+    },
+    "DATAR27": {
+      "name": "Backup Data Register 27",
+      "bits": {
+        "D27": {
+          "name": "Backup data, which can be written with user data",
+          "position": "15:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "They are only reset by backup domain reset (BDRST) or by a TAMPER pin event (if the TAMPER pin function is activated)."
+        }
+      }
+    },
+    "DATAR28": {
+      "name": "Backup Data Register 28",
+      "bits": {
+        "D28": {
+          "name": "Backup data, which can be written with user data",
+          "position": "15:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "They are only reset by backup domain reset (BDRST) or by a TAMPER pin event (if the TAMPER pin function is activated)."
+        }
+      }
+    },
+    "DATAR29": {
+      "name": "Backup Data Register 29",
+      "bits": {
+        "D29": {
+          "name": "Backup data, which can be written with user data",
+          "position": "15:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "They are only reset by backup domain reset (BDRST) or by a TAMPER pin event (if the TAMPER pin function is activated)."
+        }
+      }
+    },
+    "DATAR30": {
+      "name": "Backup Data Register 30",
+      "bits": {
+        "D30": {
+          "name": "Backup data, which can be written with user data",
+          "position": "15:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "They are only reset by backup domain reset (BDRST) or by a TAMPER pin event (if the TAMPER pin function is activated)."
+        }
+      }
+    },
+    "DATAR31": {
+      "name": "Backup Data Register 31",
+      "bits": {
+        "D31": {
+          "name": "Backup data, which can be written with user data",
+          "position": "15:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "They are only reset by backup domain reset (BDRST) or by a TAMPER pin event (if the TAMPER pin function is activated)."
+        }
+      }
+    },
+    "DATAR32": {
+      "name": "Backup Data Register 32",
+      "bits": {
+        "D32": {
+          "name": "Backup data, which can be written with user data",
+          "position": "15:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "They are only reset by backup domain reset (BDRST) or by a TAMPER pin event (if the TAMPER pin function is activated)."
+        }
+      }
+    },
+    "DATAR33": {
+      "name": "Backup Data Register 33",
+      "bits": {
+        "D33": {
+          "name": "Backup data, which can be written with user data",
+          "position": "15:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "They are only reset by backup domain reset (BDRST) or by a TAMPER pin event (if the TAMPER pin function is activated)."
+        }
+      }
+    },
+    "DATAR34": {
+      "name": "Backup Data Register 34",
+      "bits": {
+        "D34": {
+          "name": "Backup data, which can be written with user data",
+          "position": "15:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "They are only reset by backup domain reset (BDRST) or by a TAMPER pin event (if the TAMPER pin function is activated)."
+        }
+      }
+    },
+    "DATAR35": {
+      "name": "Backup Data Register 35",
+      "bits": {
+        "D35": {
+          "name": "Backup data, which can be written with user data",
+          "position": "15:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "They are only reset by backup domain reset (BDRST) or by a TAMPER pin event (if the TAMPER pin function is activated)."
+        }
+      }
+    },
+    "DATAR36": {
+      "name": "Backup Data Register 36",
+      "bits": {
+        "D36": {
+          "name": "Backup data, which can be written with user data",
+          "position": "15:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "They are only reset by backup domain reset (BDRST) or by a TAMPER pin event (if the TAMPER pin function is activated)."
+        }
+      }
+    },
+    "DATAR37": {
+      "name": "Backup Data Register 37",
+      "bits": {
+        "D37": {
+          "name": "Backup data, which can be written with user data",
+          "position": "15:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "They are only reset by backup domain reset (BDRST) or by a TAMPER pin event (if the TAMPER pin function is activated)."
+        }
+      }
+    },
+    "DATAR38": {
+      "name": "Backup Data Register 38",
+      "bits": {
+        "D38": {
+          "name": "Backup data, which can be written with user data",
+          "position": "15:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "They are only reset by backup domain reset (BDRST) or by a TAMPER pin event (if the TAMPER pin function is activated)."
+        }
+      }
+    },
+    "DATAR39": {
+      "name": "Backup Data Register 39",
+      "bits": {
+        "D39": {
+          "name": "Backup data, which can be written with user data",
+          "position": "15:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "They are only reset by backup domain reset (BDRST) or by a TAMPER pin event (if the TAMPER pin function is activated)."
+        }
+      }
+    },
+    "DATAR40": {
+      "name": "Backup Data Register 40",
+      "bits": {
+        "D40": {
+          "name": "Backup data, which can be written with user data",
+          "position": "15:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "They are only reset by backup domain reset (BDRST) or by a TAMPER pin event (if the TAMPER pin function is activated)."
+        }
+      }
+    },
+    "DATAR41": {
+      "name": "Backup Data Register 41",
+      "bits": {
+        "D41": {
+          "name": "Backup data, which can be written with user data",
+          "position": "15:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "They are only reset by backup domain reset (BDRST) or by a TAMPER pin event (if the TAMPER pin function is activated)."
+        }
+      }
+    },
+    "DATAR42": {
+      "name": "Backup Data Register 42",
+      "bits": {
+        "D42": {
+          "name": "Backup data, which can be written with user data",
+          "position": "15:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "They are only reset by backup domain reset (BDRST) or by a TAMPER pin event (if the TAMPER pin function is activated)."
+        }
+      }
+    },
+    "OCTLR": {
+      "name": "RTC Calibration Register",
+      "bits": {
+        "CAL": {
+          "name": "Calibration value",
+          "position": "6:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "The value indicates the number of clock pulses that will be skipped every 2^20 clock pulses. This allows the calibration of the RTC clock. The clock can be slowed down from 0 to 121 ppm."
+        },
+        "CCO": {
+          "name": "Calibration clock output selection",
+          "position": "7",
+          "access": "read-write",
+          "values": {
+            "1": "TAMPER pin output RTC clock divided by 64.",
+            "0": "No calibration clock output."
+          },
+          "comment": "The tamper detection function must be switched off to enable this function.\nThis bit is cleared when VDD power supply is switched off."
+        },
+        "ASOE": {
+          "name": "TAMPER pin alarm/second output enable",
+          "position": "8",
+          "access": "read-write",
+          "values": {
+            "0": "Alarm/second pulse output disabled.",
+            "1": "Alarm/second pulse output enabled."
+          },
+          "comment": "This bit can only be reset by backup domain reset (BDRST)."
+        },
+        "ASOS": {
+          "name": "TAMPER pin alarm/second output selection",
+          "position": "9",
+          "access": "read-write",
+          "values": {
+            "1": "Second pulse output selected.",
+            "0": "Alarm pulse output selected."
+          },
+          "comment": "This bit can only be reset by backup domain reset (BDRST)."
+        }
+      }
+    },
+    "TPCTLR": {
+      "name": "Tamper Detection Control Register",
+      "bits": {
+        "TPE": {
+          "name": "TAMPER pin enable",
+          "position": "0",
+          "access": "read-write",
+          "values": {
+            "0": "TAMPER pin used as common IO port.",
+            "1": "TAMPER pin used for the tamper detection."
+          },
+          "comment": "When the TPAL and TPE bits are cleared at the same time, a false tamper event occurs. It is recommended to change the status of the TPAL bit only when TPE is 0."
+        },
+        "TPAL": {
+          "name": "TAMPER pin active level",
+          "position": "1",
+          "access": "read-write",
+          "values": {
+            "0": "High level on the TAMPER pin cause all backup data registers cleared (hardware lock rising edge).",
+            "1": "Low level on the TAMPER pin causer all backup data registers cleared (hardware lock falling edge)."
+          },
+          "comment": "When the TPAL and TPE bits are cleared at the same time, a false tamper event occurs. It is recommended to change the status of the TPAL bit only when TPE is 0."
+        }
+      }
+    },
+    "TPCSR": {
+      "name": "Tamper Detection Status Register",
+      "bits": {
+        "CTE": {
+          "name": "Clear Tamper detection event",
+          "position": "0",
+          "access": "write-only",
+          "values": {},
+          "comment": "Write 1 to clear it, and the value read out is invalid."
+        },
+        "CTI": {
+          "name": "Clear Tamper detection interrupt",
+          "position": "1",
+          "access": "write-only",
+          "values": {},
+          "comment": "Write 1 to clear it, and the value read out is invalid."
+        },
+        "TPIE": {
+          "name": "Tamper interrupt enable",
+          "position": "2",
+          "access": "read-write",
+          "values": {
+            "0": "Tamper detection interrupt disabled.",
+            "1": "Tamper detection interrupt enabled (TPE needs to be set to 1)."
+          },
+          "comment": "The tamper detection interrupt cannot wake up the core from low-power mode.\nThis bit is reset only when the system is reset or woken up from standby mode."
+        },
+        "TEF": {
+          "name": "Tamper event flag",
+          "position": "8",
+          "access": "read-only",
+          "values": {},
+          "comment": "When a tamper event is detected, this bit is set. Cleared by writing 1 to the CTE bit.\nWhen this bit is 1, all BKP_DATARx registers are cleared, and all write operations to the BKP_DATARx register are invalid before this bit is not reset."
+        },
+        "TIF": {
+          "name": "Tamper interrupt flag",
+          "position": "9",
+          "access": "read-only",
+          "values": {},
+          "comment": "When a tamper event is detected and the TPIE bit is set to 1, this bit is set. Cleared by writing 1 to the CTI bit. If the TPIE bit is reset, this bit is reset at the same time.\nThis bit is reset only when the system is reset or woken up from standby mode."
+        }
+      }
+    }
+  }
+}

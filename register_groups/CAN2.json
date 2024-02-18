@@ -1,0 +1,2658 @@
+{
+  "name": "Controller Area Network (CAN) 2 registers",
+  "registers": {
+    "CTLR": {
+      "name": "CAN2 master control register",
+      "bits": {
+        "INRQ": {
+          "name": "Initialize mode request",
+          "position": "0",
+          "access": "read-write",
+          "values": {
+            "1": "Set to 1 to request the CAN controller to enter the initialization mode. After the current activity is completed, the controller enters the initialization mode, and the hardware sets the INAK bit of the register CAN_STATR to 1.",
+            "0": "Set to 0 to request the CAN controller to exit the initialization mode and enter the normal mode, and the hardware clears the INAK bit of the CAN_STATR register to 0."
+          },
+          "comment": ""
+        },
+        "SLEEP": {
+          "name": "Sleep mode request",
+          "position": "1",
+          "access": "read-write",
+          "values": {
+            "1": "Set to 1 to request the CAN controller to enter sleep mode. After the current activity is completed, the controller enters sleep mode. If the AWUM bit is set to 1, the controller clears the SLEEP bit to 0 when a message is received.",
+            "0": "After the software clears to 0, the controller exits the sleep mode."
+          },
+          "comment": ""
+        },
+        "TXFP": {
+          "name": "Send mailbox priority method selection",
+          "position": "2",
+          "access": "read-write",
+          "values": {
+            "1": "The priority is determined by the order in which the requests are sent.",
+            "0": "The priority is determined by the message identifier."
+          },
+          "comment": ""
+        },
+        "RFLM": {
+          "name": "Receive FIFO message lock mode enable",
+          "position": "3",
+          "access": "read-write",
+          "values": {
+            "1": "When the receiving FIFO overflows, the received mailbox message is not read, and the newly received message is discarded when the mailbox is not released.",
+            "0": "When the receiving FIFO overflows, the received mailbox message is not read out, and when the mailbox is not released, the new received message will overwrite the original message."
+          },
+          "comment": ""
+        },
+        "NART": {
+          "name": "The automatic packet retransmission function is disabled",
+          "position": "4",
+          "access": "read-write",
+          "values": {
+            "1": "No matter whether the transmission is successful or not, the message can only be sent once.",
+            "0": "The CAN controller keeps retransmitting until the transmission is successful."
+          },
+          "comment": ""
+        },
+        "AWUM": {
+          "name": "CAN controller automatic wake-up enable",
+          "position": "5",
+          "access": "read-write",
+          "values": {
+            "1": "When a message is detected, the hardware automatically wakes up, and the SLEEP and SLAK bits of the register CAN_STATR are automatically cleared to 0.",
+            "0": "Software operation is required to clear the SLEEP bit of the CAN_CTLR register to wake up the CAN controller."
+          },
+          "comment": ""
+        },
+        "ABOM": {
+          "name": "Offline automatic exit control",
+          "position": "6",
+          "access": "read-write",
+          "values": {
+            "1": "The hardware detects 11 consecutive implicit bits 128 times and automatically exits the offline state.",
+            "0": "The INRQ bit of the software operation register CAN_CTLR is required to be set to 1 and then cleared to 0. After 11 consecutive implicit bits are detected 128 times, the offline state is exited."
+          },
+          "comment": ""
+        },
+        "TTCM": {
+          "name": "Whether to allow time trigger mode",
+          "position": "7",
+          "access": "read-write",
+          "values": {
+            "1": "Enable time trigger mode.",
+            "0": "Disable time trigger mode."
+          },
+          "comment": "The time trigger mode is mainly used with the TTCAN protocol."
+        },
+        "RESET": {
+          "name": "CAN controller software reset request",
+          "position": "15",
+          "access": "read-write-1",
+          "values": {
+            "1": "Reset the CAN controller. After reset, the controller enters sleep mode, and then the hardware automatically clears it to 0.",
+            "0": "The CAN controller is in normal state."
+          },
+          "comment": "Writing 0 to this bit is invalid."
+        },
+        "DBF": {
+          "name": "Debug whether to disable CAN bus from working",
+          "position": "16",
+          "access": "read-write",
+          "values": {
+            "1": "During debugging, the CAN transceiver is prohibited, but the control and read and write operations of the receiving FIFO are normal.",
+            "0": "When debugging, the CAN controller works normally."
+          },
+          "comment": ""
+        }
+      }
+    },
+    "STATR": {
+      "name": "CAN2 master status register",
+      "bits": {
+        "INAK": {
+          "name": "Initialization mode indication",
+          "position": "0",
+          "access": "read-only",
+          "values": {
+            "1": "CAN controller is in initialization mode.",
+            "0": "CAN controller is not in initialization mode."
+          },
+          "comment": ""
+        },
+        "SLAK": {
+          "name": "Sleep mode indication",
+          "position": "1",
+          "access": "read-only",
+          "values": {
+            "1": "CAN controller is in sleep mode.",
+            "0": "CAN controller is not in sleep mode."
+          },
+          "comment": ""
+        },
+        "ERRI": {
+          "name": "Error interrupt",
+          "position": "2",
+          "access": "read-write-1",
+          "values": {},
+          "comment": "When the ERRIE bit in the CAN_INTENR register is set to 1, an error and status change interrupt is generated.\nThis bit is set to 1 and cleared to 0 by software, and set to 0 is invalid."
+        },
+        "WKUI": {
+          "name": "Wake-up interrupt flag",
+          "position": "3",
+          "access": "read-write-1",
+          "values": {},
+          "comment": "When the WKUI bit in the CAN_INTENR register is set to 1, if the SOF bit is detected when the CAN controller is in sleep mode, the hardware will set it to 1.\nSet to 1 by software to clear to 0, and set to 0 is invalid."
+        },
+        "SLAKI": {
+          "name": "Sleep acknowledge interrupt",
+          "position": "4",
+          "access": "read-write-1",
+          "values": {
+            "1": "When entering sleep mode, an interrupt is generated and the hardware is set to 1.",
+            "0": "When exiting sleep mode, it can be cleared by hardware or by software."
+          },
+          "comment": "When the SLKIE bit in the CAN_INTENR register is set to 1, write 1 to clear it, and writing 0 is invalid."
+        },
+        "TXM": {
+          "name": "Tx mode query",
+          "position": "8",
+          "access": "read-only",
+          "values": {
+            "1": "CAN controller is in Tx mode currently.",
+            "0": "CAN controller is not in Tx mode currently."
+          },
+          "comment": ""
+        },
+        "RXM": {
+          "name": "Rx mode query",
+          "position": "9",
+          "access": "read-only",
+          "values": {
+            "1": "CAN controller is in Rx mode currently.",
+            "0": "CAN controller is not in Rx mode currently."
+          },
+          "comment": ""
+        },
+        "SAMP": {
+          "name": "Level of a receive bit on the CAN controller Rx pin",
+          "position": "10",
+          "access": "read-only",
+          "values": {},
+          "comment": ""
+        },
+        "RX": {
+          "name": "Current actual level of CAN controller Rx pin",
+          "position": "11",
+          "access": "read-only",
+          "values": {},
+          "comment": ""
+        }
+      }
+    },
+    "TSTATR": {
+      "name": "CAN2 transmit status register",
+      "bits": {
+        "RQCP0": {
+          "name": "Tx mailbox 0 request completion flag",
+          "position": "0",
+          "access": "read-write-1",
+          "values": {},
+          "comment": "When the send or abort request of Tx mailbox 0 is completed, this bit is automatically set to 1.\nSet to 1 by software to clear, software write 0 is invalid."
+        },
+        "TXOK0": {
+          "name": "Tx mailbox 0 transmit OK",
+          "position": "1",
+          "access": "read-write-1",
+          "values": {
+            "1": "The last transmission was successful.",
+            "0": "The last transmission failed."
+          },
+          "comment": "Set to 1 by software to clear, software write 0 is invalid."
+        },
+        "ALST0": {
+          "name": "Tx mailbox 0 arbitration failure flag",
+          "position": "2",
+          "access": "read-write-1",
+          "values": {},
+          "comment": "When Tx mailbox 0 has a low arbitration priority and fails to send, this bit is automatically set to 1.\nSet to 1 by software to clear, software write 0 is invalid."
+        },
+        "TERR0": {
+          "name": "Tx mailbox 0 transmit error",
+          "position": "3",
+          "access": "read-write-1",
+          "values": {},
+          "comment": "When Tx mailbox 0 fails, this bit is automatically set to 1.\nSet to 1 by software to clear, software write 0 is invalid."
+        },
+        "ABRQ0": {
+          "name": "Send a send abort request for mailbox 0",
+          "position": "7",
+          "access": "read-write-1",
+          "values": {},
+          "comment": "Set to 1 by software to abort the sending request of mailbox 0, and reset to 0 by hardware when the sent message is cleared. Software write 0 is invalid."
+        },
+        "RQCP1": {
+          "name": "Tx mailbox 1 request completion flag",
+          "position": "8",
+          "access": "read-write-1",
+          "values": {},
+          "comment": "This bit is automatically set to 1 when the sending or aborting request of sending mailbox 1 is completed.\nSet to 1 by software to clear, software write 0 is invalid."
+        },
+        "TXOK1": {
+          "name": "Tx mailbox 1 transmit OK",
+          "position": "9",
+          "access": "read-write-1",
+          "values": {
+            "1": "The last transmission was successful.",
+            "0": "The last transmission failed."
+          },
+          "comment": "Set to 1 by software to clear, software write 0 is invalid."
+        },
+        "ALST1": {
+          "name": "Tx mailbox 1 arbitration failure flag",
+          "position": "10",
+          "access": "read-write-1",
+          "values": {},
+          "comment": "When the Tx mailbox 1 has a low arbitration priority and fails to send, this bit is automatically set to 1."
+        },
+        "TERR1": {
+          "name": "Tx mailbox 1 transmit error",
+          "position": "11",
+          "access": "read-write-1",
+          "values": {},
+          "comment": "When Tx mailbox 1 fails, this bit is automatically set to 1.\nSet to 1 by software to clear, software write 0 is invalid."
+        },
+        "ABRQ1": {
+          "name": "Send a send abort request for mailbox 1",
+          "position": "15",
+          "access": "read-write-1",
+          "values": {},
+          "comment": "Set to 1 by software to abort the sending request of mailbox 1, and reset to 0 by hardware when the sent message is cleared. Software write 0 is invalid."
+        },
+        "RQCP2": {
+          "name": "Tx mailbox 2 request completion flag",
+          "position": "16",
+          "access": "read-write-1",
+          "values": {},
+          "comment": "This bit is automatically set to 1 when the sending or aborting request of sending mailbox 2 is completed.\nSet to 1 by software to clear, software write 0 is invalid."
+        },
+        "TXOK2": {
+          "name": "Tx mailbox 2 transmit OK",
+          "position": "17",
+          "access": "read-write-1",
+          "values": {
+            "1": "The last transmission was successful.",
+            "0": "The last transmission failed."
+          },
+          "comment": "Set to 1 by software to clear, software write 0 is invalid."
+        },
+        "ALST2": {
+          "name": "Tx mailbox 2 arbitration failure flag",
+          "position": "18",
+          "access": "read-write-1",
+          "values": {},
+          "comment": "When the Tx mailbox 2 has a low arbitration priority and fails to send, this bit is automatically set to 1.\nSet to 1 by software to clear, software write 0 is invalid."
+        },
+        "TERR2": {
+          "name": "Tx mailbox 2 transmit error",
+          "position": "19",
+          "access": "read-write-1",
+          "values": {},
+          "comment": "When Tx mailbox 2 fails, this bit is automatically set to 1.\nSet to 1 by software to clear, software write 0 is invalid."
+        },
+        "ABRQ2": {
+          "name": "Send a send abort request for mailbox 2",
+          "position": "23",
+          "access": "read-write-1",
+          "values": {},
+          "comment": "Set to 1 by software to abort the sending request of mailbox 2. When the sent message is cleared, the hardware clears it to 0. If mailbox 2 is cleared, the software is invalidated by setting 1."
+        },
+        "CODE": {
+          "name": "Mailbox code",
+          "position": "25:24",
+          "access": "read-only",
+          "values": {},
+          "comment": "When more than one mailbox is empty, it indicates the next empty mailbox number; when all mailboxes are empty, it indicates the mailbox number with the lowest priority."
+        },
+        "TME0": {
+          "name": "Empty flag bit for Tx mailbox 0",
+          "position": "26",
+          "access": "read-only",
+          "values": {
+            "1": "No message waiting to be sent by the Tx mailbox 0.",
+            "0": "Tx mailbox 0 has a message waiting to be sent."
+          },
+          "comment": ""
+        },
+        "TME1": {
+          "name": "Empty flag bit for Tx mailbox 1",
+          "position": "27",
+          "access": "read-only",
+          "values": {
+            "1": "No message waiting to be sent by the Tx mailbox 1.",
+            "0": "Tx mailbox 1 has a message waiting to be sent."
+          },
+          "comment": ""
+        },
+        "TME2": {
+          "name": "Empty flag bit for Tx mailbox 2",
+          "position": "28",
+          "access": "read-only",
+          "values": {
+            "1": "No message waiting to be sent by the Tx mailbox 2.",
+            "0": "Tx mailbox 2 has a message waiting to be sent."
+          },
+          "comment": ""
+        },
+        "LOW0": {
+          "name": "Lowest priority flag for Tx mailbox 0",
+          "position": "29",
+          "access": "read-only",
+          "values": {
+            "1": "The priority of Tx mailbox 0 is the lowest.",
+            "0": "The priority of Tx mailbox 0 is not the lowest."
+          },
+          "comment": ""
+        },
+        "LOW1": {
+          "name": "Lowest priority flag for Tx mailbox 1",
+          "position": "30",
+          "access": "read-only",
+          "values": {
+            "1": "The priority of Tx mailbox 1 is the lowest.",
+            "0": "The priority of Tx mailbox 1 is not the lowest."
+          },
+          "comment": ""
+        },
+        "LOW2": {
+          "name": "Lowest priority flag for Tx mailbox 2",
+          "position": "31",
+          "access": "read-only",
+          "values": {
+            "1": "Tx mailbox 2 has the lowest priority.",
+            "0": "The priority of Tx mailbox 2 is not the lowest."
+          },
+          "comment": ""
+        }
+      }
+    },
+    "RFIFO0": {
+      "name": "CAN2 receive FIFO 0 control and status register",
+      "bits": {
+        "FMP0": {
+          "name": "FIFO 0 message pending",
+          "position": "1:0",
+          "access": "read-only",
+          "values": {},
+          "comment": "Number of received FIFO 0 messages."
+        },
+        "FULL0": {
+          "name": "Receive FIFO 0 full flag",
+          "position": "3",
+          "access": "read-write-1",
+          "values": {},
+          "comment": "Set by hardware when there are 3 messages in FIFO 0.\nThis bit needs software to be set to 1 and cleared to 0, and software write 0 is invalid."
+        },
+        "FOVR0": {
+          "name": "Receive FIFO 0 overflow flag",
+          "position": "4",
+          "access": "read-write-1",
+          "values": {},
+          "comment": "When there are 3 messages in FIFO 0, a new message is received, and the hardware is set to 1.\nThis bit needs software to be set to 1 and cleared to 0, and software write 0 is invalid."
+        },
+        "RFOM0": {
+          "name": "Release FIFO 0 output mailbox",
+          "position": "5",
+          "access": "read-write-1",
+          "values": {},
+          "comment": "When the software sets this bit to 1, it releases the current mailbox message of the receiving FIFO 0, and automatically clears it to 0 after the release, and software write 0 is invalid."
+        }
+      }
+    },
+    "RFIFO1": {
+      "name": "CAN2 receive FIFO 1 control and status register",
+      "bits": {
+        "FMP1": {
+          "name": "FIFO 1 message pending",
+          "position": "1:0",
+          "access": "read-only",
+          "values": {},
+          "comment": "Number of received FIFO 1 messages."
+        },
+        "FULL1": {
+          "name": "Receive FIFO 1 full flag",
+          "position": "3",
+          "access": "read-write-1",
+          "values": {},
+          "comment": "Set by hardware when there are 3 messages in FIFO 1.\nThis bit needs software to be set to 1 and cleared to 0, and software write 0 is invalid."
+        },
+        "FOVR1": {
+          "name": "Receive FIFO 1 overflow flag",
+          "position": "4",
+          "access": "read-write-1",
+          "values": {},
+          "comment": "When there are 3 messages in FIFO 1, a new message is received, and the hardware is set to 1.\nThis bit needs software to be set to 1 and cleared to 0, and software write 0 is invalid."
+        },
+        "RFOM1": {
+          "name": "Release FIFO 1 output mailbox",
+          "position": "5",
+          "access": "read-write-1",
+          "values": {},
+          "comment": "When the software sets this bit to 1, it releases the current mailbox message of the receiving FIFO 1, and automatically clears it to 0 after the release, and software write 0 is invalid."
+        }
+      }
+    },
+    "INTENR": {
+      "name": "CAN2 interrupt enable register",
+      "bits": {
+        "TMEIE": {
+          "name": "Tx mailbox empty interrupt",
+          "position": "0",
+          "access": "read-write",
+          "values": {
+            "1": "When the Tx mailbox is empty, an interrupt is generated.",
+            "0": "No interrupt is generated when the Tx mailbox is empty."
+          },
+          "comment": ""
+        },
+        "FMPIE0": {
+          "name": "Receive FIFO 0 message pending interrupt enable",
+          "position": "1",
+          "access": "read-write",
+          "values": {
+            "1": "When FIFO 0 updates the FMP bit, and it is not 0, trigger FIFO 0 interrupt.",
+            "0": "When FIFO 0 updates the FMP bit, and it is not 0, the FIFO 0 interrupt is not triggered."
+          },
+          "comment": ""
+        },
+        "FFIE0": {
+          "name": "Receive FIFO 0 full interrupt enable",
+          "position": "2",
+          "access": "read-write",
+          "values": {
+            "1": "When FIFO 0 is full, trigger FIFO 0 interrupt.",
+            "0": "When FIFO 0 is full, do not trigger FIFO 0 interrupt."
+          },
+          "comment": ""
+        },
+        "FOVIE0": {
+          "name": "Receive FIFO 0 overflow interrupt enable",
+          "position": "3",
+          "access": "read-write",
+          "values": {
+            "1": "When FIFO 0 overflows, trigger FIFO 0 interrupt.",
+            "0": "When FIFO 0 overflows, do not trigger FIFO 0 interrupt."
+          },
+          "comment": ""
+        },
+        "FMPIE1": {
+          "name": "Receive FIFO 1 message pending interrupt enable",
+          "position": "4",
+          "access": "read-write",
+          "values": {
+            "1": "When FIFO 1 updates the FMP bit, and it is not 0, trigger FIFO 1 interrupt.",
+            "0": "When FIFO 1 updates the FMP bit, and it is not 0, the FIFO 1 interrupt is not triggered."
+          },
+          "comment": ""
+        },
+        "FFIE1": {
+          "name": "Receive FIFO 1 full interrupt enable",
+          "position": "5",
+          "access": "read-write",
+          "values": {
+            "1": "When FIFO 1 is full, trigger FIFO 1 interrupt.",
+            "0": "When FIFO 1 is full, do not trigger FIFO 1 interrupt."
+          },
+          "comment": ""
+        },
+        "FOVIE1": {
+          "name": "Receive FIFO 1 overflow interrupt enable",
+          "position": "6",
+          "access": "read-write",
+          "values": {
+            "1": "When FIFO 1 overflows, trigger FIFO 1 interrupt.",
+            "0": "When FIFO 1 overflows, do not trigger FIFO 1 interrupt."
+          },
+          "comment": ""
+        },
+        "EWGIE": {
+          "name": "Error warning interrupt enable",
+          "position": "8",
+          "access": "read-write",
+          "values": {
+            "1": "When the number of errors reaches the warning threshold, update the ERRI bit to 1, triggering an error interrupt.",
+            "0": "When the number of errors reaches the warning threshold, the ERRI bit will not be updated, and the error interrupt will not be triggered."
+          },
+          "comment": ""
+        },
+        "EPVIE": {
+          "name": "Error passive interrupt enable",
+          "position": "9",
+          "access": "read-write",
+          "values": {
+            "1": "When entering the error passive state, update the ERRI bit to 1, triggering an error interrupt.",
+            "0": "When entering the error passive state, the ERRI bit is not updated and the error interrupt is not triggered."
+          },
+          "comment": ""
+        },
+        "BOFIE": {
+          "name": "Bus-off interrupt enable",
+          "position": "10",
+          "access": "read-write",
+          "values": {
+            "1": "When entering the offline state, update the ERRI bit to 1, triggering an error interrupt.",
+            "0": "When entering the offline state, the ERRI bit will not be updated, and the error interrupt will not be triggered."
+          },
+          "comment": ""
+        },
+        "LECIE": {
+          "name": "Last error code interrupt enable",
+          "position": "11",
+          "access": "read-write",
+          "values": {
+            "1": "When an error is detected, the hardware updates LEC[2:0], updates the ERRI bit to 1, and triggers an error interrupt.",
+            "0": "When an error is detected, the hardware updates LEC[2:0], does not update the ERRI bit, and does not trigger an error interrupt."
+          },
+          "comment": ""
+        },
+        "ERRIE": {
+          "name": "Error interrupt enable",
+          "position": "15",
+          "access": "read-write",
+          "values": {
+            "1": "When the CAN controller generates an error, an interrupt is generated.",
+            "0": "No interrupt is generated when the CAN controller generates an error."
+          },
+          "comment": ""
+        },
+        "WKUIE": {
+          "name": "Wake-up interrupt enable",
+          "position": "16",
+          "access": "read-write",
+          "values": {
+            "1": "When the CAN controller is woken up, an interrupt is generated.",
+            "0": "No interrupt is generated when the CAN controller wakes up."
+          },
+          "comment": ""
+        },
+        "SLKIE": {
+          "name": "Sleep interrupt enable",
+          "position": "17",
+          "access": "read-write",
+          "values": {
+            "1": "When entering the sleep state, an interrupt is generated.",
+            "0": "No interrupt is generated when entering sleep state."
+          },
+          "comment": ""
+        }
+      }
+    },
+    "ERRSR": {
+      "name": "CAN2 error status register",
+      "bits": {
+        "EWGF": {
+          "name": "Error warning flag bit",
+          "position": "0",
+          "access": "read-only",
+          "values": {},
+          "comment": "When the sending and receiving error counter reaches the warning threshold, that is, greater than or equal to 96, the hardware is set to 1."
+        },
+        "EPVF": {
+          "name": "Error passive flag",
+          "position": "1",
+          "access": "read-only",
+          "values": {},
+          "comment": "When the transceiver error counter reaches the error passive threshold, that is, greater than 127, the hardware is set to 1."
+        },
+        "BOFF": {
+          "name": "Bus-off status flag",
+          "position": "2",
+          "access": "read-only",
+          "values": {},
+          "comment": "When the CAN controller enters the offline state, the hardware automatically sets it to 1; when it exits the offline state, the hardware automatically clears it to 0."
+        },
+        "LEC": {
+          "name": "Last error code",
+          "position": "6:4",
+          "access": "read-write",
+          "values": {
+            "000": "No error.",
+            "001": "Bit stuffing error.",
+            "010": "FORM format error.",
+            "011": "ACK confirmation error.",
+            "100": "Recessive bit error.",
+            "101": "Dominant bit error.",
+            "110": "CRC error.",
+            "111": "Software settings."
+          },
+          "comment": "When detecting the sending error on the CAN bus, the controller will set according to the error condition, and set 000b when sending and receiving the message correctly.\nUsually when the application software reads the error, the code name is set to 111b, and the code name update can be detected."
+        },
+        "TEC": {
+          "name": "Transmit error counter",
+          "position": "23:16",
+          "access": "read-only",
+          "values": {},
+          "comment": "When the CAN sends an error, according to the error condition, the counter is incremented by 1 or 8; after the transmission is successful, the counter is decremented by 1 or set to 120 (the error count value is greater than 127). When the counter value exceeds 127, the CAN enters the error passive state."
+        },
+        "REC": {
+          "name": "Receive error counter",
+          "position": "31:24",
+          "access": "read-only",
+          "values": {},
+          "comment": "When the CAN receives an error, according to the error condition, the counter is incremented by 1 or 8; after successful reception, the counter is decreased by 1 or set to 120 (the error count value is greater than 127). When the counter value exceeds 127, the CAN enters the error passive state."
+        }
+      }
+    },
+    "BTIMR": {
+      "name": "CAN2 bit timing register",
+      "bits": {
+        "BRP": {
+          "name": "Baud rate prescaler",
+          "position": "9:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "The CAN baud rate is calculated by the following formula:\nCAN_bps = PCLK1 / ((TS1[3:0] + 1 + TS2[2:0] + 1) * (BRP[9:0] + 1))"
+        },
+        "TS1": {
+          "name": "Time segment 1",
+          "position": "19:16",
+          "access": "read-write",
+          "values": {},
+          "comment": "It defines how many minimum time units are occupied by time period 1, and the actual value is (TS1[3:0] + 1)."
+        },
+        "TS2": {
+          "name": "Time segment 2",
+          "position": "22:20",
+          "access": "read-write",
+          "values": {},
+          "comment": "It defines how many minimum time units are occupied by time period 2, and the actual value is (TS2[2:0] + 1)."
+        },
+        "SJW": {
+          "name": "Resynchronization jump width",
+          "position": "25:24",
+          "access": "read-write",
+          "values": {},
+          "comment": "When implementing resynchronization, the upper limit of the minimum number of time units that can be extended and reduced in the bit, the actual value is (SJW[1:0] + 1), and the range can be set to 1 to 4 minimum time units."
+        },
+        "LBKM": {
+          "name": "Loopback mode setting",
+          "position": "30",
+          "access": "read-write",
+          "values": {
+            "1": "Enter loopback mode.",
+            "0": "Exit loopback mode."
+          },
+          "comment": ""
+        },
+        "SILM": {
+          "name": "Silent mode setting",
+          "position": "31",
+          "access": "read-write",
+          "values": {
+            "1": "Enter silent mode.",
+            "0": "Exit silent mode."
+          },
+          "comment": ""
+        }
+      }
+    },
+    "TXMIR0": {
+      "name": "CAN2 Tx mailbox 0 identifier register",
+      "bits": {
+        "TXRQ": {
+          "name": "Transmit mailbox request",
+          "position": "0",
+          "access": "read-write",
+          "values": {},
+          "comment": "When the software is set to 1, the data in the mailbox is requested to be sent. When the mailbox is empty after sending, the hardware is cleared to 0."
+        },
+        "RTR": {
+          "name": "Remote transmission request",
+          "position": "1",
+          "access": "read-write",
+          "values": {
+            "1": "Remote frame.",
+            "0": "Data frame."
+          },
+          "comment": ""
+        },
+        "IDE": {
+          "name": "Identifier extension",
+          "position": "2",
+          "access": "read-write",
+          "values": {
+            "1": "Extended identifier.",
+            "0": "Standard identifier."
+          },
+          "comment": ""
+        },
+        "EXID": {
+          "name": "Extended identifier",
+          "position": "20:3",
+          "access": "read-write",
+          "values": {},
+          "comment": "The lower 18 bits of the extended identifier."
+        },
+        "STID": {
+          "name": "Standard identifier",
+          "position": "31:21",
+          "access": "read-write",
+          "values": {},
+          "comment": "The upper 11 bits of a standard or extended identifier."
+        }
+      }
+    },
+    "TXMDTR0": {
+      "name": "CAN2 Tx mailbox 0 data length and timestamp register",
+      "bits": {
+        "DLC": {
+          "name": "Data length code",
+          "position": "3:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "Data length of data frame or remote frame request data length.\nThe data length can be set from 0 to 8."
+        },
+        "TGT": {
+          "name": "Transmit global time",
+          "position": "8",
+          "access": "read-write",
+          "values": {
+            "1": "Send timestamp, the value is the immediate value of TIME[15:0], replacing the last 2 bytes of the 8-byte message.",
+            "0": "No timestamp is sent."
+          },
+          "comment": "This bit is valid when TTCM is set to 1 and the message length is 8."
+        },
+        "TIME": {
+          "name": "Message timestamp",
+          "position": "31:16",
+          "access": "read-write",
+          "values": {},
+          "comment": "The 16-bit timer value used to send the message SOF time."
+        }
+      }
+    },
+    "TXMDLR0": {
+      "name": "CAN2 Tx mailbox 0 data low register",
+      "bits": {
+        "DATA0": {
+          "name": "Data byte 0",
+          "position": "7:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "Send the content of data byte 0."
+        },
+        "DATA1": {
+          "name": "Data byte 1",
+          "position": "15:8",
+          "access": "read-write",
+          "values": {},
+          "comment": "Send the content of data byte 1."
+        },
+        "DATA2": {
+          "name": "Data byte 2",
+          "position": "23:16",
+          "access": "read-write",
+          "values": {},
+          "comment": "Send the content of data byte 2."
+        },
+        "DATA3": {
+          "name": "Data byte 3",
+          "position": "31:24",
+          "access": "read-write",
+          "values": {},
+          "comment": "Send the content of data byte 3."
+        }
+      }
+    },
+    "TXMDHR0": {
+      "name": "CAN2 Tx mailbox 0 data high register",
+      "bits": {
+        "DATA4": {
+          "name": "Data byte 4",
+          "position": "7:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "Send the content of data byte 4."
+        },
+        "DATA5": {
+          "name": "Data byte 5",
+          "position": "15:8",
+          "access": "read-write",
+          "values": {},
+          "comment": "Send the content of data byte 5."
+        },
+        "DATA6": {
+          "name": "Data byte 6",
+          "position": "23:16",
+          "access": "read-write",
+          "values": {},
+          "comment": "Send the content of data byte 6."
+        },
+        "DATA7": {
+          "name": "Data byte 7",
+          "position": "31:24",
+          "access": "read-write",
+          "values": {},
+          "comment": "Send the content of data byte 7."
+        }
+      }
+    },
+    "TXMIR1": {
+      "name": "CAN2 Tx mailbox 1 identifier register",
+      "bits": {
+        "TXRQ": {
+          "name": "Transmit mailbox request",
+          "position": "0",
+          "access": "read-write",
+          "values": {},
+          "comment": "When the software is set to 1, the data in the mailbox is requested to be sent. When the mailbox is empty after sending, the hardware is cleared to 0."
+        },
+        "RTR": {
+          "name": "Remote transmission request",
+          "position": "1",
+          "access": "read-write",
+          "values": {
+            "1": "Remote frame.",
+            "0": "Data frame."
+          },
+          "comment": ""
+        },
+        "IDE": {
+          "name": "Identifier extension",
+          "position": "2",
+          "access": "read-write",
+          "values": {
+            "1": "Extended identifier.",
+            "0": "Standard identifier."
+          },
+          "comment": ""
+        },
+        "EXID": {
+          "name": "Extended identifier",
+          "position": "20:3",
+          "access": "read-write",
+          "values": {},
+          "comment": "The lower 18 bits of the extended identifier."
+        },
+        "STID": {
+          "name": "Standard identifier",
+          "position": "31:21",
+          "access": "read-write",
+          "values": {},
+          "comment": "The upper 11 bits of a standard or extended identifier."
+        }
+      }
+    },
+    "TXMDTR1": {
+      "name": "CAN2 Tx mailbox 1 data length and timestamp register",
+      "bits": {
+        "DLC": {
+          "name": "Data length code",
+          "position": "3:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "Data length of data frame or remote frame request data length.\nThe data length can be set from 0 to 8."
+        },
+        "TGT": {
+          "name": "Transmit global time",
+          "position": "8",
+          "access": "read-write",
+          "values": {
+            "1": "Send timestamp, the value is the immediate value of TIME[15:0], replacing the last 2 bytes of the 8-byte message.",
+            "0": "No timestamp is sent."
+          },
+          "comment": "This bit is valid when TTCM is set to 1 and the message length is 8."
+        },
+        "TIME": {
+          "name": "Message timestamp",
+          "position": "31:16",
+          "access": "read-write",
+          "values": {},
+          "comment": "The 16-bit timer value used to send the message SOF time."
+        }
+      }
+    },
+    "TXMDLR1": {
+      "name": "CAN2 Tx mailbox 1 data low register",
+      "bits": {
+        "DATA0": {
+          "name": "Data byte 0",
+          "position": "7:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "Send the content of data byte 0."
+        },
+        "DATA1": {
+          "name": "Data byte 1",
+          "position": "15:8",
+          "access": "read-write",
+          "values": {},
+          "comment": "Send the content of data byte 1."
+        },
+        "DATA2": {
+          "name": "Data byte 2",
+          "position": "23:16",
+          "access": "read-write",
+          "values": {},
+          "comment": "Send the content of data byte 2."
+        },
+        "DATA3": {
+          "name": "Data byte 3",
+          "position": "31:24",
+          "access": "read-write",
+          "values": {},
+          "comment": "Send the content of data byte 3."
+        }
+      }
+    },
+    "TXMDHR1": {
+      "name": "CAN2 Tx mailbox 1 data high register",
+      "bits": {
+        "DATA4": {
+          "name": "Data byte 4",
+          "position": "7:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "Send the content of data byte 4."
+        },
+        "DATA5": {
+          "name": "Data byte 5",
+          "position": "15:8",
+          "access": "read-write",
+          "values": {},
+          "comment": "Send the content of data byte 5."
+        },
+        "DATA6": {
+          "name": "Data byte 6",
+          "position": "23:16",
+          "access": "read-write",
+          "values": {},
+          "comment": "Send the content of data byte 6."
+        },
+        "DATA7": {
+          "name": "Data byte 7",
+          "position": "31:24",
+          "access": "read-write",
+          "values": {},
+          "comment": "Send the content of data byte 7."
+        }
+      }
+    },
+    "TXMIR2": {
+      "name": "CAN2 Tx mailbox 2 identifier register",
+      "bits": {
+        "TXRQ": {
+          "name": "Transmit mailbox request",
+          "position": "0",
+          "access": "read-write",
+          "values": {},
+          "comment": "When the software is set to 1, the data in the mailbox is requested to be sent. When the mailbox is empty after sending, the hardware is cleared to 0."
+        },
+        "RTR": {
+          "name": "Remote transmission request",
+          "position": "1",
+          "access": "read-write",
+          "values": {
+            "1": "Remote frame.",
+            "0": "Data frame."
+          },
+          "comment": ""
+        },
+        "IDE": {
+          "name": "Identifier extension",
+          "position": "2",
+          "access": "read-write",
+          "values": {
+            "1": "Extended identifier.",
+            "0": "Standard identifier."
+          },
+          "comment": ""
+        },
+        "EXID": {
+          "name": "Extended identifier",
+          "position": "20:3",
+          "access": "read-write",
+          "values": {},
+          "comment": "The lower 18 bits of the extended identifier."
+        },
+        "STID": {
+          "name": "Standard identifier",
+          "position": "31:21",
+          "access": "read-write",
+          "values": {},
+          "comment": "The upper 11 bits of a standard or extended identifier."
+        }
+      }
+    },
+    "TXMDTR2": {
+      "name": "CAN2 Tx mailbox 2 data length and timestamp register",
+      "bits": {
+        "DLC": {
+          "name": "Data length code",
+          "position": "3:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "Data length of data frame or remote frame request data length.\nThe data length can be set from 0 to 8."
+        },
+        "TGT": {
+          "name": "Transmit global time",
+          "position": "8",
+          "access": "read-write",
+          "values": {
+            "1": "Send timestamp, the value is the immediate value of TIME[15:0], replacing the last 2 bytes of the 8-byte message.",
+            "0": "No timestamp is sent."
+          },
+          "comment": "This bit is valid when TTCM is set to 1 and the message length is 8."
+        },
+        "TIME": {
+          "name": "Message timestamp",
+          "position": "31:16",
+          "access": "read-write",
+          "values": {},
+          "comment": "The 16-bit timer value used to send the message SOF time."
+        }
+      }
+    },
+    "TXMDLR2": {
+      "name": "CAN2 Tx mailbox 2 data low register",
+      "bits": {
+        "DATA0": {
+          "name": "Data byte 0",
+          "position": "7:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "Send the content of data byte 0."
+        },
+        "DATA1": {
+          "name": "Data byte 1",
+          "position": "15:8",
+          "access": "read-write",
+          "values": {},
+          "comment": "Send the content of data byte 1."
+        },
+        "DATA2": {
+          "name": "Data byte 2",
+          "position": "23:16",
+          "access": "read-write",
+          "values": {},
+          "comment": "Send the content of data byte 2."
+        },
+        "DATA3": {
+          "name": "Data byte 3",
+          "position": "31:24",
+          "access": "read-write",
+          "values": {},
+          "comment": "Send the content of data byte 3."
+        }
+      }
+    },
+    "TXMDHR2": {
+      "name": "CAN2 Tx mailbox 2 data high register",
+      "bits": {
+        "DATA4": {
+          "name": "Data byte 4",
+          "position": "7:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "Send the content of data byte 4."
+        },
+        "DATA5": {
+          "name": "Data byte 5",
+          "position": "15:8",
+          "access": "read-write",
+          "values": {},
+          "comment": "Send the content of data byte 5."
+        },
+        "DATA6": {
+          "name": "Data byte 6",
+          "position": "23:16",
+          "access": "read-write",
+          "values": {},
+          "comment": "Send the content of data byte 6."
+        },
+        "DATA7": {
+          "name": "Data byte 7",
+          "position": "31:24",
+          "access": "read-write",
+          "values": {},
+          "comment": "Send the content of data byte 7."
+        }
+      }
+    },
+    "RXMIR0": {
+      "name": "CAN2 Rx FIFO 0 mailbox identifier register",
+      "bits": {
+        "RTR": {
+          "name": "Remote transmission request",
+          "position": "1",
+          "access": "read-only",
+          "values": {
+            "1": "Remote frame.",
+            "0": "Data frame."
+          },
+          "comment": ""
+        },
+        "IDE": {
+          "name": "Identifier extension",
+          "position": "2",
+          "access": "read-only",
+          "values": {
+            "1": "Extended identifier.",
+            "0": "Standard identifier."
+          },
+          "comment": ""
+        },
+        "EXID": {
+          "name": "Extended identifier",
+          "position": "20:3",
+          "access": "read-only",
+          "values": {},
+          "comment": "The lower 18 bits of the extended identifier."
+        },
+        "STID": {
+          "name": "Standard identifier",
+          "position": "31:21",
+          "access": "read-only",
+          "values": {},
+          "comment": "The upper 11 bits of a standard or extended identifier."
+        }
+      }
+    },
+    "RXMDTR0": {
+      "name": "CAN2 Rx FIFO 0 mailbox data length and timestamp register",
+      "bits": {
+        "DLC": {
+          "name": "Data length code",
+          "position": "3:0",
+          "access": "read-only",
+          "values": {},
+          "comment": "Received message data length.\nThe data frame length is 0 to 8, and the remote frame is 0."
+        },
+        "FMI": {
+          "name": "Filter match index",
+          "position": "15:8",
+          "access": "read-only",
+          "values": {},
+          "comment": "The filter number matched by the packet."
+        },
+        "TIME": {
+          "name": "Message timestamp",
+          "position": "31:16",
+          "access": "read-only",
+          "values": {},
+          "comment": "16-bit timer value used to receive the SOF time of the message."
+        }
+      }
+    },
+    "RXMDLR0": {
+      "name": "CAN2 Rx FIFO 0 mailbox data low register",
+      "bits": {
+        "DATA0": {
+          "name": "Data byte 0",
+          "position": "7:0",
+          "access": "read-only",
+          "values": {},
+          "comment": "Data byte 0 of the received message."
+        },
+        "DATA1": {
+          "name": "Data byte 1",
+          "position": "15:8",
+          "access": "read-only",
+          "values": {},
+          "comment": "Data byte 1 of the received message."
+        },
+        "DATA2": {
+          "name": "Data byte 2",
+          "position": "23:16",
+          "access": "read-only",
+          "values": {},
+          "comment": "Data byte 2 of the received message."
+        },
+        "DATA3": {
+          "name": "Data byte 3",
+          "position": "31:24",
+          "access": "read-only",
+          "values": {},
+          "comment": "Data byte 3 of the received message."
+        }
+      }
+    },
+    "RXMDHR0": {
+      "name": "CAN2 Rx FIFO 0 mailbox data high register",
+      "bits": {
+        "DATA4": {
+          "name": "Data byte 4",
+          "position": "7:0",
+          "access": "read-only",
+          "values": {},
+          "comment": "Data byte 4 of the received message."
+        },
+        "DATA5": {
+          "name": "Data byte 5",
+          "position": "15:8",
+          "access": "read-only",
+          "values": {},
+          "comment": "Data byte 5 of the received message."
+        },
+        "DATA6": {
+          "name": "Data byte 6",
+          "position": "23:16",
+          "access": "read-only",
+          "values": {},
+          "comment": "Data byte 6 of the received message."
+        },
+        "DATA7": {
+          "name": "Data byte 7",
+          "position": "31:24",
+          "access": "read-only",
+          "values": {},
+          "comment": "Data byte 7 of the received message."
+        }
+      }
+    },
+    "RXMIR1": {
+      "name": "CAN2 Rx FIFO 1 mailbox identifier register",
+      "bits": {
+        "RTR": {
+          "name": "Remote transmission request",
+          "position": "1",
+          "access": "read-only",
+          "values": {
+            "1": "Remote frame.",
+            "0": "Data frame."
+          },
+          "comment": ""
+        },
+        "IDE": {
+          "name": "Identifier extension",
+          "position": "2",
+          "access": "read-only",
+          "values": {
+            "1": "Extended identifier.",
+            "0": "Standard identifier."
+          },
+          "comment": ""
+        },
+        "EXID": {
+          "name": "Extended identifier",
+          "position": "20:3",
+          "access": "read-only",
+          "values": {},
+          "comment": "The lower 18 bits of the extended identifier."
+        },
+        "STID": {
+          "name": "Standard identifier",
+          "position": "31:21",
+          "access": "read-only",
+          "values": {},
+          "comment": "The upper 11 bits of a standard or extended identifier."
+        }
+      }
+    },
+    "RXMDTR1": {
+      "name": "CAN2 Rx FIFO 1 mailbox data length and timestamp register",
+      "bits": {
+        "DLC": {
+          "name": "Data length code",
+          "position": "3:0",
+          "access": "read-only",
+          "values": {},
+          "comment": "Received message data length.\nThe data frame length is 0 to 8, and the remote frame is 0."
+        },
+        "FMI": {
+          "name": "Filter match index",
+          "position": "15:8",
+          "access": "read-only",
+          "values": {},
+          "comment": "The filter number matched by the packet."
+        },
+        "TIME": {
+          "name": "Message timestamp",
+          "position": "31:16",
+          "access": "read-only",
+          "values": {},
+          "comment": "16-bit timer value used to receive the SOF time of the message."
+        }
+      }
+    },
+    "RXMDLR1": {
+      "name": "CAN2 Rx FIFO 1 mailbox data low register",
+      "bits": {
+        "DATA0": {
+          "name": "Data byte 0",
+          "position": "7:0",
+          "access": "read-only",
+          "values": {},
+          "comment": "Data byte 0 of the received message."
+        },
+        "DATA1": {
+          "name": "Data byte 1",
+          "position": "15:8",
+          "access": "read-only",
+          "values": {},
+          "comment": "Data byte 1 of the received message."
+        },
+        "DATA2": {
+          "name": "Data byte 2",
+          "position": "23:16",
+          "access": "read-only",
+          "values": {},
+          "comment": "Data byte 2 of the received message."
+        },
+        "DATA3": {
+          "name": "Data byte 3",
+          "position": "31:24",
+          "access": "read-only",
+          "values": {},
+          "comment": "Data byte 3 of the received message."
+        }
+      }
+    },
+    "RXMDHR1": {
+      "name": "CAN2 Rx FIFO 1 mailbox data high register",
+      "bits": {
+        "DATA4": {
+          "name": "Data byte 4",
+          "position": "7:0",
+          "access": "read-only",
+          "values": {},
+          "comment": "Data byte 4 of the received message."
+        },
+        "DATA5": {
+          "name": "Data byte 5",
+          "position": "15:8",
+          "access": "read-only",
+          "values": {},
+          "comment": "Data byte 5 of the received message."
+        },
+        "DATA6": {
+          "name": "Data byte 6",
+          "position": "23:16",
+          "access": "read-only",
+          "values": {},
+          "comment": "Data byte 6 of the received message."
+        },
+        "DATA7": {
+          "name": "Data byte 7",
+          "position": "31:24",
+          "access": "read-only",
+          "values": {},
+          "comment": "Data byte 7 of the received message."
+        }
+      }
+    },
+    "FCTLR": {
+      "name": "CAN2 filter master control register",
+      "bits": {
+        "FINIT": {
+          "name": "Filter initialization mode enable flag",
+          "position": "0",
+          "access": "read-write",
+          "values": {
+            "1": "Filter bank is in initialization mode.",
+            "0": "Filter bank is in normal mode."
+          },
+          "comment": ""
+        },
+        "CAN2SB": {
+          "name": "CAN2 filter start bank",
+          "position": "13:8",
+          "access": "read-write",
+          "values": {},
+          "comment": "Value ranges from 1 to 27."
+        }
+      }
+    },
+    "FMCFGR": {
+      "name": "CAN2 filter mode register",
+      "bits": {
+        "FBM0": {
+          "name": "Working mode control of filter bank 0",
+          "position": "0",
+          "access": "read-write",
+          "values": {
+            "0": "The register of filter bank 0 is in mask bit mode.",
+            "1": "The register of filter bank 0 is in identifier list mode."
+          },
+          "comment": "Only can be written when FINT is 1."
+        },
+        "FBM1": {
+          "name": "Working mode control of filter bank 1",
+          "position": "1",
+          "access": "read-write",
+          "values": {
+            "0": "The register of filter bank 1 is in mask bit mode.",
+            "1": "The register of filter bank 1 is in identifier list mode."
+          },
+          "comment": "Only can be written when FINT is 1."
+        },
+        "FBM2": {
+          "name": "Working mode control of filter bank 2",
+          "position": "2",
+          "access": "read-write",
+          "values": {
+            "0": "The register of filter bank 2 is in mask bit mode.",
+            "1": "The register of filter bank 2 is in identifier list mode."
+          },
+          "comment": "Only can be written when FINT is 1."
+        },
+        "FBM3": {
+          "name": "Working mode control of filter bank 3",
+          "position": "3",
+          "access": "read-write",
+          "values": {
+            "0": "The register of filter bank 3 is in mask bit mode.",
+            "1": "The register of filter bank 3 is in identifier list mode."
+          },
+          "comment": "Only can be written when FINT is 1."
+        },
+        "FBM4": {
+          "name": "Working mode control of filter bank 4",
+          "position": "4",
+          "access": "read-write",
+          "values": {
+            "0": "The register of filter bank 4 is in mask bit mode.",
+            "1": "The register of filter bank 4 is in identifier list mode."
+          },
+          "comment": "Only can be written when FINT is 1."
+        },
+        "FBM5": {
+          "name": "Working mode control of filter bank 5",
+          "position": "5",
+          "access": "read-write",
+          "values": {
+            "0": "The register of filter bank 5 is in mask bit mode.",
+            "1": "The register of filter bank 5 is in identifier list mode."
+          },
+          "comment": "Only can be written when FINT is 1."
+        },
+        "FBM6": {
+          "name": "Working mode control of filter bank 6",
+          "position": "6",
+          "access": "read-write",
+          "values": {
+            "0": "The register of filter bank 6 is in mask bit mode.",
+            "1": "The register of filter bank 6 is in identifier list mode."
+          },
+          "comment": "Only can be written when FINT is 1."
+        },
+        "FBM7": {
+          "name": "Working mode control of filter bank 7",
+          "position": "7",
+          "access": "read-write",
+          "values": {
+            "0": "The register of filter bank 7 is in mask bit mode.",
+            "1": "The register of filter bank 7 is in identifier list mode."
+          },
+          "comment": "Only can be written when FINT is 1."
+        },
+        "FBM8": {
+          "name": "Working mode control of filter bank 8",
+          "position": "8",
+          "access": "read-write",
+          "values": {
+            "0": "The register of filter bank 8 is in mask bit mode.",
+            "1": "The register of filter bank 8 is in identifier list mode."
+          },
+          "comment": "Only can be written when FINT is 1."
+        },
+        "FBM9": {
+          "name": "Working mode control of filter bank 9",
+          "position": "9",
+          "access": "read-write",
+          "values": {
+            "0": "The register of filter bank 9 is in mask bit mode.",
+            "1": "The register of filter bank 9 is in identifier list mode."
+          },
+          "comment": "Only can be written when FINT is 1."
+        },
+        "FBM10": {
+          "name": "Working mode control of filter bank 10",
+          "position": "10",
+          "access": "read-write",
+          "values": {
+            "0": "The register of filter bank 10 is in mask bit mode.",
+            "1": "The register of filter bank 10 is in identifier list mode."
+          },
+          "comment": "Only can be written when FINT is 1."
+        },
+        "FBM11": {
+          "name": "Working mode control of filter bank 11",
+          "position": "11",
+          "access": "read-write",
+          "values": {
+            "0": "The register of filter bank 11 is in mask bit mode.",
+            "1": "The register of filter bank 11 is in identifier list mode."
+          },
+          "comment": "Only can be written when FINT is 1."
+        },
+        "FBM12": {
+          "name": "Working mode control of filter bank 12",
+          "position": "12",
+          "access": "read-write",
+          "values": {
+            "0": "The register of filter bank 12 is in mask bit mode.",
+            "1": "The register of filter bank 12 is in identifier list mode."
+          },
+          "comment": "Only can be written when FINT is 1."
+        },
+        "FBM13": {
+          "name": "Working mode control of filter bank 13",
+          "position": "13",
+          "access": "read-write",
+          "values": {
+            "0": "The register of filter bank 13 is in mask bit mode.",
+            "1": "The register of filter bank 13 is in identifier list mode."
+          },
+          "comment": "Only can be written when FINT is 1."
+        }
+      }
+    },
+    "FSCFGR": {
+      "name": "CAN2 filter bit width register",
+      "bits": {
+        "FSC0": {
+          "name": "Filter scale configuration bit of filter bank 0",
+          "position": "0",
+          "access": "read-write",
+          "values": {
+            "1": "The register of filter bank 0 is a single 32-bit.",
+            "0": "The register of filter bank 0 is 2 16-bit."
+          },
+          "comment": "Only can be written when FINT is 1."
+        },
+        "FSC1": {
+          "name": "Filter scale configuration bit of filter bank 1",
+          "position": "1",
+          "access": "read-write",
+          "values": {
+            "1": "The register of filter bank 1 is a single 32-bit.",
+            "0": "The register of filter bank 1 is 2 16-bit."
+          },
+          "comment": "Only can be written when FINT is 1."
+        },
+        "FSC2": {
+          "name": "Filter scale configuration bit of filter bank 2",
+          "position": "2",
+          "access": "read-write",
+          "values": {
+            "1": "The register of filter bank 2 is a single 32-bit.",
+            "0": "The register of filter bank 2 is 2 16-bit."
+          },
+          "comment": "Only can be written when FINT is 1."
+        },
+        "FSC3": {
+          "name": "Filter scale configuration bit of filter bank 3",
+          "position": "3",
+          "access": "read-write",
+          "values": {
+            "1": "The register of filter bank 3 is a single 32-bit.",
+            "0": "The register of filter bank 3 is 2 16-bit."
+          },
+          "comment": "Only can be written when FINT is 1."
+        },
+        "FSC4": {
+          "name": "Filter scale configuration bit of filter bank 4",
+          "position": "4",
+          "access": "read-write",
+          "values": {
+            "1": "The register of filter bank 4 is a single 32-bit.",
+            "0": "The register of filter bank 4 is 2 16-bit."
+          },
+          "comment": "Only can be written when FINT is 1."
+        },
+        "FSC5": {
+          "name": "Filter scale configuration bit of filter bank 5",
+          "position": "5",
+          "access": "read-write",
+          "values": {
+            "1": "The register of filter bank 5 is a single 32-bit.",
+            "0": "The register of filter bank 5 is 2 16-bit."
+          },
+          "comment": "Only can be written when FINT is 1."
+        },
+        "FSC6": {
+          "name": "Filter scale configuration bit of filter bank 6",
+          "position": "6",
+          "access": "read-write",
+          "values": {
+            "1": "The register of filter bank 6 is a single 32-bit.",
+            "0": "The register of filter bank 6 is 2 16-bit."
+          },
+          "comment": "Only can be written when FINT is 1."
+        },
+        "FSC7": {
+          "name": "Filter scale configuration bit of filter bank 7",
+          "position": "7",
+          "access": "read-write",
+          "values": {
+            "1": "The register of filter bank 7 is a single 32-bit.",
+            "0": "The register of filter bank 7 is 2 16-bit."
+          },
+          "comment": "Only can be written when FINT is 1."
+        },
+        "FSC8": {
+          "name": "Filter scale configuration bit of filter bank 8",
+          "position": "8",
+          "access": "read-write",
+          "values": {
+            "1": "The register of filter bank 8 is a single 32-bit.",
+            "0": "The register of filter bank 8 is 2 16-bit."
+          },
+          "comment": "Only can be written when FINT is 1."
+        },
+        "FSC9": {
+          "name": "Filter scale configuration bit of filter bank 9",
+          "position": "9",
+          "access": "read-write",
+          "values": {
+            "1": "The register of filter bank 9 is a single 32-bit.",
+            "0": "The register of filter bank 9 is 2 16-bit."
+          },
+          "comment": "Only can be written when FINT is 1."
+        },
+        "FSC10": {
+          "name": "Filter scale configuration bit of filter bank 10",
+          "position": "10",
+          "access": "read-write",
+          "values": {
+            "1": "The register of filter bank 10 is a single 32-bit.",
+            "0": "The register of filter bank 10 is 2 16-bit."
+          },
+          "comment": "Only can be written when FINT is 1."
+        },
+        "FSC11": {
+          "name": "Filter scale configuration bit of filter bank 11",
+          "position": "11",
+          "access": "read-write",
+          "values": {
+            "1": "The register of filter bank 11 is a single 32-bit.",
+            "0": "The register of filter bank 11 is 2 16-bit."
+          },
+          "comment": "Only can be written when FINT is 1."
+        },
+        "FSC12": {
+          "name": "Filter scale configuration bit of filter bank 12",
+          "position": "12",
+          "access": "read-write",
+          "values": {
+            "1": "The register of filter bank 12 is a single 32-bit.",
+            "0": "The register of filter bank 12 is 2 16-bit."
+          },
+          "comment": "Only can be written when FINT is 1."
+        },
+        "FSC13": {
+          "name": "Filter scale configuration bit of filter bank 13",
+          "position": "13",
+          "access": "read-write",
+          "values": {
+            "1": "The register of filter bank 13 is a single 32-bit.",
+            "0": "The register of filter bank 13 is 2 16-bit."
+          },
+          "comment": "Only can be written when FINT is 1."
+        }
+      }
+    },
+    "FAFIFOR": {
+      "name": "CAN2 filter FIFO association register",
+      "bits": {
+        "FFA0": {
+          "name": "FIFO assignment of filter bank 0",
+          "position": "0",
+          "access": "read-write",
+          "values": {
+            "1": "Filter bank 0 is associated to FIFO 1.",
+            "0": "Filter bank 0 is associated to FIFO 0."
+          },
+          "comment": "Only can be written when FINT is 1."
+        },
+        "FFA1": {
+          "name": "FIFO assignment of filter bank 1",
+          "position": "1",
+          "access": "read-write",
+          "values": {
+            "1": "Filter bank 1 is associated to FIFO 1.",
+            "0": "Filter bank 1 is associated to FIFO 0."
+          },
+          "comment": "Only can be written when FINT is 1."
+        },
+        "FFA2": {
+          "name": "FIFO assignment of filter bank 2",
+          "position": "2",
+          "access": "read-write",
+          "values": {
+            "1": "Filter bank 2 is associated to FIFO 1.",
+            "0": "Filter bank 2 is associated to FIFO 0."
+          },
+          "comment": "Only can be written when FINT is 1."
+        },
+        "FFA3": {
+          "name": "FIFO assignment of filter bank 3",
+          "position": "3",
+          "access": "read-write",
+          "values": {
+            "1": "Filter bank 3 is associated to FIFO 1.",
+            "0": "Filter bank 3 is associated to FIFO 0."
+          },
+          "comment": "Only can be written when FINT is 1."
+        },
+        "FFA4": {
+          "name": "FIFO assignment of filter bank 4",
+          "position": "4",
+          "access": "read-write",
+          "values": {
+            "1": "Filter bank 4 is associated to FIFO 1.",
+            "0": "Filter bank 4 is associated to FIFO 0."
+          },
+          "comment": "Only can be written when FINT is 1."
+        },
+        "FFA5": {
+          "name": "FIFO assignment of filter bank 5",
+          "position": "5",
+          "access": "read-write",
+          "values": {
+            "1": "Filter bank 5 is associated to FIFO 1.",
+            "0": "Filter bank 5 is associated to FIFO 0."
+          },
+          "comment": "Only can be written when FINT is 1."
+        },
+        "FFA6": {
+          "name": "FIFO assignment of filter bank 6",
+          "position": "6",
+          "access": "read-write",
+          "values": {
+            "1": "Filter bank 6 is associated to FIFO 1.",
+            "0": "Filter bank 6 is associated to FIFO 0."
+          },
+          "comment": "Only can be written when FINT is 1."
+        },
+        "FFA7": {
+          "name": "FIFO assignment of filter bank 7",
+          "position": "7",
+          "access": "read-write",
+          "values": {
+            "1": "Filter bank 7 is associated to FIFO 1.",
+            "0": "Filter bank 7 is associated to FIFO 0."
+          },
+          "comment": "Only can be written when FINT is 1."
+        },
+        "FFA8": {
+          "name": "FIFO assignment of filter bank 8",
+          "position": "8",
+          "access": "read-write",
+          "values": {
+            "1": "Filter bank 8 is associated to FIFO 1.",
+            "0": "Filter bank 8 is associated to FIFO 0."
+          },
+          "comment": "Only can be written when FINT is 1."
+        },
+        "FFA9": {
+          "name": "FIFO assignment of filter bank 9",
+          "position": "9",
+          "access": "read-write",
+          "values": {
+            "1": "Filter bank 9 is associated to FIFO 1.",
+            "0": "Filter bank 9 is associated to FIFO 0."
+          },
+          "comment": "Only can be written when FINT is 1."
+        },
+        "FFA10": {
+          "name": "FIFO assignment of filter bank 10",
+          "position": "10",
+          "access": "read-write",
+          "values": {
+            "1": "Filter bank 10 is associated to FIFO 1.",
+            "0": "Filter bank 10 is associated to FIFO 0."
+          },
+          "comment": "Only can be written when FINT is 1."
+        },
+        "FFA11": {
+          "name": "FIFO assignment of filter bank 11",
+          "position": "11",
+          "access": "read-write",
+          "values": {
+            "1": "Filter bank 11 is associated to FIFO 1.",
+            "0": "Filter bank 11 is associated to FIFO 0."
+          },
+          "comment": "Only can be written when FINT is 1."
+        },
+        "FFA12": {
+          "name": "FIFO assignment of filter bank 12",
+          "position": "12",
+          "access": "read-write",
+          "values": {
+            "1": "Filter bank 12 is associated to FIFO 1.",
+            "0": "Filter bank 12 is associated to FIFO 0."
+          },
+          "comment": "Only can be written when FINT is 1."
+        },
+        "FFA13": {
+          "name": "FIFO assignment of filter bank 13",
+          "position": "13",
+          "access": "read-write",
+          "values": {
+            "1": "Filter bank 13 is associated to FIFO 1.",
+            "0": "Filter bank 13 is associated to FIFO 0."
+          },
+          "comment": "Only can be written when FINT is 1."
+        }
+      }
+    },
+    "FWR": {
+      "name": "CAN2 filter activation register",
+      "bits": {
+        "FACT0": {
+          "name": "Filter bank 0 activation control bit",
+          "position": "0",
+          "access": "read-write",
+          "values": {
+            "1": "Filter bank 0 active.",
+            "0": "Filter bank 0 disabled."
+          },
+          "comment": "Only can be written when FINT is 1."
+        },
+        "FACT1": {
+          "name": "Filter bank 1 activation control bit",
+          "position": "1",
+          "access": "read-write",
+          "values": {
+            "1": "Filter bank 1 active.",
+            "0": "Filter bank 1 disabled."
+          },
+          "comment": "Only can be written when FINT is 1."
+        },
+        "FACT2": {
+          "name": "Filter bank 2 activation control bit",
+          "position": "2",
+          "access": "read-write",
+          "values": {
+            "1": "Filter bank 2 active.",
+            "0": "Filter bank 2 disabled."
+          },
+          "comment": "Only can be written when FINT is 1."
+        },
+        "FACT3": {
+          "name": "Filter bank 3 activation control bit",
+          "position": "3",
+          "access": "read-write",
+          "values": {
+            "1": "Filter bank 3 active.",
+            "0": "Filter bank 3 disabled."
+          },
+          "comment": "Only can be written when FINT is 1."
+        },
+        "FACT4": {
+          "name": "Filter bank 4 activation control bit",
+          "position": "4",
+          "access": "read-write",
+          "values": {
+            "1": "Filter bank 4 active.",
+            "0": "Filter bank 4 disabled."
+          },
+          "comment": "Only can be written when FINT is 1."
+        },
+        "FACT5": {
+          "name": "Filter bank 5 activation control bit",
+          "position": "5",
+          "access": "read-write",
+          "values": {
+            "1": "Filter bank 5 active.",
+            "0": "Filter bank 5 disabled."
+          },
+          "comment": "Only can be written when FINT is 1."
+        },
+        "FACT6": {
+          "name": "Filter bank 6 activation control bit",
+          "position": "6",
+          "access": "read-write",
+          "values": {
+            "1": "Filter bank 6 active.",
+            "0": "Filter bank 6 disabled."
+          },
+          "comment": "Only can be written when FINT is 1."
+        },
+        "FACT7": {
+          "name": "Filter bank 7 activation control bit",
+          "position": "7",
+          "access": "read-write",
+          "values": {
+            "1": "Filter bank 7 active.",
+            "0": "Filter bank 7 disabled."
+          },
+          "comment": "Only can be written when FINT is 1."
+        },
+        "FACT8": {
+          "name": "Filter bank 8 activation control bit",
+          "position": "8",
+          "access": "read-write",
+          "values": {
+            "1": "Filter bank 8 active.",
+            "0": "Filter bank 8 disabled."
+          },
+          "comment": "Only can be written when FINT is 1."
+        },
+        "FACT9": {
+          "name": "Filter bank 9 activation control bit",
+          "position": "9",
+          "access": "read-write",
+          "values": {
+            "1": "Filter bank 9 active.",
+            "0": "Filter bank 9 disabled."
+          },
+          "comment": "Only can be written when FINT is 1."
+        },
+        "FACT10": {
+          "name": "Filter bank 10 activation control bit",
+          "position": "10",
+          "access": "read-write",
+          "values": {
+            "1": "Filter bank 10 active.",
+            "0": "Filter bank 10 disabled."
+          },
+          "comment": "Only can be written when FINT is 1."
+        },
+        "FACT11": {
+          "name": "Filter bank 11 activation control bit",
+          "position": "11",
+          "access": "read-write",
+          "values": {
+            "1": "Filter bank 11 active.",
+            "0": "Filter bank 11 disabled."
+          },
+          "comment": "Only can be written when FINT is 1."
+        },
+        "FACT12": {
+          "name": "Filter bank 12 activation control bit",
+          "position": "12",
+          "access": "read-write",
+          "values": {
+            "1": "Filter bank 12 active.",
+            "0": "Filter bank 12 disabled."
+          },
+          "comment": "Only can be written when FINT is 1."
+        },
+        "FACT13": {
+          "name": "Filter bank 13 activation control bit",
+          "position": "13",
+          "access": "read-write",
+          "values": {
+            "1": "Filter bank 13 active.",
+            "0": "Filter bank 13 disabled."
+          },
+          "comment": "Only can be written when FINT is 1."
+        }
+      }
+    },
+    "F0R1": {
+      "name": "CAN2 Filter Register 1 for Filter Bank 0",
+      "bits": {
+        "FB": {
+          "name": "Filter bits",
+          "position": "31:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "In identifier mode:\n1: Expected level of the corresponding bit is a recessive bit;\n0: Expected level of the corresponding bit is a dominant bit.\n\nIn mask bit mode:\n1: Must be consistent with the corresponding identifier register bit;\n0: No need to be consistent with the corresponding identifier register bit.\n\nOnly can be written when FINT is 1."
+        }
+      }
+    },
+    "F0R2": {
+      "name": "CAN2 Register 2 for Filter Bank 0",
+      "bits": {
+        "FB": {
+          "name": "Filter bits",
+          "position": "31:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "In identifier mode:\n1: Expected level of the corresponding bit is a recessive bit;\n0: Expected level of the corresponding bit is a dominant bit.\n\nIn mask bit mode:\n1: Must be consistent with the corresponding identifier register bit;\n0: No need to be consistent with the corresponding identifier register bit.\n\nOnly can be written when FINT is 1."
+        }
+      }
+    },
+    "F1R1": {
+      "name": "CAN2 Register 1 for Filter Bank 1",
+      "bits": {
+        "FB": {
+          "name": "Filter bits",
+          "position": "31:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "In identifier mode:\n1: Expected level of the corresponding bit is a recessive bit;\n0: Expected level of the corresponding bit is a dominant bit.\n\nIn mask bit mode:\n1: Must be consistent with the corresponding identifier register bit;\n0: No need to be consistent with the corresponding identifier register bit.\n\nOnly can be written when FINT is 1."
+        }
+      }
+    },
+    "F1R2": {
+      "name": "CAN2 Register 2 for Filter Bank 1",
+      "bits": {
+        "FB": {
+          "name": "Filter bits",
+          "position": "31:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "In identifier mode:\n1: Expected level of the corresponding bit is a recessive bit;\n0: Expected level of the corresponding bit is a dominant bit.\n\nIn mask bit mode:\n1: Must be consistent with the corresponding identifier register bit;\n0: No need to be consistent with the corresponding identifier register bit.\n\nOnly can be written when FINT is 1."
+        }
+      }
+    },
+    "F2R1": {
+      "name": "CAN2 Register 1 for Filter Bank 2",
+      "bits": {
+        "FB": {
+          "name": "Filter bits",
+          "position": "31:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "In identifier mode:\n1: Expected level of the corresponding bit is a recessive bit;\n0: Expected level of the corresponding bit is a dominant bit.\n\nIn mask bit mode:\n1: Must be consistent with the corresponding identifier register bit;\n0: No need to be consistent with the corresponding identifier register bit.\n\nOnly can be written when FINT is 1."
+        }
+      }
+    },
+    "F2R2": {
+      "name": "CAN2 Register 2 for Filter Bank 2",
+      "bits": {
+        "FB": {
+          "name": "Filter bits",
+          "position": "31:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "In identifier mode:\n1: Expected level of the corresponding bit is a recessive bit;\n0: Expected level of the corresponding bit is a dominant bit.\n\nIn mask bit mode:\n1: Must be consistent with the corresponding identifier register bit;\n0: No need to be consistent with the corresponding identifier register bit.\n\nOnly can be written when FINT is 1."
+        }
+      }
+    },
+    "F3R1": {
+      "name": "CAN2 Register 1 for Filter Bank 3",
+      "bits": {
+        "FB": {
+          "name": "Filter bits",
+          "position": "31:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "In identifier mode:\n1: Expected level of the corresponding bit is a recessive bit;\n0: Expected level of the corresponding bit is a dominant bit.\n\nIn mask bit mode:\n1: Must be consistent with the corresponding identifier register bit;\n0: No need to be consistent with the corresponding identifier register bit.\n\nOnly can be written when FINT is 1."
+        }
+      }
+    },
+    "F3R2": {
+      "name": "CAN2 Register 2 for Filter Bank 3",
+      "bits": {
+        "FB": {
+          "name": "Filter bits",
+          "position": "31:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "In identifier mode:\n1: Expected level of the corresponding bit is a recessive bit;\n0: Expected level of the corresponding bit is a dominant bit.\n\nIn mask bit mode:\n1: Must be consistent with the corresponding identifier register bit;\n0: No need to be consistent with the corresponding identifier register bit.\n\nOnly can be written when FINT is 1."
+        }
+      }
+    },
+    "F4R1": {
+      "name": "CAN2 Register 1 for Filter Bank 4",
+      "bits": {
+        "FB": {
+          "name": "Filter bits",
+          "position": "31:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "In identifier mode:\n1: Expected level of the corresponding bit is a recessive bit;\n0: Expected level of the corresponding bit is a dominant bit.\n\nIn mask bit mode:\n1: Must be consistent with the corresponding identifier register bit;\n0: No need to be consistent with the corresponding identifier register bit.\n\nOnly can be written when FINT is 1."
+        }
+      }
+    },
+    "F4R2": {
+      "name": "CAN2 Register 2 for Filter Bank 4",
+      "bits": {
+        "FB": {
+          "name": "Filter bits",
+          "position": "31:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "In identifier mode:\n1: Expected level of the corresponding bit is a recessive bit;\n0: Expected level of the corresponding bit is a dominant bit.\n\nIn mask bit mode:\n1: Must be consistent with the corresponding identifier register bit;\n0: No need to be consistent with the corresponding identifier register bit.\n\nOnly can be written when FINT is 1."
+        }
+      }
+    },
+    "F5R1": {
+      "name": "CAN2 Register 1 for Filter Bank 5",
+      "bits": {
+        "FB": {
+          "name": "Filter bits",
+          "position": "31:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "In identifier mode:\n1: Expected level of the corresponding bit is a recessive bit;\n0: Expected level of the corresponding bit is a dominant bit.\n\nIn mask bit mode:\n1: Must be consistent with the corresponding identifier register bit;\n0: No need to be consistent with the corresponding identifier register bit.\n\nOnly can be written when FINT is 1."
+        }
+      }
+    },
+    "F5R2": {
+      "name": "CAN2 Register 2 for Filter Bank 5",
+      "bits": {
+        "FB": {
+          "name": "Filter bits",
+          "position": "31:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "In identifier mode:\n1: Expected level of the corresponding bit is a recessive bit;\n0: Expected level of the corresponding bit is a dominant bit.\n\nIn mask bit mode:\n1: Must be consistent with the corresponding identifier register bit;\n0: No need to be consistent with the corresponding identifier register bit.\n\nOnly can be written when FINT is 1."
+        }
+      }
+    },
+    "F6R1": {
+      "name": "CAN2 Register 1 for Filter Bank 6",
+      "bits": {
+        "FB": {
+          "name": "Filter bits",
+          "position": "31:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "In identifier mode:\n1: Expected level of the corresponding bit is a recessive bit;\n0: Expected level of the corresponding bit is a dominant bit.\n\nIn mask bit mode:\n1: Must be consistent with the corresponding identifier register bit;\n0: No need to be consistent with the corresponding identifier register bit.\n\nOnly can be written when FINT is 1."
+        }
+      }
+    },
+    "F6R2": {
+      "name": "CAN2 Register 2 for Filter Bank 6",
+      "bits": {
+        "FB": {
+          "name": "Filter bits",
+          "position": "31:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "In identifier mode:\n1: Expected level of the corresponding bit is a recessive bit;\n0: Expected level of the corresponding bit is a dominant bit.\n\nIn mask bit mode:\n1: Must be consistent with the corresponding identifier register bit;\n0: No need to be consistent with the corresponding identifier register bit.\n\nOnly can be written when FINT is 1."
+        }
+      }
+    },
+    "F7R1": {
+      "name": "CAN2 Register 1 for Filter Bank 7",
+      "bits": {
+        "FB": {
+          "name": "Filter bits",
+          "position": "31:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "In identifier mode:\n1: Expected level of the corresponding bit is a recessive bit;\n0: Expected level of the corresponding bit is a dominant bit.\n\nIn mask bit mode:\n1: Must be consistent with the corresponding identifier register bit;\n0: No need to be consistent with the corresponding identifier register bit.\n\nOnly can be written when FINT is 1."
+        }
+      }
+    },
+    "F7R2": {
+      "name": "CAN2 Register 2 for Filter Bank 7",
+      "bits": {
+        "FB": {
+          "name": "Filter bits",
+          "position": "31:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "In identifier mode:\n1: Expected level of the corresponding bit is a recessive bit;\n0: Expected level of the corresponding bit is a dominant bit.\n\nIn mask bit mode:\n1: Must be consistent with the corresponding identifier register bit;\n0: No need to be consistent with the corresponding identifier register bit.\n\nOnly can be written when FINT is 1."
+        }
+      }
+    },
+    "F8R1": {
+      "name": "CAN2 Register 1 for Filter Bank 8",
+      "bits": {
+        "FB": {
+          "name": "Filter bits",
+          "position": "31:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "In identifier mode:\n1: Expected level of the corresponding bit is a recessive bit;\n0: Expected level of the corresponding bit is a dominant bit.\n\nIn mask bit mode:\n1: Must be consistent with the corresponding identifier register bit;\n0: No need to be consistent with the corresponding identifier register bit.\n\nOnly can be written when FINT is 1."
+        }
+      }
+    },
+    "F8R2": {
+      "name": "CAN2 Register 2 for Filter Bank 8",
+      "bits": {
+        "FB": {
+          "name": "Filter bits",
+          "position": "31:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "In identifier mode:\n1: Expected level of the corresponding bit is a recessive bit;\n0: Expected level of the corresponding bit is a dominant bit.\n\nIn mask bit mode:\n1: Must be consistent with the corresponding identifier register bit;\n0: No need to be consistent with the corresponding identifier register bit.\n\nOnly can be written when FINT is 1."
+        }
+      }
+    },
+    "F9R1": {
+      "name": "CAN2 Register 1 for Filter Bank 9",
+      "bits": {
+        "FB": {
+          "name": "Filter bits",
+          "position": "31:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "In identifier mode:\n1: Expected level of the corresponding bit is a recessive bit;\n0: Expected level of the corresponding bit is a dominant bit.\n\nIn mask bit mode:\n1: Must be consistent with the corresponding identifier register bit;\n0: No need to be consistent with the corresponding identifier register bit.\n\nOnly can be written when FINT is 1."
+        }
+      }
+    },
+    "F9R2": {
+      "name": "CAN2 Register 2 for Filter Bank 9",
+      "bits": {
+        "FB": {
+          "name": "Filter bits",
+          "position": "31:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "In identifier mode:\n1: Expected level of the corresponding bit is a recessive bit;\n0: Expected level of the corresponding bit is a dominant bit.\n\nIn mask bit mode:\n1: Must be consistent with the corresponding identifier register bit;\n0: No need to be consistent with the corresponding identifier register bit.\n\nOnly can be written when FINT is 1."
+        }
+      }
+    },
+    "F10R1": {
+      "name": "CAN2 Register 1 for Filter Bank 10",
+      "bits": {
+        "FB": {
+          "name": "Filter bits",
+          "position": "31:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "In identifier mode:\n1: Expected level of the corresponding bit is a recessive bit;\n0: Expected level of the corresponding bit is a dominant bit.\n\nIn mask bit mode:\n1: Must be consistent with the corresponding identifier register bit;\n0: No need to be consistent with the corresponding identifier register bit.\n\nOnly can be written when FINT is 1."
+        }
+      }
+    },
+    "F10R2": {
+      "name": "CAN2 Register 2 for Filter Bank 10",
+      "bits": {
+        "FB": {
+          "name": "Filter bits",
+          "position": "31:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "In identifier mode:\n1: Expected level of the corresponding bit is a recessive bit;\n0: Expected level of the corresponding bit is a dominant bit.\n\nIn mask bit mode:\n1: Must be consistent with the corresponding identifier register bit;\n0: No need to be consistent with the corresponding identifier register bit.\n\nOnly can be written when FINT is 1."
+        }
+      }
+    },
+    "F11R1": {
+      "name": "CAN2 Register 1 for Filter Bank 11",
+      "bits": {
+        "FB": {
+          "name": "Filter bits",
+          "position": "31:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "In identifier mode:\n1: Expected level of the corresponding bit is a recessive bit;\n0: Expected level of the corresponding bit is a dominant bit.\n\nIn mask bit mode:\n1: Must be consistent with the corresponding identifier register bit;\n0: No need to be consistent with the corresponding identifier register bit.\n\nOnly can be written when FINT is 1."
+        }
+      }
+    },
+    "F11R2": {
+      "name": "CAN2 Register 2 for Filter Bank 11",
+      "bits": {
+        "FB": {
+          "name": "Filter bits",
+          "position": "31:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "In identifier mode:\n1: Expected level of the corresponding bit is a recessive bit;\n0: Expected level of the corresponding bit is a dominant bit.\n\nIn mask bit mode:\n1: Must be consistent with the corresponding identifier register bit;\n0: No need to be consistent with the corresponding identifier register bit.\n\nOnly can be written when FINT is 1."
+        }
+      }
+    },
+    "F12R1": {
+      "name": "CAN2 Register 1 for Filter Bank 12",
+      "bits": {
+        "FB": {
+          "name": "Filter bits",
+          "position": "31:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "In identifier mode:\n1: Expected level of the corresponding bit is a recessive bit;\n0: Expected level of the corresponding bit is a dominant bit.\n\nIn mask bit mode:\n1: Must be consistent with the corresponding identifier register bit;\n0: No need to be consistent with the corresponding identifier register bit.\n\nOnly can be written when FINT is 1."
+        }
+      }
+    },
+    "F12R2": {
+      "name": "CAN2 Register 2 for Filter Bank 12",
+      "bits": {
+        "FB": {
+          "name": "Filter bits",
+          "position": "31:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "In identifier mode:\n1: Expected level of the corresponding bit is a recessive bit;\n0: Expected level of the corresponding bit is a dominant bit.\n\nIn mask bit mode:\n1: Must be consistent with the corresponding identifier register bit;\n0: No need to be consistent with the corresponding identifier register bit.\n\nOnly can be written when FINT is 1."
+        }
+      }
+    },
+    "F13R1": {
+      "name": "CAN2 Register 1 for Filter Bank 13",
+      "bits": {
+        "FB": {
+          "name": "Filter bits",
+          "position": "31:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "In identifier mode:\n1: Expected level of the corresponding bit is a recessive bit;\n0: Expected level of the corresponding bit is a dominant bit.\n\nIn mask bit mode:\n1: Must be consistent with the corresponding identifier register bit;\n0: No need to be consistent with the corresponding identifier register bit.\n\nOnly can be written when FINT is 1."
+        }
+      }
+    },
+    "F13R2": {
+      "name": "CAN2 Register 2 for Filter Bank 13",
+      "bits": {
+        "FB": {
+          "name": "Filter bits",
+          "position": "31:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "In identifier mode:\n1: Expected level of the corresponding bit is a recessive bit;\n0: Expected level of the corresponding bit is a dominant bit.\n\nIn mask bit mode:\n1: Must be consistent with the corresponding identifier register bit;\n0: No need to be consistent with the corresponding identifier register bit.\n\nOnly can be written when FINT is 1."
+        }
+      }
+    },
+    "F14R1": {
+      "name": "CAN2 Register 1 for Filter Bank 14",
+      "bits": {
+        "FB": {
+          "name": "Filter bits",
+          "position": "31:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "In identifier mode:\n1: Expected level of the corresponding bit is a recessive bit;\n0: Expected level of the corresponding bit is a dominant bit.\n\nIn mask bit mode:\n1: Must be consistent with the corresponding identifier register bit;\n0: No need to be consistent with the corresponding identifier register bit.\n\nOnly can be written when FINT is 1."
+        }
+      }
+    },
+    "F14R2": {
+      "name": "CAN2 Register 2 for Filter Bank 14",
+      "bits": {
+        "FB": {
+          "name": "Filter bits",
+          "position": "31:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "In identifier mode:\n1: Expected level of the corresponding bit is a recessive bit;\n0: Expected level of the corresponding bit is a dominant bit.\n\nIn mask bit mode:\n1: Must be consistent with the corresponding identifier register bit;\n0: No need to be consistent with the corresponding identifier register bit.\n\nOnly can be written when FINT is 1."
+        }
+      }
+    },
+    "F15R1": {
+      "name": "CAN2 Register 1 for Filter Bank 15",
+      "bits": {
+        "FB": {
+          "name": "Filter bits",
+          "position": "31:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "In identifier mode:\n1: Expected level of the corresponding bit is a recessive bit;\n0: Expected level of the corresponding bit is a dominant bit.\n\nIn mask bit mode:\n1: Must be consistent with the corresponding identifier register bit;\n0: No need to be consistent with the corresponding identifier register bit.\n\nOnly can be written when FINT is 1."
+        }
+      }
+    },
+    "F15R2": {
+      "name": "CAN2 Register 2 for Filter Bank 15",
+      "bits": {
+        "FB": {
+          "name": "Filter bits",
+          "position": "31:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "In identifier mode:\n1: Expected level of the corresponding bit is a recessive bit;\n0: Expected level of the corresponding bit is a dominant bit.\n\nIn mask bit mode:\n1: Must be consistent with the corresponding identifier register bit;\n0: No need to be consistent with the corresponding identifier register bit.\n\nOnly can be written when FINT is 1."
+        }
+      }
+    },
+    "F16R1": {
+      "name": "CAN2 Register 1 for Filter Bank 16",
+      "bits": {
+        "FB": {
+          "name": "Filter bits",
+          "position": "31:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "In identifier mode:\n1: Expected level of the corresponding bit is a recessive bit;\n0: Expected level of the corresponding bit is a dominant bit.\n\nIn mask bit mode:\n1: Must be consistent with the corresponding identifier register bit;\n0: No need to be consistent with the corresponding identifier register bit.\n\nOnly can be written when FINT is 1."
+        }
+      }
+    },
+    "F16R2": {
+      "name": "CAN2 Register 2 for Filter Bank 16",
+      "bits": {
+        "FB": {
+          "name": "Filter bits",
+          "position": "31:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "In identifier mode:\n1: Expected level of the corresponding bit is a recessive bit;\n0: Expected level of the corresponding bit is a dominant bit.\n\nIn mask bit mode:\n1: Must be consistent with the corresponding identifier register bit;\n0: No need to be consistent with the corresponding identifier register bit.\n\nOnly can be written when FINT is 1."
+        }
+      }
+    },
+    "F17R1": {
+      "name": "CAN2 Register 1 for Filter Bank 17",
+      "bits": {
+        "FB": {
+          "name": "Filter bits",
+          "position": "31:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "In identifier mode:\n1: Expected level of the corresponding bit is a recessive bit;\n0: Expected level of the corresponding bit is a dominant bit.\n\nIn mask bit mode:\n1: Must be consistent with the corresponding identifier register bit;\n0: No need to be consistent with the corresponding identifier register bit.\n\nOnly can be written when FINT is 1."
+        }
+      }
+    },
+    "F17R2": {
+      "name": "CAN2 Register 2 for Filter Bank 17",
+      "bits": {
+        "FB": {
+          "name": "Filter bits",
+          "position": "31:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "In identifier mode:\n1: Expected level of the corresponding bit is a recessive bit;\n0: Expected level of the corresponding bit is a dominant bit.\n\nIn mask bit mode:\n1: Must be consistent with the corresponding identifier register bit;\n0: No need to be consistent with the corresponding identifier register bit.\n\nOnly can be written when FINT is 1."
+        }
+      }
+    },
+    "F18R1": {
+      "name": "CAN2 Register 1 for Filter Bank 18",
+      "bits": {
+        "FB": {
+          "name": "Filter bits",
+          "position": "31:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "In identifier mode:\n1: Expected level of the corresponding bit is a recessive bit;\n0: Expected level of the corresponding bit is a dominant bit.\n\nIn mask bit mode:\n1: Must be consistent with the corresponding identifier register bit;\n0: No need to be consistent with the corresponding identifier register bit.\n\nOnly can be written when FINT is 1."
+        }
+      }
+    },
+    "F18R2": {
+      "name": "CAN2 Register 2 for Filter Bank 18",
+      "bits": {
+        "FB": {
+          "name": "Filter bits",
+          "position": "31:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "In identifier mode:\n1: Expected level of the corresponding bit is a recessive bit;\n0: Expected level of the corresponding bit is a dominant bit.\n\nIn mask bit mode:\n1: Must be consistent with the corresponding identifier register bit;\n0: No need to be consistent with the corresponding identifier register bit.\n\nOnly can be written when FINT is 1."
+        }
+      }
+    },
+    "F19R1": {
+      "name": "CAN2 Register 1 for Filter Bank 19",
+      "bits": {
+        "FB": {
+          "name": "Filter bits",
+          "position": "31:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "In identifier mode:\n1: Expected level of the corresponding bit is a recessive bit;\n0: Expected level of the corresponding bit is a dominant bit.\n\nIn mask bit mode:\n1: Must be consistent with the corresponding identifier register bit;\n0: No need to be consistent with the corresponding identifier register bit.\n\nOnly can be written when FINT is 1."
+        }
+      }
+    },
+    "F19R2": {
+      "name": "CAN2 Register 2 for Filter Bank 19",
+      "bits": {
+        "FB": {
+          "name": "Filter bits",
+          "position": "31:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "In identifier mode:\n1: Expected level of the corresponding bit is a recessive bit;\n0: Expected level of the corresponding bit is a dominant bit.\n\nIn mask bit mode:\n1: Must be consistent with the corresponding identifier register bit;\n0: No need to be consistent with the corresponding identifier register bit.\n\nOnly can be written when FINT is 1."
+        }
+      }
+    },
+    "F20R1": {
+      "name": "CAN2 Register 1 for Filter Bank 20",
+      "bits": {
+        "FB": {
+          "name": "Filter bits",
+          "position": "31:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "In identifier mode:\n1: Expected level of the corresponding bit is a recessive bit;\n0: Expected level of the corresponding bit is a dominant bit.\n\nIn mask bit mode:\n1: Must be consistent with the corresponding identifier register bit;\n0: No need to be consistent with the corresponding identifier register bit.\n\nOnly can be written when FINT is 1."
+        }
+      }
+    },
+    "F20R2": {
+      "name": "CAN2 Register 2 for Filter Bank 20",
+      "bits": {
+        "FB": {
+          "name": "Filter bits",
+          "position": "31:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "In identifier mode:\n1: Expected level of the corresponding bit is a recessive bit;\n0: Expected level of the corresponding bit is a dominant bit.\n\nIn mask bit mode:\n1: Must be consistent with the corresponding identifier register bit;\n0: No need to be consistent with the corresponding identifier register bit.\n\nOnly can be written when FINT is 1."
+        }
+      }
+    },
+    "F21R1": {
+      "name": "CAN2 Register 1 for Filter Bank 21",
+      "bits": {
+        "FB": {
+          "name": "Filter bits",
+          "position": "31:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "In identifier mode:\n1: Expected level of the corresponding bit is a recessive bit;\n0: Expected level of the corresponding bit is a dominant bit.\n\nIn mask bit mode:\n1: Must be consistent with the corresponding identifier register bit;\n0: No need to be consistent with the corresponding identifier register bit.\n\nOnly can be written when FINT is 1."
+        }
+      }
+    },
+    "F21R2": {
+      "name": "CAN2 Register 2 for Filter Bank 21",
+      "bits": {
+        "FB": {
+          "name": "Filter bits",
+          "position": "31:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "In identifier mode:\n1: Expected level of the corresponding bit is a recessive bit;\n0: Expected level of the corresponding bit is a dominant bit.\n\nIn mask bit mode:\n1: Must be consistent with the corresponding identifier register bit;\n0: No need to be consistent with the corresponding identifier register bit.\n\nOnly can be written when FINT is 1."
+        }
+      }
+    },
+    "F22R1": {
+      "name": "CAN2 Register 1 for Filter Bank 22",
+      "bits": {
+        "FB": {
+          "name": "Filter bits",
+          "position": "31:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "In identifier mode:\n1: Expected level of the corresponding bit is a recessive bit;\n0: Expected level of the corresponding bit is a dominant bit.\n\nIn mask bit mode:\n1: Must be consistent with the corresponding identifier register bit;\n0: No need to be consistent with the corresponding identifier register bit.\n\nOnly can be written when FINT is 1."
+        }
+      }
+    },
+    "F22R2": {
+      "name": "CAN2 Register 2 for Filter Bank 22",
+      "bits": {
+        "FB": {
+          "name": "Filter bits",
+          "position": "31:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "In identifier mode:\n1: Expected level of the corresponding bit is a recessive bit;\n0: Expected level of the corresponding bit is a dominant bit.\n\nIn mask bit mode:\n1: Must be consistent with the corresponding identifier register bit;\n0: No need to be consistent with the corresponding identifier register bit.\n\nOnly can be written when FINT is 1."
+        }
+      }
+    },
+    "F23R1": {
+      "name": "CAN2 Register 1 for Filter Bank 23",
+      "bits": {
+        "FB": {
+          "name": "Filter bits",
+          "position": "31:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "In identifier mode:\n1: Expected level of the corresponding bit is a recessive bit;\n0: Expected level of the corresponding bit is a dominant bit.\n\nIn mask bit mode:\n1: Must be consistent with the corresponding identifier register bit;\n0: No need to be consistent with the corresponding identifier register bit.\n\nOnly can be written when FINT is 1."
+        }
+      }
+    },
+    "F23R2": {
+      "name": "CAN2 Register 2 for Filter Bank 23",
+      "bits": {
+        "FB": {
+          "name": "Filter bits",
+          "position": "31:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "In identifier mode:\n1: Expected level of the corresponding bit is a recessive bit;\n0: Expected level of the corresponding bit is a dominant bit.\n\nIn mask bit mode:\n1: Must be consistent with the corresponding identifier register bit;\n0: No need to be consistent with the corresponding identifier register bit.\n\nOnly can be written when FINT is 1."
+        }
+      }
+    },
+    "F24R1": {
+      "name": "CAN2 Register 1 for Filter Bank 24",
+      "bits": {
+        "FB": {
+          "name": "Filter bits",
+          "position": "31:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "In identifier mode:\n1: Expected level of the corresponding bit is a recessive bit;\n0: Expected level of the corresponding bit is a dominant bit.\n\nIn mask bit mode:\n1: Must be consistent with the corresponding identifier register bit;\n0: No need to be consistent with the corresponding identifier register bit.\n\nOnly can be written when FINT is 1."
+        }
+      }
+    },
+    "F24R2": {
+      "name": "CAN2 Register 2 for Filter Bank 24",
+      "bits": {
+        "FB": {
+          "name": "Filter bits",
+          "position": "31:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "In identifier mode:\n1: Expected level of the corresponding bit is a recessive bit;\n0: Expected level of the corresponding bit is a dominant bit.\n\nIn mask bit mode:\n1: Must be consistent with the corresponding identifier register bit;\n0: No need to be consistent with the corresponding identifier register bit.\n\nOnly can be written when FINT is 1."
+        }
+      }
+    },
+    "F25R1": {
+      "name": "CAN2 Register 1 for Filter Bank 25",
+      "bits": {
+        "FB": {
+          "name": "Filter bits",
+          "position": "31:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "In identifier mode:\n1: Expected level of the corresponding bit is a recessive bit;\n0: Expected level of the corresponding bit is a dominant bit.\n\nIn mask bit mode:\n1: Must be consistent with the corresponding identifier register bit;\n0: No need to be consistent with the corresponding identifier register bit.\n\nOnly can be written when FINT is 1."
+        }
+      }
+    },
+    "F25R2": {
+      "name": "CAN2 Register 2 for Filter Bank 25",
+      "bits": {
+        "FB": {
+          "name": "Filter bits",
+          "position": "31:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "In identifier mode:\n1: Expected level of the corresponding bit is a recessive bit;\n0: Expected level of the corresponding bit is a dominant bit.\n\nIn mask bit mode:\n1: Must be consistent with the corresponding identifier register bit;\n0: No need to be consistent with the corresponding identifier register bit.\n\nOnly can be written when FINT is 1."
+        }
+      }
+    },
+    "F26R1": {
+      "name": "CAN2 Register 1 for Filter Bank 26",
+      "bits": {
+        "FB": {
+          "name": "Filter bits",
+          "position": "31:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "In identifier mode:\n1: Expected level of the corresponding bit is a recessive bit;\n0: Expected level of the corresponding bit is a dominant bit.\n\nIn mask bit mode:\n1: Must be consistent with the corresponding identifier register bit;\n0: No need to be consistent with the corresponding identifier register bit.\n\nOnly can be written when FINT is 1."
+        }
+      }
+    },
+    "F26R2": {
+      "name": "CAN2 Register 2 for Filter Bank 26",
+      "bits": {
+        "FB": {
+          "name": "Filter bits",
+          "position": "31:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "In identifier mode:\n1: Expected level of the corresponding bit is a recessive bit;\n0: Expected level of the corresponding bit is a dominant bit.\n\nIn mask bit mode:\n1: Must be consistent with the corresponding identifier register bit;\n0: No need to be consistent with the corresponding identifier register bit.\n\nOnly can be written when FINT is 1."
+        }
+      }
+    },
+    "F27R1": {
+      "name": "CAN2 Register 1 for Filter Bank 27",
+      "bits": {
+        "FB": {
+          "name": "Filter bits",
+          "position": "31:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "In identifier mode:\n1: Expected level of the corresponding bit is a recessive bit;\n0: Expected level of the corresponding bit is a dominant bit.\n\nIn mask bit mode:\n1: Must be consistent with the corresponding identifier register bit;\n0: No need to be consistent with the corresponding identifier register bit.\n\nOnly can be written when FINT is 1."
+        }
+      }
+    },
+    "F27R2": {
+      "name": "CAN2 Register 2 for Filter Bank 27",
+      "bits": {
+        "FB": {
+          "name": "Filter bits",
+          "position": "31:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "In identifier mode:\n1: Expected level of the corresponding bit is a recessive bit;\n0: Expected level of the corresponding bit is a dominant bit.\n\nIn mask bit mode:\n1: Must be consistent with the corresponding identifier register bit;\n0: No need to be consistent with the corresponding identifier register bit.\n\nOnly can be written when FINT is 1."
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,628 @@
+{
+  "name": "Alternate function I/O registers",
+  "registers": {
+    "ECR": {
+      "name": "Event control register",
+      "bits": {
+        "PIN": {
+          "name": "The value of these bits is used to determine the number of the pin that selects the core EVENTOUT to the port",
+          "position": "3:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "Values 0-15 correspond to pins 0-15 of the PX selected in PORT."
+        },
+        "PORT": {
+          "name": "Used to select the port of core output EVENTOUT",
+          "position": "6:4",
+          "access": "read-write",
+          "values": {
+            "000": "PA port",
+            "001": "PB port",
+            "010": "PC port",
+            "011": "PD port"
+          },
+          "comment": ""
+        },
+        "EVOE": {
+          "name": "Event output enable bit",
+          "position": "7",
+          "access": "read-write",
+          "values": {},
+          "comment": "By setting this bit, the EVENTOUT of core is connected to the selected I/O ports of PORT and PIN."
+        }
+      }
+    },
+    "PCFR1": {
+      "name": "Remap register 1",
+      "bits": {
+        "SPI1_RM": {
+          "name": "Remap of SPI1",
+          "position": "0",
+          "access": "read-write",
+          "values": {
+            "0": "Default map (NSS/PA4, SCK/PA5, MISO/PA6, MOSI/PA7).",
+            "1": "Remap (NSS/PA15, SCK/PB3, MISO/PB4, MOSI/PB5)."
+          },
+          "comment": "This bit can be read and written by the user. It controls the mapping of NSS, SCK, MISO and MOSI alternate functions of SPI1 at the GPIO port."
+        },
+        "I2C1_RM": {
+          "name": "Remap of I2C1",
+          "position": "1",
+          "access": "read-write",
+          "values": {
+            "0": "Default map (SCL/PB6, SDA/PB7).",
+            "1": "Remap (SCL/PB8, SDA/PB9)."
+          },
+          "comment": "This bit can be read and written by the user. It controls the mapping of the SCL and SDA alternate functions of I2C1 at the GPIO port."
+        },
+        "USART1_RM": {
+          "name": "USART1 map configuration low bit (used with the bit 26 (USART1_REMAP2) in the PCFR2 register)",
+          "position": "2",
+          "access": "read-write",
+          "values": {
+            "0": "USART1_REMAP2 = 0 -> Default map (CK/PA8, TX/PA9, RX/PA10, CTS/PA11, RTS/PA12) / USART1_REMAP2 = 1 -> Remap (CK/PA10, TX/PB15, RX/PA8, CTS/PA5, RTS/PA9).",
+            "1": "USART1_REMAP2 = 0 -> Remap (CK/PA8, TX/PB6, RX/PB7, CTS/PA11, RTS/PA12) / USART1_REMAP2 = 1 -> Remap (CK/PA5, TX/PA6, RX/PA7, CTS/PC4, RTS/PC5)."
+          },
+          "comment": ""
+        },
+        "USART2_RM": {
+          "name": "Remap bit of USART2",
+          "position": "3",
+          "access": "read-write",
+          "values": {
+            "0": "Default map (CTS/PA0, RTS/PA1, TX/PA2, RX/PA3, CK/PA4).",
+            "1": "Remap (CTS/PD3, RTS/PD4, TX/PD5, RX/PD6, CK/PD7)."
+          },
+          "comment": "This bit can be read and written by the user. It controls the mapping of CTS, RTS, CK, TX and RX alternate functions of USART2 on the GPIO port."
+        },
+        "USART3_RM": {
+          "name": "USART3 remap bits",
+          "position": "5:4",
+          "access": "read-write",
+          "values": {
+            "00": "Default map (TX/PB10, RX/PB11, CK/PB12, CTS/PB13, RTS/PB14).",
+            "01": "Partly remap (TX/PC10, RX/PC11, CK/PC12, CTS/PB13, RTS/PB14).",
+            "10": "Partly remap (TX/PA13, RX/PA14, CK/PD10, CTS/PD11, RTS/PD12).",
+            "11": "Fully remap (TX/PD8, RX/PD9, CK/PD10, CTS/PD11, RTS/PD12)."
+          },
+          "comment": "These bits can be read and written by the user. It controls the mapping of CTS, RTS, CK, TX and RX alternate functions of USART3 on the GPIO port."
+        },
+        "TIM1_RM": {
+          "name": "Remap bit of timer 1",
+          "position": "7:6",
+          "access": "read-write",
+          "values": {
+            "00": "Default map (ETR/PA12, CH1/PA8, CH2/PA9, CH3/PA10, CH4/PA11, BKIN/PB12, CH1N/PB13, CH2N/PB14, CH3N/PB15).",
+            "01": "Partly map (ETR/PA12, CH1/PA8, CH2/PA9, CH3/PA10, CH4/PA11, BKIN/PA6, CH1N/PA7, CH2N/PB0, CH3N/PB1).",
+            "11": "Fully map (ETR/PE7, CH1/PE9, CH2/PE11, CH3/PE13, CH4/PE14, BKIN/PE15, CH1N/PE8, CH2N/PE10, CH3N/PE12)."
+          },
+          "comment": "These bits can be written and read by the user. It controls the mapping of channel 1 to channel 4 of timer 1, 1N to 3N, external trigger (ETR) and break input (BKIN) on the GPIO port."
+        },
+        "TIM2_RM": {
+          "name": "Remap bits of timer 2",
+          "position": "9:8",
+          "access": "read-write",
+          "values": {
+            "00": "Default map (ETR/PA0, CH1/PA0, CH2/PA1, CH3/PA2, CH4/PA3).",
+            "01": "Partly map (ETR/PA15, CH1/PA15, CH2/PB3, CH3/PA2, CH4/PA3).",
+            "10": "Partly map (ETR/PA0, CH1/PA0, CH2/PA1, CH3/PB10, CH4/PB11).",
+            "11": "Fully map (ETR/PA15, CH1/PA15, CH2/PB3, CH3/PB10, CH4/PB11)."
+          },
+          "comment": "These bits can be written and read by the user. It controls the mapping of channel 1 to channel 4 of timer 2 and external trigger (ETR) on the GPIO port."
+        },
+        "TIM3_RM": {
+          "name": "Remap bits of timer 3",
+          "position": "11:10",
+          "access": "read-write",
+          "values": {
+            "00": "Default map (CH1/PA6, CH2/PA7, CH3/PB0, CH4/PB1).",
+            "10": "Partly map (CH1/PB4, CH2/PB5, CH3/PB0, CH4/PB1).",
+            "11": "Fully map (CH1/PC6, CH2/PC7, CH3/PC8, CH4/PC9)."
+          },
+          "comment": "These bits can be read and written by the user. It controls remapping of channel 1 to channel 4 of timer 3.\nRemapping does not affect TIM3_ETR on PD2."
+        },
+        "TIM4_RM": {
+          "name": "Remap bit of timer 4",
+          "position": "12",
+          "access": "read-write",
+          "values": {
+            "0": "Default map (CH1/PB6, CH2/PB7, CH3/PB8, CH4/PB9).",
+            "1": "Remap (CH1/PD12, CH2/PD13, CH3/PD14, CH4/PD15)."
+          },
+          "comment": "This bit can be read and written by the user. It controls remapping of channel 1 to channel 4 of timer 4."
+        },
+        "CAN1_RM": {
+          "name": "CAN1 alternate function remap bits",
+          "position": "14:13",
+          "access": "read-write",
+          "values": {
+            "00": "CAN1_RX is mapped to PA11, and CAN1_TX is mapped to PA12.",
+            "10": "CAN1_RX is mapped to PB8, and CAN1_TX is mapped to PB9.",
+            "11": "CAN1_RX is mapped to PD0, and CAN1_TX is mapped to PD1."
+          },
+          "comment": "These bits can be read and written by the user. Control remapping of CAN_RX and CAN_TX."
+        },
+        "PD01_RM": {
+          "name": "Remap bit of the PD0 & PD1 pins",
+          "position": "15",
+          "access": "read-write",
+          "values": {
+            "0": "The re-mapping of PD0 and PD1 is not conducted.",
+            "1": "PD0 is mapped to OSC_IN, and PD1 is mapped to OSC_OUT."
+          },
+          "comment": "This bit can be read and written by the user. It controls whether the GPIO functions of PD0 and PD1 are remapped, i.e., PD0 & PD1 is mapped to OSC_IN & OSC_OUT. When the main oscillator HSE is enabled (the system runs in the internal 8MHz RC oscillator), PD0 and PD1 can be mapped to OSC_IN and OSC_OUT pins."
+        },
+        "TIM5CH4_RM": {
+          "name": "Remap of timer 5 channel",
+          "position": "16",
+          "access": "read-write",
+          "values": {
+            "0": "Default map. Remapping of timer 5 channel 4.",
+            "1": "Remap. Map timer 5 channel 4 to LSI internal clock."
+          },
+          "comment": ""
+        },
+        "ADC1_ETRGINJ_RM": {
+          "name": "Remap bit of ADC1 external trigger injection conversion",
+          "position": "17",
+          "access": "read-write",
+          "values": {
+            "0": "ADC1 external trigger injection conversion to EXTI15.",
+            "1": "ADC1 external trigger injection conversion to TIM8_CH4."
+          },
+          "comment": ""
+        },
+        "ADC1_ETRGREG_RM": {
+          "name": "Remap bit of ADC1 external trigger regular conversion",
+          "position": "18",
+          "access": "read-write",
+          "values": {
+            "0": "ADC1 external trigger regular conversion to EXTI11.",
+            "1": "ADC1 external trigger regular conversion to TIM8_TRGO."
+          },
+          "comment": ""
+        },
+        "ADC2_ETRGINJ_RM": {
+          "name": "Remap bit of ADC2 external trigger injection conversion",
+          "position": "19",
+          "access": "read-write",
+          "values": {
+            "0": "ADC2 external trigger injection conversion to EXTI15.",
+            "1": "ADC2 external trigger injection conversion to TIM8_CH4."
+          },
+          "comment": ""
+        },
+        "ADC2_ETRGREG_RM": {
+          "name": "Remap bit of ADC2 external trigger regular conversion",
+          "position": "20",
+          "access": "read-write",
+          "values": {
+            "0": "ADC2 external trigger regular conversion EXTI11.",
+            "1": "ADC2 external trigger regular conversion TIM8_TRGO."
+          },
+          "comment": ""
+        },
+        "ETH_RM": {
+          "name": "Ethernet remap bit",
+          "position": "21",
+          "access": "read-write",
+          "values": {
+            "0": "Default map (RX_DV-CRS_DV/PA7, RXD0/PC4, RXD1/PC5, RXD2/PB0, RXD3/PB1).",
+            "1": "Remap (RX_DV-CRS_DV/PD8, RXD0/PD9, RXD1/PD10, RXD2/PD11, RXD3/PD12)."
+          },
+          "comment": ""
+        },
+        "CAN2_RM": {
+          "name": "CAN2 remap bit",
+          "position": "22",
+          "access": "read-write",
+          "values": {
+            "0": "Default map (CAN2_RX/PB12, CAN2_TX/PB13).",
+            "1": "Remap (CAN2_RX/PB5, CAN2_TX/PB6)."
+          },
+          "comment": ""
+        },
+        "MII_RMII_SEL": {
+          "name": "MII or RMII selection",
+          "position": "23",
+          "access": "read-write",
+          "values": {
+            "0": "Configure the Ethernet MAC to use the external transceiver with MII interface (PHY).",
+            "1": "Configure the Ethernet MAC to use the external transceiver with RMII interface (PHY)."
+          },
+          "comment": "Configure the internal Ethernet MAC to use the external transceiver with MII interface or RMII interface (PHY)."
+        },
+        "SW_CFG": {
+          "name": "These bits are used to configure the I/O port with SW function and tracking function",
+          "position": "26:24",
+          "access": "write-only",
+          "values": {
+            "000": "SWD enabled (SDI).",
+            "001": "SWD enabled (SDI).",
+            "010": "SWD enabled (SDI).",
+            "011": "SWD enabled (SDI).",
+            "100": "SWD disabled (SDI), served as GPIO."
+          },
+          "comment": "SWD (SDI) is a debug interface to access the core. After system reset, it is always used as the SWD port."
+        },
+        "SPI3_RM": {
+          "name": "SPI3 remap",
+          "position": "28",
+          "access": "read-write",
+          "values": {
+            "0": "Default map (NSS/PA15, SCK/PB3, MSIO/PB4, MOSI/PB5).",
+            "1": "Remap (NSS/PA4, SCK/PC10, MSIO/PC11, MOSI/PC12)."
+          },
+          "comment": ""
+        },
+        "TIM2ITR1_RM": {
+          "name": "TIM2 internal trigger 1 remap",
+          "position": "29",
+          "access": "read-write",
+          "values": {
+            "0": "Internally connect TIM2_ITR1 to Ethernet PTP output.",
+            "1": "Internally connect TIM2_ITR1 to SOF output of full-speed USB OTG."
+          },
+          "comment": ""
+        },
+        "PTP_PPS_RM": {
+          "name": "Ethernet PTP PPS remap",
+          "position": "30",
+          "access": "read-write",
+          "values": {
+            "0": "PTP PPS not output to the PB5 pin.",
+            "1": "PTP PPS output to the PB5 pin."
+          },
+          "comment": ""
+        }
+      }
+    },
+    "EXTICR1": {
+      "name": "External interrupt configuration register 1",
+      "bits": {
+        "EXTI0": {
+          "name": "External interrupt input pin 0 configuration bits",
+          "position": "3:0",
+          "access": "read-write",
+          "values": {
+            "0000": "Pin 0 of the PA pin.",
+            "0001": "Pin 0 of the PB pin.",
+            "0010": "Pin 0 of the PC pin.",
+            "0011": "Pin 0 of the PD pin.",
+            "0100": "Pin 0 of the PE pin."
+          },
+          "comment": "These bits are used to determine which port pin the external interrupt pin 0 is mapped to."
+        },
+        "EXTI1": {
+          "name": "External interrupt input pin 1 configuration bits",
+          "position": "7:4",
+          "access": "read-write",
+          "values": {
+            "0000": "Pin 1 of the PA pin.",
+            "0001": "Pin 1 of the PB pin.",
+            "0010": "Pin 1 of the PC pin.",
+            "0011": "Pin 1 of the PD pin.",
+            "0100": "Pin 1 of the PE pin."
+          },
+          "comment": "These bits are used to determine which port pin the external interrupt pin 1 is mapped to."
+        },
+        "EXTI2": {
+          "name": "External interrupt input pin 2 configuration bits",
+          "position": "11:8",
+          "access": "read-write",
+          "values": {
+            "0000": "Pin 2 of the PA pin.",
+            "0001": "Pin 2 of the PB pin.",
+            "0010": "Pin 2 of the PC pin.",
+            "0011": "Pin 2 of the PD pin.",
+            "0100": "Pin 2 of the PE pin."
+          },
+          "comment": "These bits are used to determine which port pin the external interrupt pin 2 is mapped to."
+        },
+        "EXTI3": {
+          "name": "External interrupt input pin 3 configuration bits",
+          "position": "15:12",
+          "access": "read-write",
+          "values": {
+            "0000": "Pin 3 of the PA pin.",
+            "0001": "Pin 3 of the PB pin.",
+            "0010": "Pin 3 of the PC pin.",
+            "0011": "Pin 3 of the PD pin.",
+            "0100": "Pin 3 of the PE pin."
+          },
+          "comment": "These bits are used to determine which port pin the external interrupt pin 3 is mapped to."
+        }
+      }
+    },
+    "EXTICR2": {
+      "name": "External interrupt configuration register 2",
+      "bits": {
+        "EXTI4": {
+          "name": "External interrupt input pin 4 configuration bits",
+          "position": "3:0",
+          "access": "read-write",
+          "values": {
+            "0000": "Pin 4 of the PA pin.",
+            "0001": "Pin 4 of the PB pin.",
+            "0010": "Pin 4 of the PC pin.",
+            "0011": "Pin 4 of the PD pin.",
+            "0100": "Pin 4 of the PE pin."
+          },
+          "comment": "These bits are used to determine which port pin the external interrupt pin 4 is mapped to."
+        },
+        "EXTI5": {
+          "name": "External interrupt input pin 5 configuration bits",
+          "position": "7:4",
+          "access": "read-write",
+          "values": {
+            "0000": "Pin 5 of the PA pin.",
+            "0001": "Pin 5 of the PB pin.",
+            "0010": "Pin 5 of the PC pin.",
+            "0011": "Pin 5 of the PD pin.",
+            "0100": "Pin 5 of the PE pin."
+          },
+          "comment": "These bits are used to determine which port pin the external interrupt pin 5 is mapped to."
+        },
+        "EXTI6": {
+          "name": "External interrupt input pin 6 configuration bits",
+          "position": "11:8",
+          "access": "read-write",
+          "values": {
+            "0000": "Pin 6 of the PA pin.",
+            "0001": "Pin 6 of the PB pin.",
+            "0010": "Pin 6 of the PC pin.",
+            "0011": "Pin 6 of the PD pin.",
+            "0100": "Pin 6 of the PE pin."
+          },
+          "comment": "These bits are used to determine which port pin the external interrupt pin 6 is mapped to."
+        },
+        "EXTI7": {
+          "name": "External interrupt input pin 7 configuration bits",
+          "position": "15:12",
+          "access": "read-write",
+          "values": {
+            "0000": "Pin 7 of the PA pin.",
+            "0001": "Pin 7 of the PB pin.",
+            "0010": "Pin 7 of the PC pin.",
+            "0011": "Pin 7 of the PD pin.",
+            "0100": "Pin 7 of the PE pin."
+          },
+          "comment": "These bits are used to determine which port pin the external interrupt pin 7 is mapped to."
+        }
+      }
+    },
+    "EXTICR3": {
+      "name": "External interrupt configuration register 3",
+      "bits": {
+        "EXTI8": {
+          "name": "External interrupt input pin 8 configuration bits",
+          "position": "3:0",
+          "access": "read-write",
+          "values": {
+            "0000": "Pin 8 of the PA pin.",
+            "0001": "Pin 8 of the PB pin.",
+            "0010": "Pin 8 of the PC pin.",
+            "0011": "Pin 8 of the PD pin.",
+            "0100": "Pin 8 of the PE pin."
+          },
+          "comment": "These bits are used to determine which port pin the external interrupt pin 8 is mapped to."
+        },
+        "EXTI9": {
+          "name": "External interrupt input pin 9 configuration bits",
+          "position": "7:4",
+          "access": "read-write",
+          "values": {
+            "0000": "Pin 9 of the PA pin.",
+            "0001": "Pin 9 of the PB pin.",
+            "0010": "Pin 9 of the PC pin.",
+            "0011": "Pin 9 of the PD pin.",
+            "0100": "Pin 9 of the PE pin."
+          },
+          "comment": "These bits are used to determine which port pin the external interrupt pin 9 is mapped to."
+        },
+        "EXTI10": {
+          "name": "External interrupt input pin 10 configuration bits",
+          "position": "11:8",
+          "access": "read-write",
+          "values": {
+            "0000": "Pin 10 of the PA pin.",
+            "0001": "Pin 10 of the PB pin.",
+            "0010": "Pin 10 of the PC pin.",
+            "0011": "Pin 10 of the PD pin.",
+            "0100": "Pin 10 of the PE pin."
+          },
+          "comment": "These bits are used to determine which port pin the external interrupt pin 10 is mapped to."
+        },
+        "EXTI11": {
+          "name": "External interrupt input pin 11 configuration bits",
+          "position": "15:12",
+          "access": "read-write",
+          "values": {
+            "0000": "Pin 11 of the PA pin.",
+            "0001": "Pin 11 of the PB pin.",
+            "0010": "Pin 11 of the PC pin.",
+            "0011": "Pin 11 of the PD pin.",
+            "0100": "Pin 11 of the PE pin."
+          },
+          "comment": "These bits are used to determine which port pin the external interrupt pin 11 is mapped to."
+        }
+      }
+    },
+    "EXTICR4": {
+      "name": "External interrupt configuration register 4",
+      "bits": {
+        "EXTI12": {
+          "name": "External interrupt input pin 12 configuration bits",
+          "position": "3:0",
+          "access": "read-write",
+          "values": {
+            "0000": "Pin 12 of the PA pin.",
+            "0001": "Pin 12 of the PB pin.",
+            "0010": "Pin 12 of the PC pin.",
+            "0011": "Pin 12 of the PD pin.",
+            "0100": "Pin 12 of the PE pin."
+          },
+          "comment": "These bits are used to determine which port pin the external interrupt pin 12 is mapped to."
+        },
+        "EXTI13": {
+          "name": "External interrupt input pin 13 configuration bits",
+          "position": "7:4",
+          "access": "read-write",
+          "values": {
+            "0000": "Pin 13 of the PA pin.",
+            "0001": "Pin 13 of the PB pin.",
+            "0010": "Pin 13 of the PC pin.",
+            "0011": "Pin 13 of the PD pin.",
+            "0100": "Pin 13 of the PE pin."
+          },
+          "comment": "These bits are used to determine which port pin the external interrupt pin 13 is mapped to."
+        },
+        "EXTI14": {
+          "name": "External interrupt input pin 14 configuration bits",
+          "position": "11:8",
+          "access": "read-write",
+          "values": {
+            "0000": "Pin 14 of the PA pin.",
+            "0001": "Pin 14 of the PB pin.",
+            "0010": "Pin 14 of the PC pin.",
+            "0011": "Pin 14 of the PD pin.",
+            "0100": "Pin 14 of the PE pin."
+          },
+          "comment": "These bits are used to determine which port pin the external interrupt pin 14 is mapped to."
+        },
+        "EXTI15": {
+          "name": "External interrupt input pin 15 configuration bits",
+          "position": "15:12",
+          "access": "read-write",
+          "values": {
+            "0000": "Pin 15 of the PA pin.",
+            "0001": "Pin 15 of the PB pin.",
+            "0010": "Pin 15 of the PC pin.",
+            "0011": "Pin 15 of the PD pin.",
+            "0100": "Pin 15 of the PE pin."
+          },
+          "comment": "These bits are used to determine which port pin the external interrupt pin 15 is mapped to."
+        }
+      }
+    },
+    "PCFR2": {
+      "name": "Remap register 2",
+      "bits": {
+        "TIM8_REMAP": {
+          "name": "TIM8 remap bit",
+          "position": "2",
+          "access": "read-write",
+          "values": {
+            "0": "Default map (ETR/PA0, CH1/PC6, CH2/PC7, CH3/PC8, CH4/PC9, BKIN/PA6, CH1N/PA7, CH2N/PB0, CH3N/PB1).",
+            "1": "Remap (ETR/PA0, CH1/PB6, CH2/PB7, CH3/PB8, CH4/PC13, BKIN/PB9, CH1N/PA13, CH2N/PA14, CH3N/PA15)."
+          },
+          "comment": ""
+        },
+        "TIM9_REMAP": {
+          "name": "TIM9 remap bits",
+          "position": "4:3",
+          "access": "read-write",
+          "values": {
+            "00": "Default map (ETR/PA2, CH1/PA2, CH2/PA3, CH3/PA4, CH4/PC4, BKIN/PC5, CH1N/PC0, CH2N/PC1, CH3N/PC2).",
+            "01": "Partial map (ETR/PA2, CH1/PA2, CH2/PA3, CH3/PA4, CH4/PC14, BKIN/PA1, CH1N/PB0, CH2N/PB1, CH3N/PB2).",
+            "10": "Full map (ETR/PD9, CH1/PD9, CH2/PD11, CH3/PD13, CH4/PD15, BKIN/PD14, CH1N/PD8, CH2N/PD10, CH3N/PD12).",
+            "11": "Full map (ETR/PD9, CH1/PD9, CH2/PD11, CH3/PD13, CH4/PD15, BKIN/PD14, CH1N/PD8, CH2N/PD10, CH3N/PD12)."
+          },
+          "comment": ""
+        },
+        "TIM10_REMAP": {
+          "name": "TIM10 remap bits",
+          "position": "6:5",
+          "access": "read-write",
+          "values": {
+            "00": "Default map (ETR/PC10, CH1/PB8, CH2/PB9, CH3/PC3, CH4/PC11, BKIN/PC12, CH1N/PA12, CH2N/PA13, CH3N/PA14).",
+            "01": "Partial map (ETR/PB11, CH1/PB3, CH2/PB4, CH3/PB5, CH4/PC15, BKIN/PB10, CH1N/PA5, CH2N/PA6, CH3N/PA7).",
+            "10": "Full map (ETR/PD0, CH1/PD1, CH2/PD3, CH3/PD5, CH4/PD7, BKIN/PE2, CH1N/PE3, CH2N/PE4, CH3N/PE5).",
+            "11": "Full map (ETR/PD0, CH1/PD1, CH2/PD3, CH3/PD5, CH4/PD7, BKIN/PE2, CH1N/PE3, CH2N/PE4, CH3N/PE5)."
+          },
+          "comment": ""
+        },
+        "FSMC_NADV": {
+          "name": "FSMC_NADV remap",
+          "position": "10",
+          "access": "read-write",
+          "values": {
+            "0": "FSMC NADV is mapped to PB7.",
+            "1": "FSMC NADV output disabled."
+          },
+          "comment": ""
+        },
+        "UART4_REMAP": {
+          "name": "UART4 remap",
+          "position": "17:16",
+          "access": "read-write",
+          "values": {
+            "00": "Default map (TX/PC10, RX/PC11).",
+            "01": "Remap (TX/PB0, RX/PB1).",
+            "10": "Remap (TX/PE0, RX/PE1).",
+            "11": "Remap (TX/PE0, RX/PE1)."
+          },
+          "comment": ""
+        },
+        "UART5_REMAP": {
+          "name": "UART5 remap",
+          "position": "19:18",
+          "access": "read-write",
+          "values": {
+            "00": "Default map (TX/PC12, RX/PD2).",
+            "01": "Remap (TX/PB4, RX/PB5).",
+            "10": "Remap (TX/PE8, RX/PE9).",
+            "11": "Remap (TX/PE8, RX/PE9)."
+          },
+          "comment": ""
+        },
+        "UART6_REMAP": {
+          "name": "UART6 remap",
+          "position": "21:20",
+          "access": "read-write",
+          "values": {
+            "00": "Default map (TX/PC0, RX/PC1).",
+            "01": "Remap (TX/PB8, RX/PB9).",
+            "10": "Remap (TX/PE10, RX/PE11).",
+            "11": "Remap (TX/PE10, RX/PE11)."
+          },
+          "comment": ""
+        },
+        "UART7_REMAP": {
+          "name": "UART7 remap",
+          "position": "23:22",
+          "access": "read-write",
+          "values": {
+            "00": "Default map (TX/PC2, RX/PC3).",
+            "01": "Remap (TX/PA6, RX/PA7).",
+            "10": "Remap (TX/PE12, RX/PE13).",
+            "11": "Remap (TX/PE12, RX/PE13)."
+          },
+          "comment": ""
+        },
+        "UART8_REMAP": {
+          "name": "UART8 remap",
+          "position": "25:24",
+          "access": "read-write",
+          "values": {
+            "00": "Default map (TX/PC4, RX/PC5).",
+            "01": "Remap (TX/PA14, RX/PA15).",
+            "10": "Remap (TX/PE14, RX/PE15).",
+            "11": "Remap (TX/PE14, RX/PE15)."
+          },
+          "comment": ""
+        },
+        "USART1_REMAP2": {
+          "name": "USART1 map configuration high bit (used with the bit 2 (USART1_RM) in the PCFR1 register)",
+          "position": "26",
+          "access": "read-write",
+          "values": {
+            "0": "USART1_RM = 0 -> Default map (CK/PA8, TX/PA9, RX/PA10, CTS/PA11, RTS/PA12) / USART1_RM = 1 -> Remap (CK/PA8, TX/PB6, RX/PB7, CTS/PA11, RTS/PA12).",
+            "1": "USART1_RM = 0 -> Remap (CK/PA10, TX/PB15, RX/PA8, CTS/PA5, RTS/PA9) / USART1_RM = 1 -> Remap (CK/PA5, TX/PA6, RX/PA7, CTS/PC4, RTS/PC5)."
+          },
+          "comment": ""
+        }
+      }
+    }
+  }
+}

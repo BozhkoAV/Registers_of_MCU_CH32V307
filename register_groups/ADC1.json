@@ -1,0 +1,1054 @@
+{
+  "name": "Analog-to-digital Converter (ADC) 1 and Touch Key Detection (TKEY) 1 registers",
+  "registers": {
+    "STATR": {
+      "name": "ADC1 status register",
+      "bits": {
+        "AWD": {
+          "name": "Analog watchdog flag bit",
+          "position": "0",
+          "access": "read-write",
+          "values": {
+            "1": "The analog watchdog event occurs.",
+            "0": "No analog watchdog event occurs."
+          },
+          "comment": "This bit is set to 1 by hardware (the conversion value is out of the ADC_WDHTR and ADC_WDLTR register range), and is cleared by software (invalid if writing 1)."
+        },
+        "EOC": {
+          "name": "Conversion completion status",
+          "position": "1",
+          "access": "read-write",
+          "values": {
+            "1": "The conversion has completed.",
+            "0": "The conversion has not completed."
+          },
+          "comment": "This bit is set to 1 by hardware (the regular or injected channel group conversion ends), and is cleared by software (invalid if writing 1) or clearing when ADC_RDATAR is read."
+        },
+        "JEOC": {
+          "name": "Injected channel group conversion completion status",
+          "position": "2",
+          "access": "read-write",
+          "values": {
+            "1": "The conversion has completed.",
+            "0": "The conversion has not completed."
+          },
+          "comment": "This bit is set to 1 by hardware (the conversion of all injected channels is completed), and cleared by software (invalid if writing 1)."
+        },
+        "JSTRT": {
+          "name": "Injected channel conversion start status",
+          "position": "3",
+          "access": "read-write",
+          "values": {
+            "1": "The injected channel conversion has started.",
+            "0": "The injected channel conversion has not started."
+          },
+          "comment": "This bit is set by hardware and cleared by software (invalid if writing 1)."
+        },
+        "STRT": {
+          "name": "Regular channel conversion start status",
+          "position": "4",
+          "access": "read-write",
+          "values": {
+            "1": "The regular channel conversion has started.",
+            "0": "The regular channel conversion has not started."
+          },
+          "comment": "This bit is set by hardware and cleared by software (invalid if writing 1)."
+        }
+      }
+    },
+    "CTLR1": {
+      "name": "ADC1 control register 1",
+      "bits": {
+        "AWDCH": {
+          "name": "Analog watchdog channel selection bit",
+          "position": "4:0",
+          "access": "read-write",
+          "values": {
+            "00000": "Analog input channel 0",
+            "00001": "Analog input channel 1",
+            "00010": "Analog input channel 2",
+            "00011": "Analog input channel 3",
+            "00100": "Analog input channel 4",
+            "00101": "Analog input channel 5",
+            "00110": "Analog input channel 6",
+            "00111": "Analog input channel 7",
+            "01000": "Analog input channel 8",
+            "01001": "Analog input channel 9",
+            "01010": "Analog input channel 10",
+            "01011": "Analog input channel 11",
+            "01100": "Analog input channel 12",
+            "01101": "Analog input channel 13",
+            "01110": "Analog input channel 14",
+            "01111": "Analog input channel 15",
+            "10000": "Analog input channel 16",
+            "10001": "Analog input channel 17"
+          },
+          "comment": ""
+        },
+        "EOCIE": {
+          "name": "Conversion completion (regular or injected channel group) interrupt enable bit",
+          "position": "5",
+          "access": "read-write",
+          "values": {
+            "1": "Enable the transfer completion bit (EOC flag).",
+            "0": "Disable the transfer completion interrupt."
+          },
+          "comment": ""
+        },
+        "AWDIE": {
+          "name": "Analog watchdog interrupt enable bit",
+          "position": "6",
+          "access": "read-write",
+          "values": {
+            "1": "Enable analog watchdog interrupt.",
+            "0": "Disable analog watchdog interrupt."
+          },
+          "comment": "In scan mode, if this interrupt occurs, the scan will be aborted."
+        },
+        "JEOCIE": {
+          "name": "Injected channel group conversion completion interrupt enable bit",
+          "position": "7",
+          "access": "read-write",
+          "values": {
+            "1": "Enable injected channel group transfer completion interrupt (IEOC flag).",
+            "0": "Disable injected channel group transfer completion interrupt."
+          },
+          "comment": ""
+        },
+        "SCAN": {
+          "name": "Scan mode enable bit",
+          "position": "8",
+          "access": "read-write",
+          "values": {
+            "1": "Enable scan mode (continuous conversion of all channels selected by ADC_IOFRx and ADC_RSQRx).",
+            "0": "Disable scan mode."
+          },
+          "comment": ""
+        },
+        "AWDSGL": {
+          "name": "In scan mode, analog watchdog enable bit on a single channel",
+          "position": "9",
+          "access": "read-write",
+          "values": {
+            "1": "Enable analog watchdog on single channel (AWDCH[4:0] selection).",
+            "0": "Disable analog watchdog on all channels."
+          },
+          "comment": ""
+        },
+        "JAUTO": {
+          "name": "After regular channel is enabled, automatically injected channel group conversion enable bit",
+          "position": "10",
+          "access": "read-write",
+          "values": {
+            "1": "Enable automatic injected channel group conversion.",
+            "0": "Disable automatic injected channel group conversion."
+          },
+          "comment": "The external trigger function of the injected channel needs to be disabled in this mode."
+        },
+        "DISCEN": {
+          "name": "Discontinuous mode enable bit on the regular channel",
+          "position": "11",
+          "access": "read-write",
+          "values": {
+            "1": "Enable discontinuous mode on the regular channel.",
+            "0": "Disable discontinuous mode on the regular channel."
+          },
+          "comment": ""
+        },
+        "JDISCEN": {
+          "name": "Discontinuous mode enable bit on injected channel",
+          "position": "12",
+          "access": "read-write",
+          "values": {
+            "1": "Enable discontinuous mode on the injected channel.",
+            "0": "Disable discontinuous mode on the injected channel."
+          },
+          "comment": ""
+        },
+        "DISCNUM": {
+          "name": "In discontinuous mode, the number of regular channels to be converted after external trigger",
+          "position": "15:13",
+          "access": "read-write",
+          "values": {
+            "000": "1 channel",
+            "001": "2 channels",
+            "010": "3 channels",
+            "011": "4 channels",
+            "100": "5 channels",
+            "101": "6 channels",
+            "110": "7 channels",
+            "111": "8 channels"
+          },
+          "comment": ""
+        },
+        "DUALMOD": {
+          "name": "Dual mode selection",
+          "position": "19:16",
+          "access": "read-write",
+          "values": {
+            "0000": "Independent mode",
+            "0001": "Regular simultaneous mode + Injected simultaneous mode",
+            "0010": "Regular simultaneous mode + Alternate trigger mode",
+            "0011": "Injected simultaneous mode + Fast interleaved mode",
+            "0100": "Injected simultaneous mode + Slow interleaved mode",
+            "0101": "Injected simultaneous mode",
+            "0110": "Regular simultaneous mode",
+            "0111": "Fast interleaved mode",
+            "1000": "Slow interleaved mode",
+            "1001": "Alternate trigger mode"
+          },
+          "comment": "Modification of a configuration bit must be performed when dual mode is disabled."
+        },
+        "JAWDEN": {
+          "name": "Analog watchdog enable bit on injected channels",
+          "position": "22",
+          "access": "read-write",
+          "values": {
+            "1": "Enable analog watchdog on injected channels.",
+            "0": "Disable analog watchdog on injected channels."
+          },
+          "comment": ""
+        },
+        "AWDEN": {
+          "name": "Analog watchdog enable bit on regular channels",
+          "position": "23",
+          "access": "read-write",
+          "values": {
+            "1": "Enable analog watchdog on regular channels.",
+            "0": "Disable analog watchdog on regular channels."
+          },
+          "comment": ""
+        },
+        "TKENABLE": {
+          "name": "TKEY module enable control, including TKEY_F and TKEY_V units",
+          "position": "24",
+          "access": "read-write",
+          "values": {
+            "1": "Enable TKEY module.",
+            "0": "Disable TKEY module."
+          },
+          "comment": ""
+        },
+        "TKITUNE": {
+          "name": "TKEY module charging current configuration",
+          "position": "25",
+          "access": "read-write",
+          "values": {
+            "0": "Charging current is 35uA.",
+            "1": "Charging current is reduced half."
+          },
+          "comment": ""
+        },
+        "BUFEN": {
+          "name": "ADC BUFFER enable",
+          "position": "26",
+          "access": "read-write",
+          "values": {
+            "0": "Buffer input disabled.",
+            "1": "Buffer input enabled."
+          },
+          "comment": "Cases where buffer needs to be turned on:\n1. When TKENABLE bit or TSVREFE position 1, buffer is on by default and cannot be turned off (so in these two cases, ADC calibration needs to be before TKENABLE bit or TSVREFE position 1 and buffer needs to be turned off).\n2. When the external input impedance is greater than the maximum input impedance requirement, the buffer can be turned on to improve the ADC acquisition data (at this time, the ADC sampling time is not recommended to be less than 7.5T), the external input impedance is detailed in CH32F203DS0 / CH32F208DS0 / CH32V203DS0 / CH32V208DS0 datasheet Table 4-28; CH32V307DS0 / CH32F207DS0 datasheet Table 4-41.\nRefer to EVT related routines for specific operation."
+        },
+        "PGA": {
+          "name": "ADC channel gain configuration",
+          "position": "28:27",
+          "access": "read-write",
+          "values": {
+            "00": "x1",
+            "01": "x4",
+            "10": "x16",
+            "11": "x64"
+          },
+          "comment": "The input gain can be configured, for amplifying small signals and sampling. ADC_Buffer needs to be enabled to use this function."
+        }
+      }
+    },
+    "CTLR2": {
+      "name": "ADC1 control register 2",
+      "bits": {
+        "ADON": {
+          "name": "A/D converter ON/OFF",
+          "position": "0",
+          "access": "read-write",
+          "values": {
+            "1": "Enable ADC and to start conversion.",
+            "0": "Disable ADC conversion/calibration, and go to power down mode."
+          },
+          "comment": "When this bit is 0, writing 1 will wake up the ADC from power-down mode; when this bit is 1, writing 1 will start the conversion.\nWhen only ADON changes in the register, a conversion will be started. If any other bits are sent to change, a new conversion will not be started."
+        },
+        "CONT": {
+          "name": "Continuous conversion enable",
+          "position": "1",
+          "access": "read-write",
+          "values": {
+            "1": "Continuous conversion mode.",
+            "0": "Single conversion mode."
+          },
+          "comment": "If this bit is set, the conversion will continue until the bit is cleared."
+        },
+        "CAL": {
+          "name": "A/D calibration, set by software and cleared by hardware when the calibration is completed",
+          "position": "2",
+          "access": "read-write",
+          "values": {
+            "1": "Enable the calibration.",
+            "0": "Calibration completed."
+          },
+          "comment": ""
+        },
+        "RSTCAL": {
+          "name": "Reset calibration, this bit is set by software, and cleared by hardware after reset",
+          "position": "3",
+          "access": "read-write",
+          "values": {
+            "1": "Initialize calibration register.",
+            "0": "The calibration register initialized."
+          },
+          "comment": "If RSTCAL is set while the conversion is in progress, it takes extra cycles to clear the calibration register."
+        },
+        "DMA": {
+          "name": "Direct memory access (DMA) mode enable",
+          "position": "8",
+          "access": "read-write",
+          "values": {
+            "1": "Enable DMA mode.",
+            "0": "Disable DMA mode."
+          },
+          "comment": ""
+        },
+        "ALIGN": {
+          "name": "Data alignment",
+          "position": "11",
+          "access": "read-write",
+          "values": {
+            "1": "Left alignment.",
+            "0": "Right alignment."
+          },
+          "comment": ""
+        },
+        "JEXTSEL": {
+          "name": "External trigger event select for injected channels",
+          "position": "14:12",
+          "access": "read-write",
+          "values": {
+            "000": "TRGO event of timer 1",
+            "001": "CC4 event of timer 1",
+            "010": "TRGO event of timer 2",
+            "011": "CC1 event of timer 2",
+            "100": "CC4 event of timer 3",
+            "101": "TRGO event of timer 4",
+            "110": "EXTI line 15 / CC4 event of timer 8",
+            "111": "JSWSTART software trigger"
+          },
+          "comment": "Only high-density devices have CC4 event in timer 8."
+        },
+        "JEXTTRIG": {
+          "name": "External trigger conversion mode enable for injected channels",
+          "position": "15",
+          "access": "read-write",
+          "values": {
+            "1": "Enable conversion on external event.",
+            "0": "Disable conversion on external event."
+          },
+          "comment": ""
+        },
+        "EXTSEL": {
+          "name": "External trigger event select for regular channel",
+          "position": "19:17",
+          "access": "read-write",
+          "values": {
+            "000": "CC1 event of timer 1",
+            "001": "CC2 event of timer 1",
+            "010": "CC3 event of timer 1",
+            "011": "CC2 event of timer 2",
+            "100": "TRGO event of timer 3",
+            "101": "CC4 event of timer 4",
+            "110": "EXTI line 11 / TRGO event of timer 8",
+            "111": "SWSTART software trigger"
+          },
+          "comment": "Only high-density devices have TRGO event in timer 8."
+        },
+        "EXTTRIG": {
+          "name": "External trigger conversion mode enable for regular channels",
+          "position": "20",
+          "access": "read-write",
+          "values": {
+            "1": "Enable conversion on external event.",
+            "0": "Disable conversion on external event."
+          },
+          "comment": ""
+        },
+        "JSWSTART": {
+          "name": "Start conversion of an injected channel, set by software to start",
+          "position": "21",
+          "access": "read-write",
+          "values": {
+            "1": "Start conversion of an injected channels.",
+            "0": "Reset status."
+          },
+          "comment": "This bit is set by software, and cleared by hardware or software after the conversion starts."
+        },
+        "SWSTART": {
+          "name": "Start conversion of a regular channel, set by software to start",
+          "position": "22",
+          "access": "read-write",
+          "values": {
+            "1": "Start conversion of a regular channel.",
+            "0": "Reset status."
+          },
+          "comment": "This bit is set by software, and cleared by hardware after the conversion starts."
+        },
+        "TSVREFE": {
+          "name": "Temperature sensor and internal voltage (V_REFINT) channel enable",
+          "position": "23",
+          "access": "read-write",
+          "values": {
+            "1": "Enable the temperature sensor and V_REFINT channel.",
+            "0": "Disable the temperature sensor and V_REFINT channel."
+          },
+          "comment": ""
+        }
+      }
+    },
+    "SAMPTR1_CHARGE1": {
+      "name": "ADC1 sample time configuration register 1 / TKEY1 charge sample time register 1",
+      "bits": {
+        "SMP10_TKCG10": {
+          "name": "Sample time configuration of channel 10 / Select the charge sample time of channel 10",
+          "position": "2:0",
+          "access": "read-write",
+          "values": {
+            "000": "1.5 cycles",
+            "001": "7.5 cycles",
+            "010": "13.5 cycles",
+            "011": "28.5 cycles",
+            "100": "41.5 cycles",
+            "101": "55.5 cycles",
+            "110": "71.5 cycles",
+            "111": "239.5 cycles"
+          },
+          "comment": "These bits are used to independently select the sample time of each channel, and the channel configuration value must remain unchanged during the sampling period.\nThese bits are used to independently select the charge time for each channel. Time base: ADC clock."
+        },
+        "SMP11_TKCG11": {
+          "name": "Sample time configuration of channel 11 / Select the charge sample time of channel 11",
+          "position": "5:3",
+          "access": "read-write",
+          "values": {
+            "000": "1.5 cycles",
+            "001": "7.5 cycles",
+            "010": "13.5 cycles",
+            "011": "28.5 cycles",
+            "100": "41.5 cycles",
+            "101": "55.5 cycles",
+            "110": "71.5 cycles",
+            "111": "239.5 cycles"
+          },
+          "comment": "These bits are used to independently select the sample time of each channel, and the channel configuration value must remain unchanged during the sampling period.\nThese bits are used to independently select the charge time for each channel. Time base: ADC clock."
+        },
+        "SMP12_TKCG12": {
+          "name": "Sample time configuration of channel 12 / Select the charge sample time of channel 12",
+          "position": "8:6",
+          "access": "read-write",
+          "values": {
+            "000": "1.5 cycles",
+            "001": "7.5 cycles",
+            "010": "13.5 cycles",
+            "011": "28.5 cycles",
+            "100": "41.5 cycles",
+            "101": "55.5 cycles",
+            "110": "71.5 cycles",
+            "111": "239.5 cycles"
+          },
+          "comment": "These bits are used to independently select the sample time of each channel, and the channel configuration value must remain unchanged during the sampling period.\nThese bits are used to independently select the charge time for each channel. Time base: ADC clock."
+        },
+        "SMP13_TKCG13": {
+          "name": "Sample time configuration of channel 13 / Select the charge sample time of channel 13",
+          "position": "11:9",
+          "access": "read-write",
+          "values": {
+            "000": "1.5 cycles",
+            "001": "7.5 cycles",
+            "010": "13.5 cycles",
+            "011": "28.5 cycles",
+            "100": "41.5 cycles",
+            "101": "55.5 cycles",
+            "110": "71.5 cycles",
+            "111": "239.5 cycles"
+          },
+          "comment": "These bits are used to independently select the sample time of each channel, and the channel configuration value must remain unchanged during the sampling period.\nThese bits are used to independently select the charge time for each channel. Time base: ADC clock."
+        },
+        "SMP14_TKCG14": {
+          "name": "Sample time configuration of channel 14 / Select the charge sample time of channel 14",
+          "position": "14:12",
+          "access": "read-write",
+          "values": {
+            "000": "1.5 cycles",
+            "001": "7.5 cycles",
+            "010": "13.5 cycles",
+            "011": "28.5 cycles",
+            "100": "41.5 cycles",
+            "101": "55.5 cycles",
+            "110": "71.5 cycles",
+            "111": "239.5 cycles"
+          },
+          "comment": "These bits are used to independently select the sample time of each channel, and the channel configuration value must remain unchanged during the sampling period.\nThese bits are used to independently select the charge time for each channel. Time base: ADC clock."
+        },
+        "SMP15_TKCG15": {
+          "name": "Sample time configuration of channel 15 / Select the charge sample time of channel 15",
+          "position": "17:15",
+          "access": "read-write",
+          "values": {
+            "000": "1.5 cycles",
+            "001": "7.5 cycles",
+            "010": "13.5 cycles",
+            "011": "28.5 cycles",
+            "100": "41.5 cycles",
+            "101": "55.5 cycles",
+            "110": "71.5 cycles",
+            "111": "239.5 cycles"
+          },
+          "comment": "These bits are used to independently select the sample time of each channel, and the channel configuration value must remain unchanged during the sampling period.\nThese bits are used to independently select the charge time for each channel. Time base: ADC clock."
+        },
+        "SMP16_TKCG16": {
+          "name": "Sample time configuration of channel 16 / Select the charge sample time of channel 16",
+          "position": "20:18",
+          "access": "read-write",
+          "values": {
+            "000": "1.5 cycles",
+            "001": "7.5 cycles",
+            "010": "13.5 cycles",
+            "011": "28.5 cycles",
+            "100": "41.5 cycles",
+            "101": "55.5 cycles",
+            "110": "71.5 cycles",
+            "111": "239.5 cycles"
+          },
+          "comment": "These bits are used to independently select the sample time of each channel, and the channel configuration value must remain unchanged during the sampling period.\nThese bits are used to independently select the charge time for each channel. Time base: ADC clock."
+        },
+        "SMP17_TKCG17": {
+          "name": "Sample time configuration of channel 17 / Select the charge sample time of channel 17",
+          "position": "23:21",
+          "access": "read-write",
+          "values": {
+            "000": "1.5 cycles",
+            "001": "7.5 cycles",
+            "010": "13.5 cycles",
+            "011": "28.5 cycles",
+            "100": "41.5 cycles",
+            "101": "55.5 cycles",
+            "110": "71.5 cycles",
+            "111": "239.5 cycles"
+          },
+          "comment": "These bits are used to independently select the sample time of each channel, and the channel configuration value must remain unchanged during the sampling period.\nThese bits are used to independently select the charge time for each channel. Time base: ADC clock."
+        }
+      }
+    },
+    "SAMPTR2_CHARGE2": {
+      "name": "ADC1 sample time configuration register 2 / TKEY1 charge sample time register 2",
+      "bits": {
+        "SMP0_TKCG0": {
+          "name": "Sample time configuration of channel 0 / Select the charge sample time of channel 0",
+          "position": "2:0",
+          "access": "read-write",
+          "values": {
+            "000": "1.5 cycles",
+            "001": "7.5 cycles",
+            "010": "13.5 cycles",
+            "011": "28.5 cycles",
+            "100": "41.5 cycles",
+            "101": "55.5 cycles",
+            "110": "71.5 cycles",
+            "111": "239.5 cycles"
+          },
+          "comment": "These bits are used to independently select the sample time of each channel, and the channel configuration value must remain unchanged during the sampling period.\nThese bits are used to independently select the charge time for each channel. Time base: ADC clock."
+        },
+        "SMP1_TKCG1": {
+          "name": "Sample time configuration of channel 1 / Select the charge sample time of channel 1",
+          "position": "5:3",
+          "access": "read-write",
+          "values": {
+            "000": "1.5 cycles",
+            "001": "7.5 cycles",
+            "010": "13.5 cycles",
+            "011": "28.5 cycles",
+            "100": "41.5 cycles",
+            "101": "55.5 cycles",
+            "110": "71.5 cycles",
+            "111": "239.5 cycles"
+          },
+          "comment": "These bits are used to independently select the sample time of each channel, and the channel configuration value must remain unchanged during the sampling period.\nThese bits are used to independently select the charge time for each channel. Time base: ADC clock."
+        },
+        "SMP2_TKCG2": {
+          "name": "Sample time configuration of channel 2 / Select the charge sample time of channel 2",
+          "position": "8:6",
+          "access": "read-write",
+          "values": {
+            "000": "1.5 cycles",
+            "001": "7.5 cycles",
+            "010": "13.5 cycles",
+            "011": "28.5 cycles",
+            "100": "41.5 cycles",
+            "101": "55.5 cycles",
+            "110": "71.5 cycles",
+            "111": "239.5 cycles"
+          },
+          "comment": "These bits are used to independently select the sample time of each channel, and the channel configuration value must remain unchanged during the sampling period.\nThese bits are used to independently select the charge time for each channel. Time base: ADC clock."
+        },
+        "SMP3_TKCG3": {
+          "name": "Sample time configuration of channel 3 / Select the charge sample time of channel 3",
+          "position": "11:9",
+          "access": "read-write",
+          "values": {
+            "000": "1.5 cycles",
+            "001": "7.5 cycles",
+            "010": "13.5 cycles",
+            "011": "28.5 cycles",
+            "100": "41.5 cycles",
+            "101": "55.5 cycles",
+            "110": "71.5 cycles",
+            "111": "239.5 cycles"
+          },
+          "comment": "These bits are used to independently select the sample time of each channel, and the channel configuration value must remain unchanged during the sampling period.\nThese bits are used to independently select the charge time for each channel. Time base: ADC clock."
+        },
+        "SMP4_TKCG4": {
+          "name": "Sample time configuration of channel 4 / Select the charge sample time of channel 4",
+          "position": "14:12",
+          "access": "read-write",
+          "values": {
+            "000": "1.5 cycles",
+            "001": "7.5 cycles",
+            "010": "13.5 cycles",
+            "011": "28.5 cycles",
+            "100": "41.5 cycles",
+            "101": "55.5 cycles",
+            "110": "71.5 cycles",
+            "111": "239.5 cycles"
+          },
+          "comment": "These bits are used to independently select the sample time of each channel, and the channel configuration value must remain unchanged during the sampling period.\nThese bits are used to independently select the charge time for each channel. Time base: ADC clock."
+        },
+        "SMP5_TKCG5": {
+          "name": "Sample time configuration of channel 5 / Select the charge sample time of channel 5",
+          "position": "17:15",
+          "access": "read-write",
+          "values": {
+            "000": "1.5 cycles",
+            "001": "7.5 cycles",
+            "010": "13.5 cycles",
+            "011": "28.5 cycles",
+            "100": "41.5 cycles",
+            "101": "55.5 cycles",
+            "110": "71.5 cycles",
+            "111": "239.5 cycles"
+          },
+          "comment": "These bits are used to independently select the sample time of each channel, and the channel configuration value must remain unchanged during the sampling period.\nThese bits are used to independently select the charge time for each channel. Time base: ADC clock."
+        },
+        "SMP6_TKCG6": {
+          "name": "Sample time configuration of channel 6 / Select the charge sample time of channel 6",
+          "position": "20:18",
+          "access": "read-write",
+          "values": {
+            "000": "1.5 cycles",
+            "001": "7.5 cycles",
+            "010": "13.5 cycles",
+            "011": "28.5 cycles",
+            "100": "41.5 cycles",
+            "101": "55.5 cycles",
+            "110": "71.5 cycles",
+            "111": "239.5 cycles"
+          },
+          "comment": "These bits are used to independently select the sample time of each channel, and the channel configuration value must remain unchanged during the sampling period.\nThese bits are used to independently select the charge time for each channel. Time base: ADC clock."
+        },
+        "SMP7_TKCG7": {
+          "name": "Sample time configuration of channel 7 / Select the charge sample time of channel 7",
+          "position": "23:21",
+          "access": "read-write",
+          "values": {
+            "000": "1.5 cycles",
+            "001": "7.5 cycles",
+            "010": "13.5 cycles",
+            "011": "28.5 cycles",
+            "100": "41.5 cycles",
+            "101": "55.5 cycles",
+            "110": "71.5 cycles",
+            "111": "239.5 cycles"
+          },
+          "comment": "These bits are used to independently select the sample time of each channel, and the channel configuration value must remain unchanged during the sampling period.\nThese bits are used to independently select the charge time for each channel. Time base: ADC clock."
+        },
+        "SMP8_TKCG8": {
+          "name": "Sample time configuration of channel 8 / Select the charge sample time of channel 8",
+          "position": "26:24",
+          "access": "read-write",
+          "values": {
+            "000": "1.5 cycles",
+            "001": "7.5 cycles",
+            "010": "13.5 cycles",
+            "011": "28.5 cycles",
+            "100": "41.5 cycles",
+            "101": "55.5 cycles",
+            "110": "71.5 cycles",
+            "111": "239.5 cycles"
+          },
+          "comment": "These bits are used to independently select the sample time of each channel, and the channel configuration value must remain unchanged during the sampling period.\nThese bits are used to independently select the charge time for each channel. Time base: ADC clock."
+        },
+        "SMP9_TKCG9": {
+          "name": "Sample time configuration of channel 9 / Select the charge sample time of channel 9",
+          "position": "29:27",
+          "access": "read-write",
+          "values": {
+            "000": "1.5 cycles",
+            "001": "7.5 cycles",
+            "010": "13.5 cycles",
+            "011": "28.5 cycles",
+            "100": "41.5 cycles",
+            "101": "55.5 cycles",
+            "110": "71.5 cycles",
+            "111": "239.5 cycles"
+          },
+          "comment": "These bits are used to independently select the sample time of each channel, and the channel configuration value must remain unchanged during the sampling period.\nThese bits are used to independently select the charge time for each channel. Time base: ADC clock."
+        }
+      }
+    },
+    "IOFR1": {
+      "name": "ADC1 injected channel data offset register 1",
+      "bits": {
+        "JOFFSET1": {
+          "name": "Data offset for injected channel 1",
+          "position": "11:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "When the injected channel is converted, these bits define the value to be subtracted from the original conversion data. The result of the conversion can be read in the ADC_IDATAR1 register."
+        }
+      }
+    },
+    "IOFR2": {
+      "name": "ADC1 injected channel data offset register 2",
+      "bits": {
+        "JOFFSET2": {
+          "name": "Data offset for injected channel 2",
+          "position": "11:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "When the injected channel is converted, these bits define the value to be subtracted from the original conversion data. The result of the conversion can be read in the ADC_IDATAR2 register."
+        }
+      }
+    },
+    "IOFR3": {
+      "name": "ADC1 injected channel data offset register 3",
+      "bits": {
+        "JOFFSET3": {
+          "name": "Data offset for injected channel 3",
+          "position": "11:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "When the injected channel is converted, these bits define the value to be subtracted from the original conversion data. The result of the conversion can be read in the ADC_IDATAR3 register."
+        }
+      }
+    },
+    "IOFR4": {
+      "name": "ADC1 injected channel data offset register 4",
+      "bits": {
+        "JOFFSET4": {
+          "name": "Data offset for injected channel 4",
+          "position": "11:0",
+          "access": "read-write",
+          "values": {},
+          "comment": "When the injected channel is converted, these bits define the value to be subtracted from the original conversion data. The result of the conversion can be read in the ADC_IDATAR4 register."
+        }
+      }
+    },
+    "WDHTR": {
+      "name": "ADC1 watchdog high threshold register",
+      "bits": {
+        "HT": {
+          "name": "Analog watchdog high threshold set bits",
+          "position": "11:0",
+          "access": "read-write",
+          "values": {},
+          "comment": ""
+        }
+      }
+    },
+    "WDLTR": {
+      "name": "ADC1 watchdog low threshold register",
+      "bits": {
+        "LT": {
+          "name": "Analog watchdog low threshold set bits",
+          "position": "11:0",
+          "access": "read-write",
+          "values": {},
+          "comment": ""
+        }
+      }
+    },
+    "RSQR1": {
+      "name": "ADC1 regular channel sequence register 1",
+      "bits": {
+        "SQ13": {
+          "name": "No. (0 to 17) of the 13th converted channel in regular sequence",
+          "position": "4:0",
+          "access": "read-write",
+          "values": {},
+          "comment": ""
+        },
+        "SQ14": {
+          "name": "No. (0 to 17) of the 14th converted channel in regular sequence",
+          "position": "9:5",
+          "access": "read-write",
+          "values": {},
+          "comment": ""
+        },
+        "SQ15": {
+          "name": "No. (0 to 17) of the 15th converted channel in regular sequence",
+          "position": "14:10",
+          "access": "read-write",
+          "values": {},
+          "comment": ""
+        },
+        "SQ16": {
+          "name": "No. (0 to 17) of the 16th converted channel in regular sequence",
+          "position": "19:15",
+          "access": "read-write",
+          "values": {},
+          "comment": ""
+        },
+        "L": {
+          "name": "The quantity of channels to be converted in the regular channel conversion sequence",
+          "position": "23:20",
+          "access": "read-write",
+          "values": {
+            "0000": "1 converted channel",
+            "0001": "2 converted channels",
+            "0010": "3 converted channels",
+            "0011": "4 converted channels",
+            "0100": "5 converted channels",
+            "0101": "6 converted channels",
+            "0110": "7 converted channels",
+            "0111": "8 converted channels",
+            "1000": "9 converted channels",
+            "1001": "10 converted channels",
+            "1010": "11 converted channels",
+            "1011": "12 converted channels",
+            "1100": "13 converted channels",
+            "1101": "14 converted channels",
+            "1110": "15 converted channels",
+            "1111": "16 converted channels"
+          },
+          "comment": ""
+        }
+      }
+    },
+    "RSQR2": {
+      "name": "ADC1 regular channel sequence register 2",
+      "bits": {
+        "SQ7": {
+          "name": "No. (0 to 17) of the 7th converted channel in regular sequence",
+          "position": "4:0",
+          "access": "read-write",
+          "values": {},
+          "comment": ""
+        },
+        "SQ8": {
+          "name": "No. (0 to 17) of the 8th converted channel in regular sequence",
+          "position": "9:5",
+          "access": "read-write",
+          "values": {},
+          "comment": ""
+        },
+        "SQ9": {
+          "name": "No. (0 to 17) of the 9th converted channel in regular sequence",
+          "position": "14:10",
+          "access": "read-write",
+          "values": {},
+          "comment": ""
+        },
+        "SQ10": {
+          "name": "No. (0 to 17) of the 10th converted channel in regular sequence",
+          "position": "19:15",
+          "access": "read-write",
+          "values": {},
+          "comment": ""
+        },
+        "SQ11": {
+          "name": "No. (0 to 17) of the 11th converted channel in regular sequence",
+          "position": "24:20",
+          "access": "read-write",
+          "values": {},
+          "comment": ""
+        },
+        "SQ12": {
+          "name": "No. (0 to 17) of the 12th converted channel in regular sequence",
+          "position": "29:25",
+          "access": "read-write",
+          "values": {},
+          "comment": ""
+        }
+      }
+    },
+    "RSQR3_CHANNEL": {
+      "name": "ADC1 regular channel sequence register 3 / TKEY1 channel select register",
+      "bits": {
+        "SQ1_CHSEL": {
+          "name": "No. (0 to 17) of the 1st converted channel in regular sequence / TKEY_V channel select",
+          "position": "4:0",
+          "access": "read-write",
+          "values": {},
+          "comment": ""
+        },
+        "SQ2": {
+          "name": "No. (0 to 17) of the 2nd converted channel in regular sequence",
+          "position": "9:5",
+          "access": "read-write",
+          "values": {},
+          "comment": ""
+        },
+        "SQ3": {
+          "name": "No. (0 to 17) of the 3rd converted channel in regular sequence",
+          "position": "14:10",
+          "access": "read-write",
+          "values": {},
+          "comment": ""
+        },
+        "SQ4": {
+          "name": "No. (0 to 17) of the 4th converted channel in regular sequence",
+          "position": "19:15",
+          "access": "read-write",
+          "values": {},
+          "comment": ""
+        },
+        "SQ5": {
+          "name": "No. (0 to 17) of the 5th converted channel in regular sequence",
+          "position": "24:20",
+          "access": "read-write",
+          "values": {},
+          "comment": ""
+        },
+        "SQ6": {
+          "name": "No. (0 to 17) of the 6th converted channel in regular sequence",
+          "position": "29:25",
+          "access": "read-write",
+          "values": {},
+          "comment": ""
+        }
+      }
+    },
+    "ISQR": {
+      "name": "ADC1 injected channel sequence register",
+      "bits": {
+        "JSQ1": {
+          "name": "No. (0 to 17) of the 1st converted channel in injected sequence",
+          "position": "4:0",
+          "access": "read-write",
+          "values": {},
+          "comment": ""
+        },
+        "JSQ2": {
+          "name": "No. (0 to 17) of the 2nd converted channel in injected sequence",
+          "position": "9:5",
+          "access": "read-write",
+          "values": {},
+          "comment": ""
+        },
+        "JSQ3": {
+          "name": "No. (0 to 17) of the 3rd converted channel in injected sequence",
+          "position": "14:10",
+          "access": "read-write",
+          "values": {},
+          "comment": ""
+        },
+        "JSQ4": {
+          "name": "No. (0 to 17) of the 4th converted channel in injected sequence",
+          "position": "19:15",
+          "access": "read-write",
+          "values": {},
+          "comment": ""
+        },
+        "JL": {
+          "name": "The quantity of channels to be converted in the injected channel conversion sequence",
+          "position": "21:20",
+          "access": "read-write",
+          "values": {
+            "00": "1 converted channel",
+            "01": "2 converted channels",
+            "10": "3 converted channels",
+            "11": "4 converted channels"
+          },
+          "comment": ""
+        }
+      }
+    },
+    "IDATAR1_CHGOFFSET": {
+      "name": "ADC1 injected data register 1 / TKEY1 charge time offset register",
+      "bits": {
+        "JDATA0_7_TKCGOFFSET": {
+          "name": "Injected channel converted data (data left alignment or right alignment) / TKEY charge time offset configuration value",
+          "position": "7:0",
+          "access": "read-only / write-only",
+          "values": {},
+          "comment": "Total charge time: TCHG = TKCGOFFSET + TKCGx\nThis register maps the injected data register 1 (ADC_IDATAR1) of the ADC module. So when write operation is performed on this address register, it serves as TKEY charge time offset (TKEY_CHGOFFSET). When read operation is performed, it serves as the injected data register 1 (ADC_IDATAR1) of the ADC module."
+        },
+        "JDATA8_15": {
+          "name": "Injected channel converted data (data left alignment or right alignment)",
+          "position": "15:8",
+          "access": "read-only",
+          "values": {},
+          "comment": ""
+        }
+      }
+    },
+    "IDATAR2": {
+      "name": "ADC1 injected data register 2",
+      "bits": {
+        "JDATA": {
+          "name": "Injected channel converted data (data left alignment or right alignment)",
+          "position": "15:0",
+          "access": "read-only",
+          "values": {},
+          "comment": ""
+        }
+      }
+    },
+    "IDATAR3": {
+      "name": "ADC1 injected data register 3",
+      "bits": {
+        "JDATA": {
+          "name": "Injected channel converted data (data left alignment or right alignment)",
+          "position": "15:0",
+          "access": "read-only",
+          "values": {},
+          "comment": ""
+        }
+      }
+    },
+    "IDATAR4": {
+      "name": "ADC1 injected data register 4",
+      "bits": {
+        "JDATA": {
+          "name": "Injected channel converted data (data left alignment or right alignment)",
+          "position": "15:0",
+          "access": "read-only",
+          "values": {},
+          "comment": ""
+        }
+      }
+    },
+    "RDATAR_DR_ACT_DCG": {
+      "name": "ADC1 regular data register / TKEY1 data register / TKEY1 activate and discharge time register",
+      "bits": {
+        "DATA0_7_TKACT_DCG": {
+          "name": "Regular channel converted data (data left or right alignment) / Write the discharge time and activate a TKEY channel detection",
+          "position": "7:0",
+          "access": "read-only / write-only",
+          "values": {},
+          "comment": ""
+        },
+        "DATA8_15": {
+          "name": "Regular channel converted data (data left or right alignment)",
+          "position": "15:8",
+          "access": "read-only",
+          "values": {},
+          "comment": ""
+        }
+      }
+    }
+  }
+}
