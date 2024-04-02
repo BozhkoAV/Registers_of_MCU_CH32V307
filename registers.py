@@ -209,130 +209,130 @@ def main():
     args = parser.parse_args()
 
     try:
-        fun_info(args)
-        fun_tree(args)
-        fun_group(args)
-        fun_register(args)
-        fun_bit(args)
-        fun_hex(args)
-        fun_bin(args)
-        fun_regh(args)
-        fun_regb(args)
+        if args.info:
+            fun_info()
+        if args.tree:
+            fun_tree()
+        if args.group:
+            fun_group(args.group)
+        if args.register:
+            fun_register(args.register)
+        if args.bit:
+            fun_bit(args.bit)
+        if args.hex:
+            fun_hex(args.hex)
+        if args.bin:
+            fun_bin(args.bin)
+        if args.regh:
+            fun_regh(args.regh)
+        if args.regb:
+            fun_regb(args.regb)
     except Exception as e:
         print(e)
 
 
-def fun_regb(args):
-    if args.regb:
-        group_name = str(args.regb[0]).upper()
-        reg_name = str(args.regb[1]).upper()
-        bin_value = str(args.regb[2])
-        if all(c.isdigit() and c in '01' for c in bin_value):
-            bin_value = bin_value.lstrip('0')
-            if len(bin_value) == 0:
-                bin_value = 0
-            display_reg_value_info(group_name, reg_name, bin_value)
-        else:
-            raise Exception("Error: Value is not a binary number.")
+def fun_info():
+    json_files = glob.glob(os.path.join("register_groups", '*.json'))
+
+    if len(json_files) != 0:
+        print("\nRegister groups:")
+        for file_name in [os.path.splitext(os.path.basename(file))[0] for file in json_files]:
+            print(file_name)
+        print()
+    else:
+        print("JSON files weren't found in the register_groups directory.")
 
 
-def fun_regh(args):
-    if args.regh:
-        group_name = str(args.regh[0]).upper()
-        reg_name = str(args.regh[1]).upper()
-        hex_value = str(args.regh[2]).upper()
-        if all(c.isdigit() or c.isalpha() and c in 'ABCDEF' for c in hex_value):
-            hex_value = hex_value.lstrip('0')
-            if len(hex_value) == 0:
-                bin_value = 0
-            else:
-                bin_value = bin(int(hex_value, 16))[2:]
-            display_reg_value_info(group_name, reg_name, bin_value)
-        else:
-            raise Exception("Error: Value is not a hexadecimal number.")
+def fun_tree():
+    json_files = glob.glob(os.path.join("register_groups", '*.json'))
 
-
-def fun_bin(args):
-    if args.bin:
-        group_name = str(args.bin[0]).upper()
-        reg_name = str(args.bin[1]).upper()
-        bit_name = str(args.bin[2]).upper()
-        bin_value = str(args.bin[3])
-        if all(c.isdigit() and c in '01' for c in bin_value):
-            bin_value = bin_value.lstrip('0')
-            if len(bin_value) == 0:
-                bin_value = 0
-            display_bit_value_info(group_name, reg_name, bit_name, bin_value)
-        else:
-            raise Exception("Error: Value is not a binary number.")
-
-
-def fun_hex(args):
-    if args.hex:
-        group_name = str(args.hex[0]).upper()
-        reg_name = str(args.hex[1]).upper()
-        bit_name = str(args.hex[2]).upper()
-        hex_value = str(args.hex[3]).upper()
-        if all(c.isdigit() or c.isalpha() and c in 'ABCDEF' for c in hex_value):
-            hex_value = hex_value.lstrip('0')
-            if len(hex_value) == 0:
-                bin_value = 0
-            else:
-                bin_value = bin(int(hex_value, 16))[2:]
-            display_bit_value_info(group_name, reg_name, bit_name, bin_value)
-        else:
-            raise Exception("Error: Value is not a hexadecimal number.")
-
-
-def fun_bit(args):
-    if args.bit:
-        group_name = str(args.bit[0]).upper()
-        reg_name = str(args.bit[1]).upper()
-        bit_name = str(args.bit[2]).upper()
-        display_bit_info(group_name, reg_name, bit_name)
-
-
-def fun_register(args):
-    if args.register:
-        group_name = str(args.register[0]).upper()
-        reg_name = str(args.register[1]).upper()
-        display_register_info(group_name, reg_name)
+    if len(json_files) != 0:
+        for group in [os.path.splitext(os.path.basename(file))[0] for file in json_files]:
+            print(f"─── {group}")
+            register_data = load_register_data(group)
+            for register in register_data['registers']:
+                print(f"   └── {register}")
+                for bit in register_data['registers'][register]['bits']:
+                    print(f"      └── {bit} {register_data['registers'][register]['bits'][bit]['position']}")
+        print()
+    else:
+        print("JSON files weren't found in the register_groups directory.")
 
 
 def fun_group(args):
-    if args.group:
-        group_name = str(args.group[0]).upper()
-        display_group_info(group_name)
+    group_name = str(args[0]).upper()
+    display_group_info(group_name)
 
 
-def fun_info(args):
-    if args.info:
-        json_files = glob.glob(os.path.join("register_groups", '*.json'))
+def fun_register(args):
+    group_name = str(args[0]).upper()
+    reg_name = str(args[1]).upper()
+    display_register_info(group_name, reg_name)
 
-        if len(json_files) != 0:
-            print("\nRegister groups:")
-            for file_name in [os.path.splitext(os.path.basename(file))[0] for file in json_files]:
-                print(file_name)
-            print()
+
+def fun_bit(args):
+    group_name = str(args[0]).upper()
+    reg_name = str(args[1]).upper()
+    bit_name = str(args[2]).upper()
+    display_bit_info(group_name, reg_name, bit_name)
+
+
+def fun_hex(args):
+    group_name = str(args[0]).upper()
+    reg_name = str(args[1]).upper()
+    bit_name = str(args[2]).upper()
+    hex_value = str(args[3]).upper()
+    if all(c.isdigit() or c.isalpha() and c in 'ABCDEF' for c in hex_value):
+        hex_value = hex_value.lstrip('0')
+        if len(hex_value) == 0:
+            bin_value = 0
         else:
-            print("JSON files weren't found in the register_groups directory.")
+            bin_value = bin(int(hex_value, 16))[2:]
+        display_bit_value_info(group_name, reg_name, bit_name, bin_value)
+    else:
+        raise Exception("Error: Value is not a hexadecimal number.")
 
 
-def fun_tree(args):
-    if args.tree:
-        json_files = glob.glob(os.path.join("register_groups", '*.json'))
+def fun_bin(args):
+    group_name = str(args[0]).upper()
+    reg_name = str(args[1]).upper()
+    bit_name = str(args[2]).upper()
+    bin_value = str(args[3])
+    if all(c.isdigit() and c in '01' for c in bin_value):
+        bin_value = bin_value.lstrip('0')
+        if len(bin_value) == 0:
+            bin_value = 0
+        display_bit_value_info(group_name, reg_name, bit_name, bin_value)
+    else:
+        raise Exception("Error: Value is not a binary number.")
 
-        if len(json_files) != 0:
-            for group in [os.path.splitext(os.path.basename(file))[0] for file in json_files]:
-                print(f"─── {group}")
-                register_data = load_register_data(group)
-                for register in register_data['registers']:
-                    print(f"   └── {register}")
-                    for bit in register_data['registers'][register]['bits']:
-                        print(f"      └── {bit} {register_data['registers'][register]['bits'][bit]['position']}")
-            print()
+
+def fun_regh(args):
+    group_name = str(args[0]).upper()
+    reg_name = str(args[1]).upper()
+    hex_value = str(args[2]).upper()
+    if all(c.isdigit() or c.isalpha() and c in 'ABCDEF' for c in hex_value):
+        hex_value = hex_value.lstrip('0')
+        if len(hex_value) == 0:
+            bin_value = 0
         else:
-            print("JSON files weren't found in the register_groups directory.")
+            bin_value = bin(int(hex_value, 16))[2:]
+        display_reg_value_info(group_name, reg_name, bin_value)
+    else:
+        raise Exception("Error: Value is not a hexadecimal number.")
+
+
+def fun_regb(args):
+    group_name = str(args[0]).upper()
+    reg_name = str(args[1]).upper()
+    bin_value = str(args[2])
+    if all(c.isdigit() and c in '01' for c in bin_value):
+        bin_value = bin_value.lstrip('0')
+        if len(bin_value) == 0:
+            bin_value = 0
+        display_reg_value_info(group_name, reg_name, bin_value)
+    else:
+        raise Exception("Error: Value is not a binary number.")
 
 
 if __name__ == "__main__":
