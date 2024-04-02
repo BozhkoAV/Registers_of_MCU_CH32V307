@@ -1,0 +1,12 @@
+ADC1 -> CTLR1 -> AWDCH
+
+Name of register: ADC1 control register 1
+
+Info about group of bits: Analog watchdog channel selection bit.
+
+Position: 4:0
+
+Access: read-write
+
+Value:
+00011: Analog input channel 3

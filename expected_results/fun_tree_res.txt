@@ -1,0 +1,1091 @@
+─── ADC1
+   └── STATR
+      └── AWD 0
+      └── EOC 1
+      └── JEOC 2
+      └── JSTRT 3
+      └── STRT 4
+   └── CTLR1
+      └── AWDCH 4:0
+      └── EOCIE 5
+      └── AWDIE 6
+      └── JEOCIE 7
+      └── SCAN 8
+      └── AWDSGL 9
+      └── JAUTO 10
+      └── DISCEN 11
+      └── JDISCEN 12
+      └── DISCNUM 15:13
+      └── DUALMOD 19:16
+      └── JAWDEN 22
+      └── AWDEN 23
+      └── TKENABLE 24
+      └── TKITUNE 25
+      └── BUFEN 26
+      └── PGA 28:27
+   └── CTLR2
+      └── ADON 0
+      └── CONT 1
+      └── CAL 2
+      └── RSTCAL 3
+      └── DMA 8
+      └── ALIGN 11
+      └── JEXTSEL 14:12
+      └── JEXTTRIG 15
+      └── EXTSEL 19:17
+      └── EXTTRIG 20
+      └── JSWSTART 21
+      └── SWSTART 22
+      └── TSVREFE 23
+   └── SAMPTR1_CHARGE1
+      └── SMP10_TKCG10 2:0
+      └── SMP11_TKCG11 5:3
+      └── SMP12_TKCG12 8:6
+      └── SMP13_TKCG13 11:9
+      └── SMP14_TKCG14 14:12
+      └── SMP15_TKCG15 17:15
+      └── SMP16_TKCG16 20:18
+      └── SMP17_TKCG17 23:21
+   └── SAMPTR2_CHARGE2
+      └── SMP0_TKCG0 2:0
+      └── SMP1_TKCG1 5:3
+      └── SMP2_TKCG2 8:6
+      └── SMP3_TKCG3 11:9
+      └── SMP4_TKCG4 14:12
+      └── SMP5_TKCG5 17:15
+      └── SMP6_TKCG6 20:18
+      └── SMP7_TKCG7 23:21
+      └── SMP8_TKCG8 26:24
+      └── SMP9_TKCG9 29:27
+   └── IOFR1
+      └── JOFFSET1 11:0
+   └── IOFR2
+      └── JOFFSET2 11:0
+   └── IOFR3
+      └── JOFFSET3 11:0
+   └── IOFR4
+      └── JOFFSET4 11:0
+   └── WDHTR
+      └── HT 11:0
+   └── WDLTR
+      └── LT 11:0
+   └── RSQR1
+      └── SQ13 4:0
+      └── SQ14 9:5
+      └── SQ15 14:10
+      └── SQ16 19:15
+      └── L 23:20
+   └── RSQR2
+      └── SQ7 4:0
+      └── SQ8 9:5
+      └── SQ9 14:10
+      └── SQ10 19:15
+      └── SQ11 24:20
+      └── SQ12 29:25
+   └── RSQR3_CHANNEL
+      └── SQ1_CHSEL 4:0
+      └── SQ2 9:5
+      └── SQ3 14:10
+      └── SQ4 19:15
+      └── SQ5 24:20
+      └── SQ6 29:25
+   └── ISQR
+      └── JSQ1 4:0
+      └── JSQ2 9:5
+      └── JSQ3 14:10
+      └── JSQ4 19:15
+      └── JL 21:20
+   └── IDATAR1_CHGOFFSET
+      └── JDATA0_7_TKCGOFFSET 7:0
+      └── JDATA8_15 15:8
+   └── IDATAR2
+      └── JDATA 15:0
+   └── IDATAR3
+      └── JDATA 15:0
+   └── IDATAR4
+      └── JDATA 15:0
+   └── RDATAR_DR_ACT_DCG
+      └── DATA0_7_TKACT_DCG 7:0
+      └── DATA8_15 15:8
+─── ADC2
+   └── STATR
+      └── AWD 0
+      └── EOC 1
+      └── JEOC 2
+      └── JSTRT 3
+      └── STRT 4
+   └── CTLR1
+      └── AWDCH 4:0
+      └── EOCIE 5
+      └── AWDIE 6
+      └── JEOCIE 7
+      └── SCAN 8
+      └── AWDSGL 9
+      └── JAUTO 10
+      └── DISCEN 11
+      └── JDISCEN 12
+      └── DISCNUM 15:13
+      └── DUALMOD 19:16
+      └── JAWDEN 22
+      └── AWDEN 23
+      └── TKEYEN 24
+      └── TKITUNE 25
+      └── BUFEN 26
+      └── PGA 28:27
+   └── CTLR2
+      └── ADON 0
+      └── CONT 1
+      └── CAL 2
+      └── RSTCAL 3
+      └── DMA 8
+      └── ALIGN 11
+      └── JEXTSEL 14:12
+      └── JEXTTRIG 15
+      └── EXTSEL 19:17
+      └── EXTTRIG 20
+      └── JSWSTART 21
+      └── SWSTART 22
+      └── TSVREFE 23
+   └── SAMPTR1_CHARGE1
+      └── SMP10_TKCG10 2:0
+      └── SMP11_TKCG11 5:3
+      └── SMP12_TKCG12 8:6
+      └── SMP13_TKCG13 11:9
+      └── SMP14_TKCG14 14:12
+      └── SMP15_TKCG15 17:15
+      └── SMP16_TKCG16 20:18
+      └── SMP17_TKCG17 23:21
+   └── SAMPTR2_CHARGE2
+      └── SMP0_TKCG0 2:0
+      └── SMP1_TKCG1 5:3
+      └── SMP2_TKCG2 8:6
+      └── SMP3_TKCG3 11:9
+      └── SMP4_TKCG4 14:12
+      └── SMP5_TKCG5 17:15
+      └── SMP6_TKCG6 20:18
+      └── SMP7_TKCG7 23:21
+      └── SMP8_TKCG8 26:24
+      └── SMP9_TKCG9 29:27
+   └── IOFR1
+      └── JOFFSET1 11:0
+   └── IOFR2
+      └── JOFFSET2 11:0
+   └── IOFR3
+      └── JOFFSET3 11:0
+   └── IOFR4
+      └── JOFFSET4 11:0
+   └── WDHTR
+      └── HT 11:0
+   └── WDLTR
+      └── LT 11:0
+   └── RSQR1
+      └── SQ13 4:0
+      └── SQ14 9:5
+      └── SQ15 14:10
+      └── SQ16 19:15
+      └── L 23:20
+   └── RSQR2
+      └── SQ7 4:0
+      └── SQ8 9:5
+      └── SQ9 14:10
+      └── SQ10 19:15
+      └── SQ11 24:20
+      └── SQ12 29:25
+   └── RSQR3_CHANNEL
+      └── SQ1_CHSEL 4:0
+      └── SQ2 9:5
+      └── SQ3 14:10
+      └── SQ4 19:15
+      └── SQ5 24:20
+      └── SQ6 29:25
+   └── ISQR
+      └── JSQ1 4:0
+      └── JSQ2 9:5
+      └── JSQ3 14:10
+      └── JSQ4 19:15
+      └── JL 21:20
+   └── IDATAR1_CHGOFFSET
+      └── JDATA0_7_TKCGOFFSET 7:0
+      └── JDATA8_15 15:8
+   └── IDATAR2
+      └── JDATA 15:0
+   └── IDATAR3
+      └── JDATA 15:0
+   └── IDATAR4
+      └── JDATA 15:0
+   └── RDATAR_DR_ACT_DCG
+      └── DATA0_7_TKACT_DCG 7:0
+      └── DATA8_15 15:8
+─── AFIO
+   └── ECR
+      └── PIN 3:0
+      └── PORT 6:4
+      └── EVOE 7
+   └── PCFR1
+      └── SPI1_RM 0
+      └── I2C1_RM 1
+      └── USART1_RM 2
+      └── USART2_RM 3
+      └── USART3_RM 5:4
+      └── TIM1_RM 7:6
+      └── TIM2_RM 9:8
+      └── TIM3_RM 11:10
+      └── TIM4_RM 12
+      └── CAN1_RM 14:13
+      └── PD01_RM 15
+      └── TIM5CH4_RM 16
+      └── ADC1_ETRGINJ_RM 17
+      └── ADC1_ETRGREG_RM 18
+      └── ADC2_ETRGINJ_RM 19
+      └── ADC2_ETRGREG_RM 20
+      └── ETH_RM 21
+      └── CAN2_RM 22
+      └── MII_RMII_SEL 23
+      └── SW_CFG 26:24
+      └── SPI3_RM 28
+      └── TIM2ITR1_RM 29
+      └── PTP_PPS_RM 30
+   └── EXTICR1
+      └── EXTI0 3:0
+      └── EXTI1 7:4
+      └── EXTI2 11:8
+      └── EXTI3 15:12
+   └── EXTICR2
+      └── EXTI4 3:0
+      └── EXTI5 7:4
+      └── EXTI6 11:8
+      └── EXTI7 15:12
+   └── EXTICR3
+      └── EXTI8 3:0
+      └── EXTI9 7:4
+      └── EXTI10 11:8
+      └── EXTI11 15:12
+   └── EXTICR4
+      └── EXTI12 3:0
+      └── EXTI13 7:4
+      └── EXTI14 11:8
+      └── EXTI15 15:12
+   └── PCFR2
+      └── TIM8_REMAP 2
+      └── TIM9_REMAP 4:3
+      └── TIM10_REMAP 6:5
+      └── FSMC_NADV 10
+      └── UART4_REMAP 17:16
+      └── UART5_REMAP 19:18
+      └── UART6_REMAP 21:20
+      └── UART7_REMAP 23:22
+      └── UART8_REMAP 25:24
+      └── USART1_REMAP2 26
+─── BKP
+   └── DATAR1
+      └── D1 15:0
+   └── DATAR2
+      └── D2 15:0
+   └── DATAR3
+      └── D3 15:0
+   └── DATAR4
+      └── D4 15:0
+   └── DATAR5
+      └── D5 15:0
+   └── DATAR6
+      └── D6 15:0
+   └── DATAR7
+      └── D7 15:0
+   └── DATAR8
+      └── D8 15:0
+   └── DATAR9
+      └── D9 15:0
+   └── DATAR10
+      └── D10 15:0
+   └── DATAR11
+      └── D11 15:0
+   └── DATAR12
+      └── D12 15:0
+   └── DATAR13
+      └── D13 15:0
+   └── DATAR14
+      └── D14 15:0
+   └── DATAR15
+      └── D15 15:0
+   └── DATAR16
+      └── D16 15:0
+   └── DATAR17
+      └── D17 15:0
+   └── DATAR18
+      └── D18 15:0
+   └── DATAR19
+      └── D19 15:0
+   └── DATAR20
+      └── D20 15:0
+   └── DATAR21
+      └── D21 15:0
+   └── DATAR22
+      └── D22 15:0
+   └── DATAR23
+      └── D23 15:0
+   └── DATAR24
+      └── D24 15:0
+   └── DATAR25
+      └── D25 15:0
+   └── DATAR26
+      └── D26 15:0
+   └── DATAR27
+      └── D27 15:0
+   └── DATAR28
+      └── D28 15:0
+   └── DATAR29
+      └── D29 15:0
+   └── DATAR30
+      └── D30 15:0
+   └── DATAR31
+      └── D31 15:0
+   └── DATAR32
+      └── D32 15:0
+   └── DATAR33
+      └── D33 15:0
+   └── DATAR34
+      └── D34 15:0
+   └── DATAR35
+      └── D35 15:0
+   └── DATAR36
+      └── D36 15:0
+   └── DATAR37
+      └── D37 15:0
+   └── DATAR38
+      └── D38 15:0
+   └── DATAR39
+      └── D39 15:0
+   └── DATAR40
+      └── D40 15:0
+   └── DATAR41
+      └── D41 15:0
+   └── DATAR42
+      └── D42 15:0
+   └── OCTLR
+      └── CAL 6:0
+      └── CCO 7
+      └── ASOE 8
+      └── ASOS 9
+   └── TPCTLR
+      └── TPE 0
+      └── TPAL 1
+   └── TPCSR
+      └── CTE 0
+      └── CTI 1
+      └── TPIE 2
+      └── TEF 8
+      └── TIF 9
+─── CAN1
+   └── CTLR
+      └── INRQ 0
+      └── SLEEP 1
+      └── TXFP 2
+      └── RFLM 3
+      └── NART 4
+      └── AWUM 5
+      └── ABOM 6
+      └── TTCM 7
+      └── RESET 15
+      └── DBF 16
+   └── STATR
+      └── INAK 0
+      └── SLAK 1
+      └── ERRI 2
+      └── WKUI 3
+      └── SLAKI 4
+      └── TXM 8
+      └── RXM 9
+      └── SAMP 10
+      └── RX 11
+   └── TSTATR
+      └── RQCP0 0
+      └── TXOK0 1
+      └── ALST0 2
+      └── TERR0 3
+      └── ABRQ0 7
+      └── RQCP1 8
+      └── TXOK1 9
+      └── ALST1 10
+      └── TERR1 11
+      └── ABRQ1 15
+      └── RQCP2 16
+      └── TXOK2 17
+      └── ALST2 18
+      └── TERR2 19
+      └── ABRQ2 23
+      └── CODE 25:24
+      └── TME0 26
+      └── TME1 27
+      └── TME2 28
+      └── LOW0 29
+      └── LOW1 30
+      └── LOW2 31
+   └── RFIFO0
+      └── FMP0 1:0
+      └── FULL0 3
+      └── FOVR0 4
+      └── RFOM0 5
+   └── RFIFO1
+      └── FMP1 1:0
+      └── FULL1 3
+      └── FOVR1 4
+      └── RFOM1 5
+   └── INTENR
+      └── TMEIE 0
+      └── FMPIE0 1
+      └── FFIE0 2
+      └── FOVIE0 3
+      └── FMPIE1 4
+      └── FFIE1 5
+      └── FOVIE1 6
+      └── EWGIE 8
+      └── EPVIE 9
+      └── BOFIE 10
+      └── LECIE 11
+      └── ERRIE 15
+      └── WKUIE 16
+      └── SLKIE 17
+   └── ERRSR
+      └── EWGF 0
+      └── EPVF 1
+      └── BOFF 2
+      └── LEC 6:4
+      └── TEC 23:16
+      └── REC 31:24
+   └── BTIMR
+      └── BRP 9:0
+      └── TS1 19:16
+      └── TS2 22:20
+      └── SJW 25:24
+      └── LBKM 30
+      └── SILM 31
+   └── TXMIR0
+      └── TXRQ 0
+      └── RTR 1
+      └── IDE 2
+      └── EXID 20:3
+      └── STID 31:21
+   └── TXMDTR0
+      └── DLC 3:0
+      └── TGT 8
+      └── TIME 31:16
+   └── TXMDLR0
+      └── DATA0 7:0
+      └── DATA1 15:8
+      └── DATA2 23:16
+      └── DATA3 31:24
+   └── TXMDHR0
+      └── DATA4 7:0
+      └── DATA5 15:8
+      └── DATA6 23:16
+      └── DATA7 31:24
+   └── TXMIR1
+      └── TXRQ 0
+      └── RTR 1
+      └── IDE 2
+      └── EXID 20:3
+      └── STID 31:21
+   └── TXMDTR1
+      └── DLC 3:0
+      └── TGT 8
+      └── TIME 31:16
+   └── TXMDLR1
+      └── DATA0 7:0
+      └── DATA1 15:8
+      └── DATA2 23:16
+      └── DATA3 31:24
+   └── TXMDHR1
+      └── DATA4 7:0
+      └── DATA5 15:8
+      └── DATA6 23:16
+      └── DATA7 31:24
+   └── TXMIR2
+      └── TXRQ 0
+      └── RTR 1
+      └── IDE 2
+      └── EXID 20:3
+      └── STID 31:21
+   └── TXMDTR2
+      └── DLC 3:0
+      └── TGT 8
+      └── TIME 31:16
+   └── TXMDLR2
+      └── DATA0 7:0
+      └── DATA1 15:8
+      └── DATA2 23:16
+      └── DATA3 31:24
+   └── TXMDHR2
+      └── DATA4 7:0
+      └── DATA5 15:8
+      └── DATA6 23:16
+      └── DATA7 31:24
+   └── RXMIR0
+      └── RTR 1
+      └── IDE 2
+      └── EXID 20:3
+      └── STID 31:21
+   └── RXMDTR0
+      └── DLC 3:0
+      └── FMI 15:8
+      └── TIME 31:16
+   └── RXMDLR0
+      └── DATA0 7:0
+      └── DATA1 15:8
+      └── DATA2 23:16
+      └── DATA3 31:24
+   └── RXMDHR0
+      └── DATA4 7:0
+      └── DATA5 15:8
+      └── DATA6 23:16
+      └── DATA7 31:24
+   └── RXMIR1
+      └── RTR 1
+      └── IDE 2
+      └── EXID 20:3
+      └── STID 31:21
+   └── RXMDTR1
+      └── DLC 3:0
+      └── FMI 15:8
+      └── TIME 31:16
+   └── RXMDLR1
+      └── DATA0 7:0
+      └── DATA1 15:8
+      └── DATA2 23:16
+      └── DATA3 31:24
+   └── RXMDHR1
+      └── DATA4 7:0
+      └── DATA5 15:8
+      └── DATA6 23:16
+      └── DATA7 31:24
+   └── FCTLR
+      └── FINIT 0
+      └── CAN1SB 13:8
+   └── FMCFGR
+      └── FBM0 0
+      └── FBM1 1
+      └── FBM2 2
+      └── FBM3 3
+      └── FBM4 4
+      └── FBM5 5
+      └── FBM6 6
+      └── FBM7 7
+      └── FBM8 8
+      └── FBM9 9
+      └── FBM10 10
+      └── FBM11 11
+      └── FBM12 12
+      └── FBM13 13
+   └── FSCFGR
+      └── FSC0 0
+      └── FSC1 1
+      └── FSC2 2
+      └── FSC3 3
+      └── FSC4 4
+      └── FSC5 5
+      └── FSC6 6
+      └── FSC7 7
+      └── FSC8 8
+      └── FSC9 9
+      └── FSC10 10
+      └── FSC11 11
+      └── FSC12 12
+      └── FSC13 13
+   └── FAFIFOR
+      └── FFA0 0
+      └── FFA1 1
+      └── FFA2 2
+      └── FFA3 3
+      └── FFA4 4
+      └── FFA5 5
+      └── FFA6 6
+      └── FFA7 7
+      └── FFA8 8
+      └── FFA9 9
+      └── FFA10 10
+      └── FFA11 11
+      └── FFA12 12
+      └── FFA13 13
+   └── FWR
+      └── FACT0 0
+      └── FACT1 1
+      └── FACT2 2
+      └── FACT3 3
+      └── FACT4 4
+      └── FACT5 5
+      └── FACT6 6
+      └── FACT7 7
+      └── FACT8 8
+      └── FACT9 9
+      └── FACT10 10
+      └── FACT11 11
+      └── FACT12 12
+      └── FACT13 13
+   └── F0R1
+      └── FB 31:0
+   └── F0R2
+      └── FB 31:0
+   └── F1R1
+      └── FB 31:0
+   └── F1R2
+      └── FB 31:0
+   └── F2R1
+      └── FB 31:0
+   └── F2R2
+      └── FB 31:0
+   └── F3R1
+      └── FB 31:0
+   └── F3R2
+      └── FB 31:0
+   └── F4R1
+      └── FB 31:0
+   └── F4R2
+      └── FB 31:0
+   └── F5R1
+      └── FB 31:0
+   └── F5R2
+      └── FB 31:0
+   └── F6R1
+      └── FB 31:0
+   └── F6R2
+      └── FB 31:0
+   └── F7R1
+      └── FB 31:0
+   └── F7R2
+      └── FB 31:0
+   └── F8R1
+      └── FB 31:0
+   └── F8R2
+      └── FB 31:0
+   └── F9R1
+      └── FB 31:0
+   └── F9R2
+      └── FB 31:0
+   └── F10R1
+      └── FB 31:0
+   └── F10R2
+      └── FB 31:0
+   └── F11R1
+      └── FB 31:0
+   └── F11R2
+      └── FB 31:0
+   └── F12R1
+      └── FB 31:0
+   └── F12R2
+      └── FB 31:0
+   └── F13R1
+      └── FB 31:0
+   └── F13R2
+      └── FB 31:0
+   └── F14R1
+      └── FB 31:0
+   └── F14R2
+      └── FB 31:0
+   └── F15R1
+      └── FB 31:0
+   └── F15R2
+      └── FB 31:0
+   └── F16R1
+      └── FB 31:0
+   └── F16R2
+      └── FB 31:0
+   └── F17R1
+      └── FB 31:0
+   └── F17R2
+      └── FB 31:0
+   └── F18R1
+      └── FB 31:0
+   └── F18R2
+      └── FB 31:0
+   └── F19R1
+      └── FB 31:0
+   └── F19R2
+      └── FB 31:0
+   └── F20R1
+      └── FB 31:0
+   └── F20R2
+      └── FB 31:0
+   └── F21R1
+      └── FB 31:0
+   └── F21R2
+      └── FB 31:0
+   └── F22R1
+      └── FB 31:0
+   └── F22R2
+      └── FB 31:0
+   └── F23R1
+      └── FB 31:0
+   └── F23R2
+      └── FB 31:0
+   └── F24R1
+      └── FB 31:0
+   └── F24R2
+      └── FB 31:0
+   └── F25R1
+      └── FB 31:0
+   └── F25R2
+      └── FB 31:0
+   └── F26R1
+      └── FB 31:0
+   └── F26R2
+      └── FB 31:0
+   └── F27R1
+      └── FB 31:0
+   └── F27R2
+      └── FB 31:0
+─── CAN2
+   └── CTLR
+      └── INRQ 0
+      └── SLEEP 1
+      └── TXFP 2
+      └── RFLM 3
+      └── NART 4
+      └── AWUM 5
+      └── ABOM 6
+      └── TTCM 7
+      └── RESET 15
+      └── DBF 16
+   └── STATR
+      └── INAK 0
+      └── SLAK 1
+      └── ERRI 2
+      └── WKUI 3
+      └── SLAKI 4
+      └── TXM 8
+      └── RXM 9
+      └── SAMP 10
+      └── RX 11
+   └── TSTATR
+      └── RQCP0 0
+      └── TXOK0 1
+      └── ALST0 2
+      └── TERR0 3
+      └── ABRQ0 7
+      └── RQCP1 8
+      └── TXOK1 9
+      └── ALST1 10
+      └── TERR1 11
+      └── ABRQ1 15
+      └── RQCP2 16
+      └── TXOK2 17
+      └── ALST2 18
+      └── TERR2 19
+      └── ABRQ2 23
+      └── CODE 25:24
+      └── TME0 26
+      └── TME1 27
+      └── TME2 28
+      └── LOW0 29
+      └── LOW1 30
+      └── LOW2 31
+   └── RFIFO0
+      └── FMP0 1:0
+      └── FULL0 3
+      └── FOVR0 4
+      └── RFOM0 5
+   └── RFIFO1
+      └── FMP1 1:0
+      └── FULL1 3
+      └── FOVR1 4
+      └── RFOM1 5
+   └── INTENR
+      └── TMEIE 0
+      └── FMPIE0 1
+      └── FFIE0 2
+      └── FOVIE0 3
+      └── FMPIE1 4
+      └── FFIE1 5
+      └── FOVIE1 6
+      └── EWGIE 8
+      └── EPVIE 9
+      └── BOFIE 10
+      └── LECIE 11
+      └── ERRIE 15
+      └── WKUIE 16
+      └── SLKIE 17
+   └── ERRSR
+      └── EWGF 0
+      └── EPVF 1
+      └── BOFF 2
+      └── LEC 6:4
+      └── TEC 23:16
+      └── REC 31:24
+   └── BTIMR
+      └── BRP 9:0
+      └── TS1 19:16
+      └── TS2 22:20
+      └── SJW 25:24
+      └── LBKM 30
+      └── SILM 31
+   └── TXMIR0
+      └── TXRQ 0
+      └── RTR 1
+      └── IDE 2
+      └── EXID 20:3
+      └── STID 31:21
+   └── TXMDTR0
+      └── DLC 3:0
+      └── TGT 8
+      └── TIME 31:16
+   └── TXMDLR0
+      └── DATA0 7:0
+      └── DATA1 15:8
+      └── DATA2 23:16
+      └── DATA3 31:24
+   └── TXMDHR0
+      └── DATA4 7:0
+      └── DATA5 15:8
+      └── DATA6 23:16
+      └── DATA7 31:24
+   └── TXMIR1
+      └── TXRQ 0
+      └── RTR 1
+      └── IDE 2
+      └── EXID 20:3
+      └── STID 31:21
+   └── TXMDTR1
+      └── DLC 3:0
+      └── TGT 8
+      └── TIME 31:16
+   └── TXMDLR1
+      └── DATA0 7:0
+      └── DATA1 15:8
+      └── DATA2 23:16
+      └── DATA3 31:24
+   └── TXMDHR1
+      └── DATA4 7:0
+      └── DATA5 15:8
+      └── DATA6 23:16
+      └── DATA7 31:24
+   └── TXMIR2
+      └── TXRQ 0
+      └── RTR 1
+      └── IDE 2
+      └── EXID 20:3
+      └── STID 31:21
+   └── TXMDTR2
+      └── DLC 3:0
+      └── TGT 8
+      └── TIME 31:16
+   └── TXMDLR2
+      └── DATA0 7:0
+      └── DATA1 15:8
+      └── DATA2 23:16
+      └── DATA3 31:24
+   └── TXMDHR2
+      └── DATA4 7:0
+      └── DATA5 15:8
+      └── DATA6 23:16
+      └── DATA7 31:24
+   └── RXMIR0
+      └── RTR 1
+      └── IDE 2
+      └── EXID 20:3
+      └── STID 31:21
+   └── RXMDTR0
+      └── DLC 3:0
+      └── FMI 15:8
+      └── TIME 31:16
+   └── RXMDLR0
+      └── DATA0 7:0
+      └── DATA1 15:8
+      └── DATA2 23:16
+      └── DATA3 31:24
+   └── RXMDHR0
+      └── DATA4 7:0
+      └── DATA5 15:8
+      └── DATA6 23:16
+      └── DATA7 31:24
+   └── RXMIR1
+      └── RTR 1
+      └── IDE 2
+      └── EXID 20:3
+      └── STID 31:21
+   └── RXMDTR1
+      └── DLC 3:0
+      └── FMI 15:8
+      └── TIME 31:16
+   └── RXMDLR1
+      └── DATA0 7:0
+      └── DATA1 15:8
+      └── DATA2 23:16
+      └── DATA3 31:24
+   └── RXMDHR1
+      └── DATA4 7:0
+      └── DATA5 15:8
+      └── DATA6 23:16
+      └── DATA7 31:24
+   └── FCTLR
+      └── FINIT 0
+      └── CAN2SB 13:8
+   └── FMCFGR
+      └── FBM0 0
+      └── FBM1 1
+      └── FBM2 2
+      └── FBM3 3
+      └── FBM4 4
+      └── FBM5 5
+      └── FBM6 6
+      └── FBM7 7
+      └── FBM8 8
+      └── FBM9 9
+      └── FBM10 10
+      └── FBM11 11
+      └── FBM12 12
+      └── FBM13 13
+   └── FSCFGR
+      └── FSC0 0
+      └── FSC1 1
+      └── FSC2 2
+      └── FSC3 3
+      └── FSC4 4
+      └── FSC5 5
+      └── FSC6 6
+      └── FSC7 7
+      └── FSC8 8
+      └── FSC9 9
+      └── FSC10 10
+      └── FSC11 11
+      └── FSC12 12
+      └── FSC13 13
+   └── FAFIFOR
+      └── FFA0 0
+      └── FFA1 1
+      └── FFA2 2
+      └── FFA3 3
+      └── FFA4 4
+      └── FFA5 5
+      └── FFA6 6
+      └── FFA7 7
+      └── FFA8 8
+      └── FFA9 9
+      └── FFA10 10
+      └── FFA11 11
+      └── FFA12 12
+      └── FFA13 13
+   └── FWR
+      └── FACT0 0
+      └── FACT1 1
+      └── FACT2 2
+      └── FACT3 3
+      └── FACT4 4
+      └── FACT5 5
+      └── FACT6 6
+      └── FACT7 7
+      └── FACT8 8
+      └── FACT9 9
+      └── FACT10 10
+      └── FACT11 11
+      └── FACT12 12
+      └── FACT13 13
+   └── F0R1
+      └── FB 31:0
+   └── F0R2
+      └── FB 31:0
+   └── F1R1
+      └── FB 31:0
+   └── F1R2
+      └── FB 31:0
+   └── F2R1
+      └── FB 31:0
+   └── F2R2
+      └── FB 31:0
+   └── F3R1
+      └── FB 31:0
+   └── F3R2
+      └── FB 31:0
+   └── F4R1
+      └── FB 31:0
+   └── F4R2
+      └── FB 31:0
+   └── F5R1
+      └── FB 31:0
+   └── F5R2
+      └── FB 31:0
+   └── F6R1
+      └── FB 31:0
+   └── F6R2
+      └── FB 31:0
+   └── F7R1
+      └── FB 31:0
+   └── F7R2
+      └── FB 31:0
+   └── F8R1
+      └── FB 31:0
+   └── F8R2
+      └── FB 31:0
+   └── F9R1
+      └── FB 31:0
+   └── F9R2
+      └── FB 31:0
+   └── F10R1
+      └── FB 31:0
+   └── F10R2
+      └── FB 31:0
+   └── F11R1
+      └── FB 31:0
+   └── F11R2
+      └── FB 31:0
+   └── F12R1
+      └── FB 31:0
+   └── F12R2
+      └── FB 31:0
+   └── F13R1
+      └── FB 31:0
+   └── F13R2
+      └── FB 31:0
+   └── F14R1
+      └── FB 31:0
+   └── F14R2
+      └── FB 31:0
+   └── F15R1
+      └── FB 31:0
+   └── F15R2
+      └── FB 31:0
+   └── F16R1
+      └── FB 31:0
+   └── F16R2
+      └── FB 31:0
+   └── F17R1
+      └── FB 31:0
+   └── F17R2
+      └── FB 31:0
+   └── F18R1
+      └── FB 31:0
+   └── F18R2
+      └── FB 31:0
+   └── F19R1
+      └── FB 31:0
+   └── F19R2
+      └── FB 31:0
+   └── F20R1
+      └── FB 31:0
+   └── F20R2
+      └── FB 31:0
+   └── F21R1
+      └── FB 31:0
+   └── F21R2
+      └── FB 31:0
+   └── F22R1
+      └── FB 31:0
+   └── F22R2
+      └── FB 31:0
+   └── F23R1
+      └── FB 31:0
+   └── F23R2
+      └── FB 31:0
+   └── F24R1
+      └── FB 31:0
+   └── F24R2
+      └── FB 31:0
+   └── F25R1
+      └── FB 31:0
+   └── F25R2
+      └── FB 31:0
+   └── F26R1
+      └── FB 31:0
+   └── F26R2
+      └── FB 31:0
+   └── F27R1
+      └── FB 31:0
+   └── F27R2
+      └── FB 31:0

@@ -1,0 +1,16 @@
+ADC1 -> STATR -> AWD
+
+Name of register: ADC1 status register
+
+Info about bit: Analog watchdog flag bit.
+
+Position: 0
+
+Access: read-write
+
+Values:
+1: The analog watchdog event occurs.
+0: No analog watchdog event occurs.
+
+Comment:
+This bit is set to 1 by hardware (the conversion value is out of the ADC_WDHTR and ADC_WDLTR register range), and is cleared by software (invalid if writing 1).

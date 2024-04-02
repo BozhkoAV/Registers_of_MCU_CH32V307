@@ -1,0 +1,7 @@
+Register groups:
+ADC1
+ADC2
+AFIO
+BKP
+CAN1
+CAN2

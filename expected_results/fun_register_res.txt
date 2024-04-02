@@ -1,0 +1,11 @@
+ADC1 -> STATR
+
+Name of register:
+ADC1 status register
+
+Bits:
+0 - AWD - Analog watchdog flag bit
+1 - EOC - Conversion completion status
+2 - JEOC - Injected channel group conversion completion status
+3 - JSTRT - Injected channel conversion start status
+4 - STRT - Regular channel conversion start status

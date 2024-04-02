@@ -1,0 +1,63 @@
+ADC1 -> STATR
+
+Name of register:
+ADC1 status register
+
+Value of Register:
+00000000000000000000000000010001 (HEX: 00000011)
+
+Bits:
+~~~
+0 - AWD - Analog watchdog flag bit
+
+Access: read-write
+
+Value:
+1: The analog watchdog event occurs.
+
+Comment:
+This bit is set to 1 by hardware (the conversion value is out of the ADC_WDHTR and ADC_WDLTR register range), and is cleared by software (invalid if writing 1).
+
+~~~
+1 - EOC - Conversion completion status
+
+Access: read-write
+
+Value:
+0: The conversion has not completed.
+
+Comment:
+This bit is set to 1 by hardware (the regular or injected channel group conversion ends), and is cleared by software (invalid if writing 1) or clearing when ADC_RDATAR is read.
+
+~~~
+2 - JEOC - Injected channel group conversion completion status
+
+Access: read-write
+
+Value:
+0: The conversion has not completed.
+
+Comment:
+This bit is set to 1 by hardware (the conversion of all injected channels is completed), and cleared by software (invalid if writing 1).
+
+~~~
+3 - JSTRT - Injected channel conversion start status
+
+Access: read-write
+
+Value:
+0: The injected channel conversion has not started.
+
+Comment:
+This bit is set by hardware and cleared by software (invalid if writing 1).
+
+~~~
+4 - STRT - Regular channel conversion start status
+
+Access: read-write
+
+Value:
+1: The regular channel conversion has started.
+
+Comment:
+This bit is set by hardware and cleared by software (invalid if writing 1).

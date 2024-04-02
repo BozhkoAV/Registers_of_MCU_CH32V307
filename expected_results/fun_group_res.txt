@@ -1,0 +1,24 @@
+Name of registers group:
+Analog-to-digital Converter (ADC) 1 and Touch Key Detection (TKEY) 1 registers
+
+Registers:
+STATR - ADC1 status register
+CTLR1 - ADC1 control register 1
+CTLR2 - ADC1 control register 2
+SAMPTR1_CHARGE1 - ADC1 sample time configuration register 1 / TKEY1 charge sample time register 1
+SAMPTR2_CHARGE2 - ADC1 sample time configuration register 2 / TKEY1 charge sample time register 2
+IOFR1 - ADC1 injected channel data offset register 1
+IOFR2 - ADC1 injected channel data offset register 2
+IOFR3 - ADC1 injected channel data offset register 3
+IOFR4 - ADC1 injected channel data offset register 4
+WDHTR - ADC1 watchdog high threshold register
+WDLTR - ADC1 watchdog low threshold register
+RSQR1 - ADC1 regular channel sequence register 1
+RSQR2 - ADC1 regular channel sequence register 2
+RSQR3_CHANNEL - ADC1 regular channel sequence register 3 / TKEY1 channel select register
+ISQR - ADC1 injected channel sequence register
+IDATAR1_CHGOFFSET - ADC1 injected data register 1 / TKEY1 charge time offset register
+IDATAR2 - ADC1 injected data register 2
+IDATAR3 - ADC1 injected data register 3
+IDATAR4 - ADC1 injected data register 4
+RDATAR_DR_ACT_DCG - ADC1 regular data register / TKEY1 data register / TKEY1 activate and discharge time register
