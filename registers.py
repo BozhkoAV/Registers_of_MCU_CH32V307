@@ -9,8 +9,8 @@ def load_register_data(group):
         with open(f"register_groups/{group}.json", 'r') as file:
             data = json.load(file)
         return data
-    except FileNotFoundError:
-        raise Exception(f"Error: Register group '{group}' not found.")
+    except FileNotFoundError as e:
+        raise Exception(f"Error: Register group '{group}' not found.") from e
 
 
 def display_group_info(group):
@@ -43,27 +43,7 @@ def display_register_info(group, register):
 
 
 def display_bit_info(group, register, bit):
-    register_data = load_register_data(group)
-
-    if register not in register_data['registers']:
-        raise Exception(f"Error: Register '{register}' not found in group '{group}'.\n")
-
-    if bit not in register_data['registers'][register]['bits']:
-        raise Exception(f"Error: Bit '{bit}' not found in register '{register}' of group '{group}'.\n")
-
-    print(f"\n{group.upper()} -> {register.upper()} -> {bit.upper()}")
-
-    print(f"\nName of register: {register_data['registers'][register]['name']}")
-
-    bit_info = register_data['registers'][register]['bits'][bit]
-
-    if ":" in str(bit_info['position']):
-        print(f"\nInfo about group of bits: {bit_info['name']}.")
-    else:
-        print(f"\nInfo about bit: {bit_info['name']}.")
-
-    print(f"\nPosition: {bit_info['position']}")
-    print(f"\nAccess: {bit_info['access']}")
+    bit_info = display_general_bit_info(bit, group, register)
 
     if str(bit_info['values']) != "{}":
         print("\nValues:")
@@ -76,28 +56,26 @@ def display_bit_info(group, register, bit):
     print()
 
 
-def display_bit_value_info(group, register, bit, bin_value):
+def display_general_bit_info(bit, group, register):
     register_data = load_register_data(group)
-
     if register not in register_data['registers']:
         raise Exception(f"Error: Register '{register}' not found in group '{group}'.\n")
-
     if bit not in register_data['registers'][register]['bits']:
         raise Exception(f"Error: Bit '{bit}' not found in register '{register}' of group '{group}'.\n")
-
     print(f"\n{group.upper()} -> {register.upper()} -> {bit.upper()}")
-
     print(f"\nName of register: {register_data['registers'][register]['name']}")
-
     bit_info = register_data['registers'][register]['bits'][bit]
-
     if ":" in str(bit_info['position']):
         print(f"\nInfo about group of bits: {bit_info['name']}.")
     else:
         print(f"\nInfo about bit: {bit_info['name']}.")
-
     print(f"\nPosition: {bit_info['position']}")
     print(f"\nAccess: {bit_info['access']}")
+    return bit_info
+
+
+def display_bit_value_info(group, register, bit, bin_value):
+    bit_info = display_general_bit_info(bit, group, register)
 
     if ":" in bit_info['position']:
         pos = str(bit_info['position']).split(":")
@@ -162,6 +140,9 @@ def display_reg_value_info(group, register, bin_value):
 
     print("\nName of register:")
     print(register_data['registers'][register]['name'])
+
+    if len(bin_value) > 32:
+        raise Exception(f"\nError:\nValue of Register: '{bin_value}' bigger than 2^32 - 1.\n")
 
     bin_value = bin_value.zfill(32)
     print(f"\nValue of Register:\n{bin_value} (HEX: {hex(int(bin_value, 2))[2:].zfill(8)})")
